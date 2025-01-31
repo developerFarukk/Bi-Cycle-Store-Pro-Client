@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router";
 import Error from "../pages/Error";
 import HomeRoot from "./HomeRoot";
 import Home from "@/pages/HomePage/Home";
+import LoginAuth from "@/authentication/LoginAuth";
+import RegistationAuth from "@/authentication/RegistationAuth";
 
 
 
@@ -33,14 +35,14 @@ const router = createBrowserRouter([
     //     children: routeGenerator(studentPaths),
     // },
 
-    // {
-    //     path: '/login',
-    //     element: <Login />,
-    // },
-    // {
-    //     path: '/register',
-    //     element: <Register />,
-    // },
+    {
+        path: 'login',
+        element: <LoginAuth />,
+    },
+    {
+        path: '/register',
+        element: <RegistationAuth />,
+    },
 ]);
 
 export default router;
