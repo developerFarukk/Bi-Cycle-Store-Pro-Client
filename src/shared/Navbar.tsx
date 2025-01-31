@@ -97,7 +97,7 @@ const Navbar = () => {
 
                             {/* Login and Registration buttons for small and medium devices */}
                             <div className="flex flex-col space-y-2 md:hidden">
-                                <Link to="/register"><HookButton title="Registration" /></Link>
+                                <Link to="/register"><HookButton title="Sign UP" /></Link>
                                 <Link to="/login"><HookButton title="Login" /></Link>
                             </div>
                         </div>
@@ -129,7 +129,7 @@ const Navbar = () => {
 
                     {/* Login and Registration buttons for large devices */}
                     <div className="hidden md:flex gap-2">
-                        <Link to="/register"><HookButton title="Registration" /></Link>
+                        <Link to="/register"><HookButton title="Sign UP" /></Link>
                         <Link to="/login"><HookButton title="Login" /></Link>
                     </div>
                 </div>
