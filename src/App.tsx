@@ -1,4 +1,5 @@
-import { Button } from "./components/ui/button";
+import HookButton from "./shared/HookButton";
+
 
 
 const App = () => {
@@ -9,7 +10,7 @@ const App = () => {
             <h1 className="ext-3xl font-bold underline">
                 Hello world!
             </h1>
-            <Button>Click me</Button>
+            <HookButton title="Go to Home"></HookButton>
         </div>
     );
 };
