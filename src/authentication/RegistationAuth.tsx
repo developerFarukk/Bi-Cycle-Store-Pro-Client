@@ -66,9 +66,11 @@ const RegistrationAuth = () => {
                         </div>
                     </form>
                 </CardContent>
-                <CardFooter className="flex justify-between">
-                    <Link to="/" className="text-blue-500"><HookButton title="Back" /></Link>
-                    <Link to="/" className="text-blue-500"><HookButton title="Submit" /></Link>
+                <div className="flex justify-center p-2 mb-2">
+                    <h2>Already have an account. go to <Link to="/login" className="text-blue-600 font-semibold" >Log In</Link> </h2>
+                </div>
+                <CardFooter className="flex justify-end">
+                    <Link to={"/"}><HookButton title="Back to home" /></Link>
                 </CardFooter>
             </Card>
         </div>
