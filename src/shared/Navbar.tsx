@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import HookButton from "./HookButton";
+import Ridenest from "./Ridenest";
 
 
 
@@ -15,11 +16,7 @@ const Navbar = () => {
                 <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
                     <div className="flex items-center justify-between">
                         <Link to="/">
-                            <img
-                                className="w-auto h-6 sm:h-7"
-                                src="https://merakiui.com/images/full-logo.svg"
-                                alt="Logo"
-                            />
+                            <Ridenest />
                         </Link>
 
                         {/* Mobile menu button */}
