@@ -13,7 +13,7 @@ const Navbar = () => {
 
     const dispatch = useAppDispatch();
     const { token } = useAppSelector((state) => state.auth);
-    console.log(token);
+    // console.log(token);
 
     const handleLogout = () => {
         const toastId = toast.loading("Logging out...");
