@@ -1,3 +1,5 @@
+import { useState } from "react"; // Import useState for state management
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -13,6 +15,26 @@ interface TTitle {
 }
 
 const BiModel = ({ title }: TTitle) => {
+    // State to manage quantity
+    const [quantity, setQuantity] = useState<number>(1);
+
+    // Function to handle increment
+    const handleIncrement = () => {
+        setQuantity((prev) => prev + 1);
+    };
+
+    // Function to handle decrement
+    const handleDecrement = () => {
+        if (quantity > 1) {
+            setQuantity((prev) => prev - 1);
+        }
+    };
+
+    // Function to handle adding to cart
+    const handleAddToCart = () => {
+        alert(`Added ${quantity} item(s) to cart!`); // Replace with your actual logic
+    };
+
     return (
         <div>
             <Dialog>
@@ -35,77 +57,89 @@ const BiModel = ({ title }: TTitle) => {
                                             alt="Product Image"
                                         />
                                     </div>
-                                    <div className="flex -mx-2 mb-4">
-                                        <div className="w-1/2 px-2">
-                                            <button className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                        <div className="w-1/2 px-2">
-                                            <button className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">
-                                                Add to Wishlist
-                                            </button>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 {/* Product Details Section */}
-                                <div className="md:flex-1 px-4">
+                                <div className="md:flex-1 px-4 flex flex-col">
                                     <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Product Name</h2>
-                                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod
-                                        libero id mauris malesuada tincidunt.
-                                    </p>
+                                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">description</p>
 
                                     {/* Price and Availability */}
-                                    <div className="flex flex-col md:flex-row mb-4 gap-4">
+                                    <div className="flex flex-col md:flex-row mb-4 gap-4 justify-between">
                                         <div>
                                             <span className="font-bold text-gray-700 dark:text-gray-300">Price:</span>
-                                            <span className="text-gray-600 dark:text-gray-300">$29.99</span>
+                                            <span className="text-gray-600 dark:text-gray-300 ml-2">TK 10000</span>
                                         </div>
                                         <div>
-                                            <span className="font-bold text-gray-700 dark:text-gray-300">Availability:</span>
-                                            <span className="text-gray-600 dark:text-gray-300">In Stock</span>
+                                            <span className="font-bold text-gray-700 dark:text-gray-300">Status:</span>
+                                            <Badge variant="destructive" className="text-black ml-2">In Stock</Badge>
                                         </div>
                                     </div>
 
-                                    {/* Color Selection */}
-                                    <div className="mb-4">
-                                        <span className="font-bold text-gray-700 dark:text-gray-300">Select Color:</span>
-                                        <div className="flex items-center mt-2">
-                                            <button className="w-6 h-6 rounded-full bg-gray-800 dark:bg-gray-200 mr-2"></button>
-                                            <button className="w-6 h-6 rounded-full bg-red-500 dark:bg-red-700 mr-2"></button>
-                                            <button className="w-6 h-6 rounded-full bg-blue-500 dark:bg-blue-700 mr-2"></button>
-                                            <button className="w-6 h-6 rounded-full bg-yellow-500 dark:bg-yellow-700 mr-2"></button>
+                                    <div className="flex flex-col md:flex-row mb-4 gap-4 justify-between">
+                                        <div>
+                                            <span className="font-bold text-gray-700 dark:text-gray-300">Brand:</span>
+                                            <span className="text-gray-600 dark:text-gray-300 ml-2">Duronto</span>
+                                        </div>
+                                        <div>
+                                            <span className="font-bold text-gray-700 dark:text-gray-300">Model:</span>
+                                            <span className="text-gray-600 dark:text-gray-300 ml-2">X541NA</span>
                                         </div>
                                     </div>
 
-                                    {/* Size Selection */}
-                                    <div className="mb-4">
-                                        <span className="font-bold text-gray-700 dark:text-gray-300">Select Size:</span>
-                                        <div className="flex flex-wrap items-center mt-2 gap-2">
-                                            {['S', 'M', 'L', 'XL', 'XXL'].map((size) => (
-                                                <button
-                                                    key={size}
-                                                    className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-400 dark:hover:bg-gray-600"
-                                                >
-                                                    {size}
-                                                </button>
-                                            ))}
+                                    <div className="flex flex-col md:flex-row mb-4 gap-4 justify-between">
+                                        <div className="flex gap-2 items-center justify-center text-center">
+                                            <span className="font-bold text-gray-700 dark:text-gray-300">Available Stock:</span>
+                                            <div className="flex flex-wrap items-center gap-2">
+                                                <div className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-1 px-3 rounded-full font-bold hover:bg-gray-400 dark:hover:bg-gray-600">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span className="font-bold text-gray-700 dark:text-gray-300">Type:</span>
+                                            <span className="text-gray-600 dark:text-gray-300 ml-2">Avil</span>
                                         </div>
                                     </div>
 
-                                    {/* Product Description */}
-                                    <div>
-                                        <span className="font-bold text-gray-700 dark:text-gray-300">Product Description:</span>
-                                        <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer
-                                            euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus
-                                            aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat
-                                            vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non
-                                            sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi
-                                            consectetur.
-                                        </p>
+                                    {/* Quantity Input */}
+                                    <div className="mt-4 flex items-center justify-start gap-2">
+                                        <label htmlFor="Quantity" className="font-bold text-gray-700 dark:text-gray-300">
+                                            Quantity :
+                                        </label>
+                                        <div className="flex items-center rounded-sm border w-fit">
+                                            <button
+                                                type="button"
+                                                onClick={handleDecrement}
+                                                className="size-10 leading-10 text-gray-600 transition hover:opacity-75"
+                                            >
+                                                &minus;
+                                            </button>
+                                            <input
+                                                type="number"
+                                                id="Quantity"
+                                                value={quantity}
+                                                onChange={(e) => setQuantity(Number(e.target.value))}
+                                                className="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={handleIncrement}
+                                                className="size-10 leading-10 text-gray-600 transition hover:opacity-75"
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {/* Add to Cart Button */}
+                                    <div className="mt-auto">
+                                        <Button
+                                            onClick={handleAddToCart}
+                                            className="block w-full rounded-sm bg-blue-800 text-sm font-medium transition hover:scale-105"
+                                        >
+                                            Add to Cart
+                                        </Button>
                                     </div>
                                 </div>
                             </div>
