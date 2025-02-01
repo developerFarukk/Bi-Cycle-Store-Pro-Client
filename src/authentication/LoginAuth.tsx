@@ -1,8 +1,9 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import HookButton from "@/shared/HookButton";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useAppDispatch } from "@/redux/hooks";
 
 type Inputs = {
     email: string;
@@ -11,7 +12,11 @@ type Inputs = {
 
 const LoginAuth = () => {
 
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+    
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
         // Handle form submission here
