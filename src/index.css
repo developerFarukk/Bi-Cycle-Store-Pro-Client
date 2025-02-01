@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -29,6 +30,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem
   }
+
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -56,10 +58,12 @@
     --chart-5: 340 75% 55%
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -70,4 +74,53 @@
 
 .exo-uniquifier {
   font-family: "Exo 2", serif;
+}
+
+
+
+/* ********************    Hover Underline Animation  ************ */
+
+.hover-underline-animation {
+  display: inline-block;
+  /* Display inline block */
+  position: relative;
+  /* Set position relative */
+  color:
+    /* whitesmoke; */
+  /* Set text color */
+}
+
+.hover-underline-animation:after {
+  content: '';
+  /* Add content after the element */
+  position: absolute;
+  /* Position absolute for pseudo-element */
+  width: 100%;
+  /* Full width */
+  transform: scaleX(0);
+  /* Initial scale of 0 for underline effect */
+  height: 2px;
+  /* Height of the underline */
+  bottom: 0;
+  /* Align to bottom */
+  left: 0;
+  /* Align to left */
+  background-color:
+    blue;
+  /* Background color of the underline */
+  transform-origin: bottom right;
+  /* Set transform origin */
+  transition: transform 0.25s ease-out;
+  /* Transition effect for the underline */
+}
+
+.hover-underline-animation:hover:after {
+  transform: scaleX(1);
+  /* Scale the underline on hover */
+  transform-origin: bottom left;
+  /* Set transform origin */
+}
+
+html {
+  scroll-behavior: smooth;
 }

@@ -14,7 +14,7 @@ const Home = () => {
             </div>
 
             {/* Bicycle Card Page */}
-            <div className="lg:p-4 p-2">
+            <div id="BicycleCard" className="lg:p-4 p-2">
                 <BicycleCard />
             </div>
 
