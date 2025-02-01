@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import BiModel from "@/shared/BiModel";
 
 
 
@@ -42,7 +43,8 @@ const BicycleCard = () => {
                         />
                         {/* Overlay Text */}
                         <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                            <p className="text-white text-lg font-medium">See Details...</p>
+                            {/* <p className="text-white text-lg font-medium">See Details...</p> */}
+                            <BiModel title="See Details..." />
                         </div>
                     </div>
 
