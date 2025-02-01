@@ -9,7 +9,7 @@ const BicycleCard = () => {
 
     const { data: bicycleData } = useGetAllProductsQuery(undefined);
     const bicycle = bicycleData?.data?.result
-    console.log(bicycle);
+    // console.log(bicycle);
 
 
 
@@ -53,7 +53,7 @@ const BicycleCard = () => {
                                 />
                                 {/* Overlay Text */}
                                 <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                                    <BiModel title="See Details..." />
+                                    <BiModel title="See Details..." id={bi._id} />
                                 </div>
                             </div>
 

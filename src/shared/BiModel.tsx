@@ -1,32 +1,47 @@
-import { useState } from "react"; // Import useState for state management
+
+
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useGetSingleBicycleQuery } from "@/redux/features/bicycleProducts/bicycleManagmentApi";
 
 interface TTitle {
     title: string;
+    id: string;
 }
 
-const BiModel = ({ title }: TTitle) => {
-    // State to manage quantity
+const BiModel = ({ title, id }: TTitle) => {
+    const { data: bi, isLoading, isError } = useGetSingleBicycleQuery(id);
+    const bicycle = bi?.data;
+
     const [quantity, setQuantity] = useState<number>(1);
 
-    // Function to handle increment
     const handleIncrement = () => {
         setQuantity((prev) => prev + 1);
     };
 
-    // Function to handle decrement
     const handleDecrement = () => {
         if (quantity > 1) {
             setQuantity((prev) => prev - 1);
         }
     };
 
-    // Function to handle adding to cart
     const handleAddToCart = () => {
-        alert(`Added ${quantity} item(s) to cart!`); // Replace with your actual logic
+        alert(`Added ${quantity} item(s) to cart!`);
     };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (isError) {
+        return <div>Error loading bicycle details.</div>;
+    }
+
+    if (!bicycle) {
+        return <div>Bicycle not found.</div>;
+    }
 
     return (
         <div>
@@ -36,47 +51,44 @@ const BiModel = ({ title }: TTitle) => {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[90%] md:max-w-3xl lg:max-w-4xl xl:max-w-6xl">
                     <DialogHeader>
-                        <DialogTitle className="text-center">Bicycle Products</DialogTitle>
+                        <DialogTitle className="text-center">Bicycle Products Details</DialogTitle>
                     </DialogHeader>
                     <div className="bg-gray-100 dark:bg-gray-800 py-4 md:py-8 rounded-md">
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="flex flex-col md:flex-row -mx-4">
-                                {/* Product Image Section */}
                                 <div className="md:flex-1 px-4">
                                     <div className="h-64 md:h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
                                         <img
                                             className="w-full h-full object-cover rounded-lg"
-                                            src="../../public/Bi-1.png"
-                                            alt="Product Image"
+                                            src={bicycle.bicycleImage}
+                                            alt={bicycle.name}
                                         />
                                     </div>
                                 </div>
 
-                                {/* Product Details Section */}
                                 <div className="md:flex-1 px-4 flex flex-col">
-                                    <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Product Name</h2>
-                                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">description</p>
+                                    <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{bicycle.name}</h2>
+                                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{bicycle.description}</p>
 
-                                    {/* Price and Availability */}
                                     <div className="flex flex-col md:flex-row mb-4 gap-4 justify-between">
                                         <div>
                                             <span className="font-bold text-gray-700 dark:text-gray-300">Price:</span>
-                                            <span className="text-gray-600 dark:text-gray-300 ml-2">TK 10000</span>
+                                            <span className="text-gray-600 dark:text-gray-300 ml-2">TK {bicycle.price}</span>
                                         </div>
                                         <div>
                                             <span className="font-bold text-gray-700 dark:text-gray-300">Status:</span>
-                                            <Badge variant="destructive" className="text-black ml-2">In Stock</Badge>
+                                            <Badge variant="destructive" className="text-black ml-2">{bicycle.status}</Badge>
                                         </div>
                                     </div>
 
                                     <div className="flex flex-col md:flex-row mb-4 gap-4 justify-between">
                                         <div>
                                             <span className="font-bold text-gray-700 dark:text-gray-300">Brand:</span>
-                                            <span className="text-gray-600 dark:text-gray-300 ml-2">Duronto</span>
+                                            <span className="text-gray-600 dark:text-gray-300 ml-2">{bicycle.brand}</span>
                                         </div>
                                         <div>
                                             <span className="font-bold text-gray-700 dark:text-gray-300">Model:</span>
-                                            <span className="text-gray-600 dark:text-gray-300 ml-2">X541NA</span>
+                                            <span className="text-gray-600 dark:text-gray-300 ml-2">{bicycle.model}</span>
                                         </div>
                                     </div>
 
@@ -85,17 +97,17 @@ const BiModel = ({ title }: TTitle) => {
                                             <span className="font-bold text-gray-700 dark:text-gray-300">Available Stock:</span>
                                             <div className="flex flex-wrap items-center gap-2">
                                                 <div className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-1 px-3 rounded-full font-bold hover:bg-gray-400 dark:hover:bg-gray-600">
-                                                    45
+                                                    {bicycle.quantity} {/* Display the actual quantity from the data */}
                                                 </div>
                                             </div>
                                         </div>
                                         <div>
                                             <span className="font-bold text-gray-700 dark:text-gray-300">Type:</span>
-                                            <span className="text-gray-600 dark:text-gray-300 ml-2">Avil</span>
+                                            <span className="text-gray-600 dark:text-gray-300 ml-2">{bicycle.type}</span> {/* Display the actual type from the data */}
                                         </div>
                                     </div>
 
-                                    {/* Quantity Input */}
+
                                     <div className="mt-4 flex items-center justify-start gap-2">
                                         <label htmlFor="Quantity" className="font-bold text-gray-700 dark:text-gray-300">
                                             Quantity :
@@ -125,7 +137,6 @@ const BiModel = ({ title }: TTitle) => {
                                         </div>
                                     </div>
 
-                                    {/* Add to Cart Button */}
                                     <div className="mt-auto">
                                         <Button
                                             onClick={handleAddToCart}
