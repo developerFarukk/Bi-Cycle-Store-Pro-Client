@@ -4,6 +4,7 @@ import HomeRoot from "./HomeRoot";
 import Home from "@/pages/HomePage/Home";
 import LoginAuth from "@/authentication/LoginAuth";
 import RegistationAuth from "@/authentication/RegistationAuth";
+import App from "@/App";
 
 
 
@@ -19,11 +20,11 @@ const router = createBrowserRouter([
             }
         ]
     },
-    // {
-    //     path: '/admin',
-    //     element: <App />,
-    //     children: routeGenerator(adminPaths),
-    // },
+    {
+        path: '/customer',
+        element: <App />,
+        // children: routeGenerator(adminPaths),
+    },
     // {
     //     path: '/faculty',
     //     element: <App />,
