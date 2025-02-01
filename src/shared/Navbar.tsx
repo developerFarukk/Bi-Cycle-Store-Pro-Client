@@ -21,8 +21,8 @@ const Navbar = () => {
         //  logging out
         setTimeout(() => {
             dispatch(logout());
-            toast.success("Logged out successfully", { id: toastId, duration: 1000 });
-        }, 1000);
+            toast.success("Logged out successfully", { id: toastId, duration: 1500 });
+        }, 1500);
     };
 
     const [isOpen, setIsOpen] = useState(false);
