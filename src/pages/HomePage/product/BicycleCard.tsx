@@ -1,9 +1,14 @@
 import { Badge } from "@/components/ui/badge";
+import { useGetAllProductsQuery } from "@/redux/features/bicycleProducts/bicycleManagmentApi";
 import BiModel from "@/shared/BiModel";
 
 
 
 const BicycleCard = () => {
+
+    const { data: bicycleData } = useGetAllProductsQuery(undefined);
+    console.log(bicycleData);
+    
 
     return (
         <div>
