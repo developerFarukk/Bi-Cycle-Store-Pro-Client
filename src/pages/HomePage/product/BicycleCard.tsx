@@ -7,7 +7,7 @@ const BicycleCard = () => {
     return (
         <div>
             <div className="text-center p-4 mb-4">
-                <h2 className="text-4xl font-bold">Our Bicycle Product</h2>
+                <h2 className="text-4xl font-bold">Our Bicycle Products</h2>
             </div>
 
             <div className="grid lg:grid-cols-4 md:grid-cols-2">
@@ -61,13 +61,13 @@ const BicycleCard = () => {
                         </div>
 
                         {/* Add to Cart Button */}
-                        <form className="mt-4 flex gap-4">
+                        <div className="mt-4 flex gap-4">
                             <button
                                 className="block w-full rounded-sm bg-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105"
                             >
                                 Add to Cart
                             </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
