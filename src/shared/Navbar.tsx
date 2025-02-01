@@ -2,11 +2,28 @@ import { useState } from "react";
 import { Link } from "react-router";
 import HookButton from "./HookButton";
 import Ridenest from "./Ridenest";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { logout } from "@/redux/features/auth/authSlice";
+import { toast } from "sonner";
 
 
 
 
 const Navbar = () => {
+
+    const dispatch = useAppDispatch();
+    const { token } = useAppSelector((state) => state.auth);
+    console.log(token);
+
+    const handleLogout = () => {
+        const toastId = toast.loading("Logging out...");
+
+        //  logging out
+        setTimeout(() => {
+            dispatch(logout());
+            toast.success("Logged out successfully", { id: toastId, duration: 1000 });
+        }, 1000);
+    };
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -97,8 +114,20 @@ const Navbar = () => {
 
                             {/* Login and Registration buttons for small and medium devices */}
                             <div className="flex flex-col space-y-2 md:hidden">
-                                <Link to="/register"><HookButton title="Sign UP" /></Link>
-                                <Link to="/login"><HookButton title="Login" /></Link>
+                                {!token ? (
+                                    <>
+                                        <Link to="/register">
+                                            <HookButton title="Sign Up" />
+                                        </Link>
+                                        <Link to="/login">
+                                            <HookButton title="Login" />
+                                        </Link>
+                                    </>
+                                ) : (
+                                    <Link onClick={handleLogout} to="/">
+                                        <HookButton title="Log Out" />
+                                    </Link>
+                                )}
                             </div>
                         </div>
 
@@ -129,8 +158,20 @@ const Navbar = () => {
 
                     {/* Login and Registration buttons for large devices */}
                     <div className="hidden md:flex gap-2">
-                        <Link to="/register"><HookButton title="Sign UP" /></Link>
-                        <Link to="/login"><HookButton title="Login" /></Link>
+                        {!token ? (
+                            <>
+                                <Link to="/register">
+                                    <HookButton title="Sign Up" />
+                                </Link>
+                                <Link to="/login">
+                                    <HookButton title="Login" />
+                                </Link>
+                            </>
+                        ) : (
+                            <Link onClick={handleLogout} to="/">
+                                <HookButton title="Log Out" />
+                            </Link>
+                        )}
                     </div>
                 </div>
             </nav>
