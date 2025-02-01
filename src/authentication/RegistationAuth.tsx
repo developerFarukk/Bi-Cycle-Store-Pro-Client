@@ -115,7 +115,7 @@ import { Input } from "@/components/ui/input";
 import { useAddUserMutation } from "@/redux/features/users/userMenagement";
 import HookButton from "@/shared/HookButton";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router"; // Fixed import
+import { Link, useNavigate } from "react-router"; // Fixed import
 import { toast } from "sonner";
 
 type Inputs = {
@@ -126,6 +126,7 @@ type Inputs = {
 
 const RegistrationAuth = () => {
     const [addUser, { isLoading }] = useAddUserMutation();
+    const navigate = useNavigate()
 
     const {
         register,
@@ -143,12 +144,15 @@ const RegistrationAuth = () => {
         };
 
         try {
-            const res = await addUser(userData).unwrap();
-            console.log(res);
-            
+            const res = await addUser(userData).unwrap(); // Use unwrap() to handle the response
 
             if (res.success) {
                 toast.success("Account created successfully!", { id: toastId });
+
+                // Navigate to the login page
+                setTimeout(() => {
+                    navigate("/login");
+                }, 700);
             } else {
                 toast.error(res.message || "Failed to create account", { id: toastId });
             }
