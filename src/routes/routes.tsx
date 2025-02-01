@@ -5,6 +5,7 @@ import Home from "@/pages/HomePage/Home";
 import LoginAuth from "@/authentication/LoginAuth";
 import RegistationAuth from "@/authentication/RegistationAuth";
 import App from "@/App";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 
 
@@ -21,8 +22,15 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/customer',
-        element: <App />,
+        path: 'dashboard',
+        element: (
+            <SidebarProvider>
+                <main>
+                    <SidebarTrigger />
+                    <App/>
+                </main>
+            </SidebarProvider>
+        ),
         // children: routeGenerator(adminPaths),
     },
     // {

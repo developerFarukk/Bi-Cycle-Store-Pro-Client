@@ -96,13 +96,13 @@ const Navbar = () => {
                                 href="#BicycleCard"
                                 className="my-2 hover-underline-animation text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0"
                             >
-                                Shop
+                                All Products
                             </a>
 
                             {!token ? (
                                 null
                             ) : (
-                                <Link to="/"
+                                <Link to="/dashboard"
                                     className="my-2 hover-underline-animation text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0"
                                 >
                                     Dashboard
