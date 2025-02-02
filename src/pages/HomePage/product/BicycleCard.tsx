@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
 
 import { Badge } from "@/components/ui/badge";
 import { useGetAllProductsQuery } from "@/redux/features/bicycleProducts/bicycleManagmentApi";
 import { addToCart, setCartItems, TCartItem } from "@/redux/features/cart/cartSlice";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import BiModel from "@/shared/BiModel";
 import LoadingProgress from "@/shared/LoadingProgress";
@@ -16,13 +17,13 @@ import { toast } from "sonner";
 
 
 const BicycleCard = (
-    // { product }: { product: TProduct }
 ) => {
     const { data: bicycleData, isLoading, isError } = useGetAllProductsQuery(undefined);
     const bicycle = bicycleData?.data?.result;
     const user = useSelector((state: RootState) => state.auth.user);
     const dispatch = useAppDispatch();
     const [cartItems, setCartItemsState] = useState<TCartItem[]>([]);
+    const cartItem = useAppSelector((state: RootState) => state.cart);
 
     useEffect(() => {
         if (user) {
@@ -32,7 +33,7 @@ const BicycleCard = (
                 setCartItemsState(storedCartItems);
             }
         } else {
-       
+
             dispatch(setCartItems([]));
             setCartItemsState([]);
         }
@@ -48,6 +49,15 @@ const BicycleCard = (
 
         if (!user) {
             toast.error("You must be logged in to add to cart.");
+            return;
+        }
+
+        const productInCart = cartItem.items.find((item: any) => item._id === bi._id);
+        console.log(productInCart);
+        
+
+        if (productInCart) {
+            toast.info("Product is already exsist in your cart.");
             return;
         }
 
