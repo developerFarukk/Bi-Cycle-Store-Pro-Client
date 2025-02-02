@@ -9,9 +9,4 @@ export const adminPaths = [
         path: 'admindashboard',
         element: <PrivateRoute ><AdminDashboard /></PrivateRoute>,
     },
-    // {
-    //     name: 'Home',
-    //     path: 'dashboard/home',
-    //     element: <CustomerDashboard />,
-    // },
 ];
