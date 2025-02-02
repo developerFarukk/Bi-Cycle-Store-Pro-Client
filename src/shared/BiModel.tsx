@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
 import { useState } from "react";
@@ -5,6 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useGetSingleBicycleQuery } from "@/redux/features/bicycleProducts/bicycleManagmentApi";
+import LoadingProgress from "./LoadingProgress";
+import { TBicycle } from "@/types/productsManagment";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { toast } from "sonner";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { addToCart } from "@/redux/features/cart/cartSlice";
 
 interface TTitle {
     title: string;
@@ -12,8 +20,16 @@ interface TTitle {
 }
 
 const BiModel = ({ title, id }: TTitle) => {
+
+    const user = useSelector((state: RootState) => state.auth.user);
+    const cartItem = useAppSelector((state: RootState) => state.cart);
+    // console.log(cartItem);
+    
     const { data: bi, isLoading, isError } = useGetSingleBicycleQuery(id);
     const bicycle = bi?.data;
+    const dispatch = useAppDispatch();
+    // console.log(bicycle._id);
+
 
     const [quantity, setQuantity] = useState<number>(1);
 
@@ -27,12 +43,56 @@ const BiModel = ({ title, id }: TTitle) => {
         }
     };
 
-    const handleAddToCart = () => {
-        alert(`Added ${quantity} item(s) to cart!`);
+    // const handleAddToCart = () => {
+    //     console.log(quantity);
+
+    // };
+
+
+
+    const handleAddToCart = (bi: TBicycle) => {
+        console.log(bi);
+        
+
+        if (!user) {
+            toast.error("You must be logged in to add to cart.");
+            return;
+        }
+
+        const productInCart = cartItem.items.find((item: any) => item._id === bi._id);
+        console.log(cartItem.items);
+
+
+        if (productInCart) {
+            toast.info("Product is already exsist in your cart.");
+            return;
+        }
+
+        const toastId = toast.loading("Logging out...");
+        dispatch(
+            addToCart({
+                _id: bi._id,
+                bicycleImage: bi.bicycleImage,
+                brand: bi.brand,
+                description: bi.description,
+                name: bi.name,
+                price: bi.price,
+                model: bi.model,
+                quantity: quantity,
+                status: bi.status,
+                type: bi.type,
+            }),
+            user.userId
+        );
+        toast.success("Add to Card successfully", { id: toastId, duration: 1500 });
     };
 
+
+
+
+
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div><LoadingProgress></LoadingProgress></div>;
     }
 
     if (isError) {
@@ -139,7 +199,8 @@ const BiModel = ({ title, id }: TTitle) => {
 
                                     <div className="mt-auto">
                                         <Button
-                                            onClick={handleAddToCart}
+                                            // onClick={handleAddToCart}
+                                            onClick={() => handleAddToCart(bicycle)}
                                             className="block w-full rounded-sm bg-blue-800 text-sm font-medium transition hover:scale-105"
                                         >
                                             Add to Cart

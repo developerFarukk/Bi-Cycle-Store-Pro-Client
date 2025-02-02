@@ -174,20 +174,30 @@ const MyCart = () => {
                                                 />
 
                                                 <div>
-                                                    <h3 className="text-lg text-gray-900">{item.name}</h3>
+                                                    <h3 className="text-lg text-blue-400">{item.name}</h3>
 
                                                     <dl className="mt-0.5 space-y-px  text-gray-600">
-                                                        <div>
-                                                            <dt className="inline font-medium ">Brand:</dt>
-                                                            <dd className="inline ml-2">{item.brand}</dd>
-                                                        </div>
-                                                        <div>
-                                                            <dt className="inline font-medium ">Model:</dt>
-                                                            <dd className="inline ml-2">{item.model}</dd>
-                                                        </div>
-                                                        <div>
-                                                            <dt className="inline font-medium ">Type:</dt>
-                                                            <dd className="inline ml-2">{item.type}</dd>
+                                                        <div className="flex gap-8">
+                                                            <div>
+                                                                <div>
+                                                                    <dt className="inline font-medium ">Brand:</dt>
+                                                                    <dd className="inline ml-2">{item.brand}</dd>
+                                                                </div>
+                                                                <div>
+                                                                    <dt className="inline font-medium ">Model:</dt>
+                                                                    <dd className="inline ml-2">{item.model}</dd>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div>
+                                                                    <dt className="inline font-medium ">Type:</dt>
+                                                                    <dd className="inline ml-2">{item.type}</dd>
+                                                                </div>
+                                                                <div>
+                                                                    <dt className="inline font-medium ">Price:</dt>
+                                                                    <dd className="inline ml-2">{item.price}</dd>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </dl>
                                                 </div>

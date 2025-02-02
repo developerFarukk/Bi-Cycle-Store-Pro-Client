@@ -46,6 +46,7 @@ const BicycleCard = (
     }, [user, cartItems]);
 
     const handleAddToCart = (bi: TBicycle) => {
+// console.log(bi);
 
         if (!user) {
             toast.error("You must be logged in to add to cart.");
@@ -54,7 +55,7 @@ const BicycleCard = (
 
         const productInCart = cartItem.items.find((item: any) => item._id === bi._id);
         console.log(productInCart);
-        
+
 
         if (productInCart) {
             toast.info("Product is already exsist in your cart.");
@@ -129,9 +130,9 @@ const BicycleCard = (
                                     className="h-64 w-full rounded-tl-md rounded-tr-md object-cover transition duration-500 group-hover:scale-105 sm:h-72"
                                 />
                                 {/* Overlay Text */}
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                                {/* <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                                     <BiModel title="See Details..." id={bi._id} />
-                                </div>
+                                </div> */}
                             </div>
 
                             {/* Product Details */}
@@ -159,8 +160,9 @@ const BicycleCard = (
                                         onClick={() => handleAddToCart(bi)}
                                         className="block w-full rounded-sm bg-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105"
                                     >
-                                        Add to Cart
+                                        View Details
                                     </button>
+                                    <BiModel title="View Details" id={bi._id} />
 
                                 </div>
                             </div>
