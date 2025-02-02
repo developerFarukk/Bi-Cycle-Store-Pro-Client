@@ -1,17 +1,43 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetAllUsersQuery } from "@/redux/features/userManagment/userManagmentApi";
 
+import { useGetAllUsersQuery } from "@/redux/features/userManagment/userManagmentApi";
+import LoadingProgress from "@/shared/LoadingProgress";
+import { useEffect, useState } from "react";
+
+
+interface Tuserss {
+
+    _id: string
+    name: string;
+    email: string;
+    role: 'admin' | 'customer';
+    status: 'in-progress' | 'blocked';
+    isDeleted: boolean;
+
+}
 
 
 const AllUser = () => {
 
-    const { data: userData, isLoading, isError } = useGetAllUsersQuery(undefined);
-    console.log(isError, isLoading);
 
-    //  console.log(userData?.data?.result);
-    const totalUser = userData?.data?.result.length || 0;
-    const user = userData?.data?.result
-    console.log(user);
+    const { data: userData, isLoading, isError } = useGetAllUsersQuery(undefined);
+    const [users, setUsers] = useState<Tuserss[]>([]);
+
+    useEffect(() => { 
+        if (userData && !isLoading && !isError) {
+            setUsers(userData.data.result);
+        }
+    }, [userData, isLoading, isError]); 
+
+    const totalUser = users.length; 
+
+    if (isLoading) {
+        return <div><LoadingProgress></LoadingProgress></div>; 
+    }
+
+    if (isError) {
+        return <div>Error loading users.</div>;
+    }
 
 
 
@@ -32,16 +58,16 @@ const AllUser = () => {
 
                                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
 
-                                    <thead className="bg-gray-50 dark:bg-gray-800">
+                                    <thead className="bg-gray-50 dark:bg-gray-800 text-center justify-center">
                                         <tr>
-                                            <th scope="col" className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                            <th scope="col" className="py-3.5 px-4 text-sm font-normal text-center justify-center rtl:text-right text-gray-500 dark:text-gray-400">
                                                 <div className="flex items-center gap-x-3">
                                                     <input type="checkbox" className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700" />
                                                     <span>Name</span>
                                                 </div>
                                             </th>
 
-                                            <th scope="col" className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                            <th scope="col" className="px-12 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400">
                                                 <button className="flex items-center gap-x-2">
                                                     <span>Status</span>
 
@@ -53,7 +79,7 @@ const AllUser = () => {
                                                 </button>
                                             </th>
 
-                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400">
                                                 <button className="flex items-center gap-x-2">
                                                     <span>Role</span>
 
@@ -63,9 +89,9 @@ const AllUser = () => {
                                                 </button>
                                             </th>
 
-                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Email address</th>
+                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400">Email address</th>
 
-                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Teams</th>
+                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400">Action</th>
 
                                             <th scope="col" className="relative py-3.5 px-4">
                                                 <span className="sr-only">Edit</span>
@@ -74,9 +100,10 @@ const AllUser = () => {
                                     </thead>
 
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+
                                         {
-                                            user.map((user: any) => <>
-                                                <tr key={user.id}>
+                                            users.map((user: Tuserss) =>
+                                                <tr key={user._id} >
                                                     <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                                         <div className="inline-flex items-center gap-x-3">
                                                             <input type="checkbox" className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700" />
@@ -97,19 +124,12 @@ const AllUser = () => {
                                                             <h2 className="text-sm font-normal text-emerald-500">{user.status}</h2>
                                                         </div>
                                                     </td>
-                                                    <td className="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                                        <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-blue-50 dark:bg-gray-800">
-                                                            <h2 className="text-sm font-normal text-emerald-500">{user.status}</h2>
+                                                    <td className="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap flex justify-center">
+                                                        <div className="text-center inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-blue-50 dark:bg-gray-800">
+                                                           {user.role}
                                                         </div>
                                                     </td>
-                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">authurmelo@example.com</td>
-                                                    <td className="px-4 py-4 text-sm whitespace-nowrap">
-                                                        <div className="flex items-center gap-x-2">
-
-                                                            <p className="px-3 py-1 text-xs text-blue-500 rounded-full dark:bg-gray-800 bg-blue-100/60">Product</p>
-                                                            <p className="px-3 py-1 text-xs text-pink-500 rounded-full dark:bg-gray-800 bg-pink-100/60">Marketing</p>
-                                                        </div>
-                                                    </td>
+                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{user.email}</td>
                                                     <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                         <div className="flex items-center gap-x-6">
                                                             <button className="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none">
@@ -126,8 +146,11 @@ const AllUser = () => {
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            </>)
+                                            )
                                         }
+
+
+
 
 
                                     </tbody>
