@@ -24,6 +24,7 @@ const BiModel = ({ title, id }: TTitle) => {
     const user = useSelector((state: RootState) => state.auth.user);
     const cartItem = useAppSelector((state: RootState) => state.cart);
     // console.log(cartItem);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     
     const { data: bi, isLoading, isError } = useGetSingleBicycleQuery(id);
     const bicycle = bi?.data;
@@ -85,6 +86,7 @@ const BiModel = ({ title, id }: TTitle) => {
             user.userId
         );
         toast.success("Add to Card successfully", { id: toastId, duration: 1500 });
+        setIsDialogOpen(false);
     };
 
 
@@ -105,13 +107,13 @@ const BiModel = ({ title, id }: TTitle) => {
 
     return (
         <div>
-            <Dialog>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
                     <Button variant="outline">{title}</Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[90%] md:max-w-3xl lg:max-w-4xl xl:max-w-6xl">
                     <DialogHeader>
-                        <DialogTitle className="text-center">Bicycle Products Details</DialogTitle>
+                        <DialogTitle  className="text-center">Bicycle Products Details</DialogTitle>
                     </DialogHeader>
                     <div className="bg-gray-100 dark:bg-gray-800 py-4 md:py-8 rounded-md">
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

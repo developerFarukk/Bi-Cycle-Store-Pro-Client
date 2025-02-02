@@ -4,8 +4,8 @@
 
 import { Badge } from "@/components/ui/badge";
 import { useGetAllProductsQuery } from "@/redux/features/bicycleProducts/bicycleManagmentApi";
-import { addToCart, setCartItems, TCartItem } from "@/redux/features/cart/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { setCartItems, TCartItem } from "@/redux/features/cart/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import BiModel from "@/shared/BiModel";
 import LoadingProgress from "@/shared/LoadingProgress";
@@ -13,7 +13,6 @@ import { TBicycle } from "@/types/productsManagment";
 import { getCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "@/utils/localUtils";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { toast } from "sonner";
 
 
 const BicycleCard = (
@@ -23,7 +22,7 @@ const BicycleCard = (
     const user = useSelector((state: RootState) => state.auth.user);
     const dispatch = useAppDispatch();
     const [cartItems, setCartItemsState] = useState<TCartItem[]>([]);
-    const cartItem = useAppSelector((state: RootState) => state.cart);
+    // const cartItem = useAppSelector((state: RootState) => state.cart);
 
     useEffect(() => {
         if (user) {
@@ -45,41 +44,41 @@ const BicycleCard = (
         }
     }, [user, cartItems]);
 
-    const handleAddToCart = (bi: TBicycle) => {
-// console.log(bi);
+    //     const handleAddToCart = (bi: TBicycle) => {
+    // // console.log(bi);
 
-        if (!user) {
-            toast.error("You must be logged in to add to cart.");
-            return;
-        }
+    //         if (!user) {
+    //             toast.error("You must be logged in to add to cart.");
+    //             return;
+    //         }
 
-        const productInCart = cartItem.items.find((item: any) => item._id === bi._id);
-        console.log(productInCart);
+    //         const productInCart = cartItem.items.find((item: any) => item._id === bi._id);
+    //         console.log(productInCart);
 
 
-        if (productInCart) {
-            toast.info("Product is already exsist in your cart.");
-            return;
-        }
+    //         if (productInCart) {
+    //             toast.info("Product is already exsist in your cart.");
+    //             return;
+    //         }
 
-        const toastId = toast.loading("Logging out...");
-        dispatch(
-            addToCart({
-                _id: bi._id,
-                bicycleImage: bi.bicycleImage,
-                brand: bi.brand,
-                description: bi.description,
-                name: bi.name,
-                price: bi.price,
-                model: bi.model,
-                quantity: 1,
-                status: bi.status,
-                type: bi.type,
-            }),
-            user.userId
-        );
-        toast.success("Add to Card successfully", { id: toastId, duration: 1500 });
-    };
+    //         const toastId = toast.loading("Logging out...");
+    //         dispatch(
+    //             addToCart({
+    //                 _id: bi._id,
+    //                 bicycleImage: bi.bicycleImage,
+    //                 brand: bi.brand,
+    //                 description: bi.description,
+    //                 name: bi.name,
+    //                 price: bi.price,
+    //                 model: bi.model,
+    //                 quantity: 1,
+    //                 status: bi.status,
+    //                 type: bi.type,
+    //             }),
+    //             user.userId
+    //         );
+    //         toast.success("Add to Card successfully", { id: toastId, duration: 1500 });
+    //     };
 
     if (isLoading) {
         return <LoadingProgress />;
@@ -157,12 +156,13 @@ const BicycleCard = (
                                 <div className="mt-4 flex gap-4">
 
                                     <button
-                                        onClick={() => handleAddToCart(bi)}
-                                        className="block w-full rounded-sm bg-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105"
-                                    >
-                                        View Details
+                                        className="flex  text-sm font-medium justify-end "
+                                    ><BiModel title="View Details" id={bi._id} />
+
                                     </button>
-                                    <BiModel title="View Details" id={bi._id} />
+                                    {/* <div className="transition hover:scale-105 ">
+                                        <BiModel title="View Details" id={bi._id} />
+                                    </div> */}
 
                                 </div>
                             </div>
