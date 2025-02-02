@@ -4,6 +4,7 @@ import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom"; // Import from react-router-dom
 import { useState, useEffect } from "react"; // Import useState and useEffect
+import LoadingProgress from "@/shared/LoadingProgress";
 
 interface TChildren {
     children: JSX.Element; // Use JSX.Element for type safety
@@ -26,7 +27,7 @@ const PrivateRoute = ({ children }: TChildren) => {
 
 
     if (loading) {
-        return <progress className="text-3xl text-blue-600 text-center">Loading</progress>; 
+        return <LoadingProgress />
     }
 
     if (user) {

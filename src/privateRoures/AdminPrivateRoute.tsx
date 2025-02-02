@@ -1,6 +1,7 @@
 
 
 import { RootState } from "@/redux/store";
+import LoadingProgress from "@/shared/LoadingProgress";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
@@ -23,7 +24,7 @@ const AdminPrivateRoute = ({ children }: TChildren) => {
     }, [userRole]); 
 
     if (loading) {
-        return <progress className="text-3xl text-blue-600 text-center">Loading</progress>;
+        return <LoadingProgress />;
     }
 
     if (userRole === 'admin') {

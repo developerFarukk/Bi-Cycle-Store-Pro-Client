@@ -29,7 +29,7 @@ const MainLayout = () => {
             <Sidebar>
                 <SidebarContent>
                     <SidebarGroup>
-                        <SidebarGroupLabel>Application</SidebarGroupLabel>
+                        <SidebarGroupLabel className="text-2xl text-center flex justify-center items-center">DASHBOARD</SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
                                 {pathsToRender.map((item) => (
