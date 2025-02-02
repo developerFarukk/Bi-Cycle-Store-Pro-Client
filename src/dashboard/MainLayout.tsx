@@ -1,20 +1,15 @@
 
 
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
+    Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu,
+    SidebarMenuButton, SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
 import { RootState } from "@/redux/store";
 import { adminPaths } from "@/routes/admin.routes";
 import { customerPaths } from "@/routes/customer.routes";
 import { useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 
 const MainLayout = () => {
@@ -29,7 +24,9 @@ const MainLayout = () => {
             <Sidebar>
                 <SidebarContent>
                     <SidebarGroup>
-                        <SidebarGroupLabel className="text-2xl text-center flex justify-center items-center">DASHBOARD</SidebarGroupLabel>
+                        <SidebarGroupLabel className="text-2xl text-center flex justify-center items-center hover:bg-blue-100">
+                            <Link to="/">DASHBOARD</Link>
+                        </SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
                                 {pathsToRender.map((item) => (

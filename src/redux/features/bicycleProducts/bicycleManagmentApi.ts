@@ -10,7 +10,7 @@ const userManagementApi = baseApi.injectEndpoints({
         // Get All Bicycle
         getAllProducts: builder.query({
             query: (args) => {
-                console.log(args);
+                // console.log(args);
                 const params = new URLSearchParams();
 
                 if (args) {
