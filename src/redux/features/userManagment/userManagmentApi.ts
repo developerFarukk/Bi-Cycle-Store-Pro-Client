@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { baseApi } from "@/redux/api/baseApi";
 import { TQueryParam, TResponseRedux } from "@/types/global";
-import { TBicycle } from "@/types/productsManagment";
+import { TUser } from "../auth/authSlice";
 
 
-const productManagementApi = baseApi.injectEndpoints({
+const userManagementApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
 
         // Get All Bicycle
-        getAllProducts: builder.query({
+        getAllUsers: builder.query({
             query: (args) => {
                 console.log(args);
                 const params = new URLSearchParams();
@@ -20,12 +20,12 @@ const productManagementApi = baseApi.injectEndpoints({
                 }
 
                 return {
-                    url: '/bicycle?limit=6',
+                    url: '/users',
                     method: 'GET',
                     params: params,
                 };
             },
-            transformResponse: (response: TResponseRedux<TBicycle[]>) => {
+            transformResponse: (response: TResponseRedux<TUser[]>) => {
                 return {
                     data: response.data,
                 };
@@ -33,20 +33,20 @@ const productManagementApi = baseApi.injectEndpoints({
         }),
 
         // Get single Bicycle
-        getSingleBicycle: builder.query({
-            query: (id) => {
-                return {
-                    url: `/bicycle/${id}`,
-                    method: 'GET',
-                };
-            },
-            transformResponse: (response: TResponseRedux<any>) => {
-                return {
-                    data: response.data,
-                    // meta: response.meta,
-                };
-            },
-        }),
+        // getSingleBicycle: builder.query({
+        //     query: (id) => {
+        //         return {
+        //             url: `/bicycle/${id}`,
+        //             method: 'GET',
+        //         };
+        //     },
+        //     transformResponse: (response: TResponseRedux<any>) => {
+        //         return {
+        //             data: response.data,
+        //             // meta: response.meta,
+        //         };
+        //     },
+        // }),
 
         // create student API
         // addStudent: builder.mutation({
@@ -62,6 +62,6 @@ const productManagementApi = baseApi.injectEndpoints({
 
 export const {
     // useAddStudentMutation,
-    useGetAllProductsQuery,
-    useGetSingleBicycleQuery,
-} = productManagementApi;
+    useGetAllUsersQuery,
+    // useGetSingleBicycleQuery,
+} = userManagementApi;

@@ -7,6 +7,7 @@ import { FaShopify } from "react-icons/fa6";
 export const adminPaths = [
     {
         name: 'User Managments',
+        index: true,
         icons: <FaShopify />,
         path: 'admindashboard',
         element: <PrivateRoute ><AdminDashboard /></PrivateRoute>,

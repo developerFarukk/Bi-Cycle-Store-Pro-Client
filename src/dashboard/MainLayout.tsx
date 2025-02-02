@@ -19,7 +19,7 @@ const MainLayout = () => {
 
 
     const pathsToRender = userRole === 'admin' ? adminPaths : userRole === 'customer' ? customerPaths : [];
-    console.log(pathsToRender);
+    // console.log(pathsToRender);
     
 
     const navigate = useNavigate();
