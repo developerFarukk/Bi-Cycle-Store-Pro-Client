@@ -1,7 +1,7 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type TCartItem = {
+export type TCartItem = {
     _id: string;
     bicycleImage: string | undefined;
     brand: string;
@@ -19,12 +19,14 @@ interface TCartState {
     items: TCartItem[];
     totalQuantity: number;
     totalPrice: number;
+    userId: string | null;
 }
 
 const initialState: TCartState = {
     items: [],
     totalQuantity: 0,
     totalPrice: 0,
+    userId: null
 };
 
 const cartSlice = createSlice({
@@ -71,9 +73,18 @@ const cartSlice = createSlice({
             state.totalQuantity = 0;
             state.totalPrice = 0;
         },
+        setUserId(state, action: PayloadAction<string>) {
+            state.userId = action.payload;
+        },
+        setCartItems(state, action: PayloadAction<TCartItem[]>) {
+            state.items = action.payload;
+            state.totalQuantity = state.items.reduce((total, item) => total + item.quantity, 0);
+            state.totalPrice = state.items.reduce((total, item) => total + item.price * item.quantity, 0);
+        },
+
     },
 });
 
-export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, updateQuantity, clearCart, setUserId, setCartItems } = cartSlice.actions;
 
 export default cartSlice.reducer;

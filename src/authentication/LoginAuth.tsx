@@ -12,13 +12,15 @@ import { useLoginMutation } from "@/redux/features/auth/auth";
 import { toast } from "sonner";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import { setUser } from "@/redux/features/auth/authSlice";
+import { setUser, TUser } from "@/redux/features/auth/authSlice";
 
 // Define the form schema using zod
 const formSchema = z.object({
     email: z.string().email(),
     password: z.string(),
 });
+
+
 
 const LoginAuth = () => {
     const navigate = useNavigate();
@@ -65,8 +67,10 @@ const LoginAuth = () => {
 
             try {
                 // Decode the token
-                const user = jwtDecode(token);
-                dispatch(setUser({ user, token })); // Dispatch setUser action
+                const user = jwtDecode(token) as TUser;
+                console.log();
+
+                dispatch(setUser({ user, token }));
                 toast.success(data.message, { id: toastId });
 
                 setTimeout(() => {
