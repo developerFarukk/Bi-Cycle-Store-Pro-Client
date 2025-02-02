@@ -148,7 +148,7 @@ const MyCart = () => {
     const cartItems = useAppSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
 
-    console.log(cartItems.items);
+    // console.log(cartItems.items);
 
     return (
         <div>
@@ -212,9 +212,9 @@ const MyCart = () => {
                                                         <input
                                                             type="number"
                                                             min="1"
-                                                            defaultValue="1"
+                                                            defaultValue={item.quantity}
                                                             id="Line1Qty"
-                                                            className="h-8 w-12 rounded-sm border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-hidden [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                                                            className="h-8 w-12 rounded-sm border-gray-200 bg-fuchsia-200 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-hidden [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                                                         />
                                                     </form>
 
