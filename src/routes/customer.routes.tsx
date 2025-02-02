@@ -1,17 +1,18 @@
-import CustoDashboard from "@/pages/customer/CustoDashboard";
+import MyCart from "@/pages/customer/myCart";
+
 
 
 export const customerPaths = [
     {
-        name: 'Dashboard',
-        path: 'customerdashboard',
-        element: <CustoDashboard />,
+        name: 'My Cart',
+        path: 'mycart',
+        element: <MyCart />,
     },
-    {
-        name: 'Dashboard',
-        path: 'customerdashboard',
-        element: <CustoDashboard />,
-    },
+    // {
+    //     name: 'Dashboard',
+    //     path: 'customerdashboard',
+    //     element: <CustoDashboard />,
+    // },
     // {
     //     name: 'Home',
     //     path: 'dashboard/home',

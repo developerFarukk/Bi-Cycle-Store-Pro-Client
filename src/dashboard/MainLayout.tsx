@@ -14,7 +14,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 
 const MainLayout = () => {
     const userRole = useSelector((state: RootState) => state.auth.user?.role);
-    console.log(userRole);
+    // console.log(userRole);
     const pathsToRender = userRole === 'admin' ? adminPaths : userRole === 'customer' ? customerPaths : [];
 
     const navigate = useNavigate();
