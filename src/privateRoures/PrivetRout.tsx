@@ -1,31 +1,3 @@
-// import { RootState } from "@/redux/store";
-// import { useSelector } from "react-redux";
-// import { Navigate, useLocation } from "react-router";
-
-// interface TChildren {
-//     children: string
-// }
-
-
-// const PrivetRout = ({ children }: TChildren) => {
-
-//     const user = useSelector((state: RootState) => state.auth.user);
-//     console.log(user);
-
-//     const location = useLocation();
-
-//     if (loading) {
-//         return <progress className="progress w-56"></progress>
-//     }
-
-//     if (user) {
-//         return children;
-//     }
-
-//     return <Navigate to="/login" state={{ from: location }} replace></Navigate>
-// };
-
-// export default PrivetRout;
 
 
 import { RootState } from "@/redux/store";
@@ -39,27 +11,26 @@ interface TChildren {
 
 const PrivateRoute = ({ children }: TChildren) => {
     const user = useSelector((state: RootState) => state.auth.user);
-    const [loading, setLoading] = useState(true); // State for loading
+    const [loading, setLoading] = useState(true); 
     const location = useLocation();
 
     useEffect(() => {
-        // Simulate loading (replace with your actual loading logic)
         const timer = setTimeout(() => {
-            setLoading(false); // Set loading to false after a delay
-        }, 500); // Adjust delay as needed
+            setLoading(false); 
+        }, 500); 
 
-        // Cleanup timer if component unmounts
+   
         return () => clearTimeout(timer);
 
-    }, [user]); // Add user as a dependency
+    }, [user]);
 
 
     if (loading) {
-        return <progress className="text-3xl text-blue-600 text-center">Loading</progress>; // Or any other loading indicator
+        return <progress className="text-3xl text-blue-600 text-center">Loading</progress>; 
     }
 
     if (user) {
-        return <>{children}</>; // Wrap children in a fragment
+        return <>{children}</>; 
     }
 
     return <Navigate to="/login" state={{ from: location }} replace />;

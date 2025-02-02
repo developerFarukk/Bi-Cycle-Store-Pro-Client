@@ -10,6 +10,7 @@ import { adminPaths } from "./admin.routes";
 import { customerPaths } from "./customer.routes";
 import { routeGenerator } from "@/utils/routesGenerator";
 import PrivateRoute from "@/privateRoures/PrivetRout";
+import AdminPrivateRoute from "@/privateRoures/AdminPrivateRoute";
 
 
 
@@ -31,26 +32,12 @@ const router = createBrowserRouter([
     },
     {
         path: '/admin',
-        element: (
-            <SidebarProvider>
-                <main>
-                    <SidebarTrigger />
-                    <App />
-                </main>
-            </SidebarProvider>
-        ),
+        element: ( <AdminPrivateRoute><SidebarProvider><main><SidebarTrigger /><App /></main> </SidebarProvider></AdminPrivateRoute> ),
         children: routeGenerator(adminPaths),
-    },
+    },  
     {
         path: '/customer',
-        element: (
-            <SidebarProvider>
-                <main>
-                    <SidebarTrigger />
-                    <App />
-                </main>
-            </SidebarProvider>
-        ),
+        element: ( <SidebarProvider> <main> <SidebarTrigger /> <App /></main> </SidebarProvider> ),
         children: routeGenerator(customerPaths),
     },
 
