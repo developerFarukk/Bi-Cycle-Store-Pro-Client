@@ -1,35 +1,40 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface ICartItem {
-    product: string; // Product ID
+type TCartItem = {
+    _id: string;
+    bicycleImage: string | undefined;
+    brand: string;
+    description: string;
     name: string;
     price: number;
+    model: string;
     quantity: number;
-    stock: number;
-    imageUrl: string; // Optional: for displaying in the UI
-}
+    status: string;
+    type: string;
+};
 
-interface CartState {
-    items: ICartItem[];
+
+interface TCartState {
+    items: TCartItem[];
     totalQuantity: number;
     totalPrice: number;
 }
 
-const initialState: CartState = {
+const initialState: TCartState = {
     items: [],
     totalQuantity: 0,
     totalPrice: 0,
 };
 
 const cartSlice = createSlice({
-    name: "cart",
+    name: "card",
     initialState,
     reducers: {
-        addToCart(state, action: PayloadAction<ICartItem>) {
-            console.log({ state: state.items });
+        addToCart(state, action: PayloadAction<TCartItem>) {
+            // console.log({ state: state.items });
             const existingItem = state.items.find(
-                (item) => item.product === action.payload.product
+                (item) => item._id === action.payload._id
             );
             if (existingItem) {
                 existingItem.quantity += action.payload.quantity;
@@ -41,11 +46,11 @@ const cartSlice = createSlice({
         },
         removeFromCart(state, action: PayloadAction<string>) {
             const itemId = action.payload;
-            const existingItem = state.items.find((item) => item.product === itemId);
+            const existingItem = state.items.find((item) => item._id === itemId);
             if (existingItem) {
                 state.totalQuantity -= existingItem.quantity;
                 state.totalPrice -= existingItem.price * existingItem.quantity;
-                state.items = state.items.filter((item) => item.product !== itemId);
+                state.items = state.items.filter((item) => item._id !== itemId);
             }
         },
         updateQuantity(
@@ -53,7 +58,7 @@ const cartSlice = createSlice({
             action: PayloadAction<{ id: string; quantity: number }>
         ) {
             const { id, quantity } = action.payload;
-            const existingItem = state.items.find((item) => item.product === id);
+            const existingItem = state.items.find((item) => item._id === id);
             if (existingItem && quantity > 0) {
                 const quantityDifference = quantity - existingItem.quantity;
                 existingItem.quantity = quantity;

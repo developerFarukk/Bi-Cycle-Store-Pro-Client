@@ -130,43 +130,50 @@
 
 import { Badge } from "@/components/ui/badge";
 import { useGetAllProductsQuery } from "@/redux/features/bicycleProducts/bicycleManagmentApi";
-// import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/features/cart/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import BiModel from "@/shared/BiModel";
 import { TBicycle } from "@/types/productsManagment";
 
-export interface TProduct {
-    _id: string;
-    bicycleImage: string;
-    brand: string;
-    description: string;
-    name: string;
-    price: number;
-    model: string;
-    quantity: number;
-    status: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-}
+// export interface TProduct {
+//     _id: string;
+//     bicycleImage: string;
+//     brand: string;
+//     description: string;
+//     name: string;
+//     price: number;
+//     model: string;
+//     quantity: number;
+//     status: string;
+//     type: string;
+//     createdAt: string;
+//     updatedAt: string;
+// }
 
-const BicycleCard = () => {
+const BicycleCard = (
+    // { product }: { product: TProduct }
+) => {
     const { data: bicycleData, isLoading, isError } = useGetAllProductsQuery(undefined);
     const bicycle = bicycleData?.data?.result;
 
-    // const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
     const handleAddToCart = (bi: TBicycle) => {
-        console.log("Product added to cart:", bi);
-        // dispatch(
-        //   addToCart({
-        //     product: product._id,
-        //     name: product.name,
-        //     price: product.price,
-        //     quantity: 1,
-        //     stock: product.stock,
-        //     imageUrl: product.imageUrl as string,
-        //   })
-        // );
+        // console.log("Product added to cart:", bi);
+        dispatch(
+            addToCart({
+                _id: bi._id,
+                bicycleImage: bi.bicycleImage,
+                brand: bi.brand,
+                description: bi.description,
+                name: bi.name,
+                price: bi.price,
+                model: bi.model,
+                quantity: 1,
+                status: bi.status,
+                type: bi.type,
+            })
+        );
     };
 
     if (isLoading) {
