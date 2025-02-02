@@ -133,6 +133,7 @@ import { useGetAllProductsQuery } from "@/redux/features/bicycleProducts/bicycle
 import { addToCart } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import BiModel from "@/shared/BiModel";
+import LoadingProgress from "@/shared/LoadingProgress";
 import { TBicycle } from "@/types/productsManagment";
 
 // export interface TProduct {
@@ -155,6 +156,8 @@ const BicycleCard = (
 ) => {
     const { data: bicycleData, isLoading, isError } = useGetAllProductsQuery(undefined);
     const bicycle = bicycleData?.data?.result;
+    console.log(bicycle);
+    
 
     const dispatch = useAppDispatch();
 
@@ -177,11 +180,11 @@ const BicycleCard = (
     };
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <LoadingProgress />;
     }
 
     if (isError) {
-        return <div>Error fetching data</div>;
+        return <div>Data no fatch</div>;
     }
 
     if (!bicycle || !Array.isArray(bicycle)) {

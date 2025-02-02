@@ -21,13 +21,20 @@ const persistConfig = {
     storage,
 };
 
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+const cartPersistConfig = {
+    key: 'cart',
+    storage,
+    whitelist: ['items', 'totalQuantity', 'totalPrice'],
+};
+
+const persistedAuthReducer = persistReducer(persistConfig, authReducer,);
+const persistedCardReducer = persistReducer(cartPersistConfig, cartReducer);
 
 export const store = configureStore({
     reducer: {
         [baseApi.reducerPath]: baseApi.reducer,
         auth: persistedAuthReducer,
-        cart: cartReducer
+        cart: persistedCardReducer
     },
     middleware: (getDefaultMiddlewares) =>
         getDefaultMiddlewares({
