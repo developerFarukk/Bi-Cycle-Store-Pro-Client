@@ -57,7 +57,7 @@ const LoginAuth = () => {
         if (isSuccess && data) {
 
             // Ensure the token is a valid string
-            const token = data.data?.token || data.data; // Adjust based on your API response structure
+            const token = data.data?.token || data.data;
             if (typeof token !== "string" || !token) {
                 toast.error("Invalid token received from the server.", { id: toastId });
                 return;
