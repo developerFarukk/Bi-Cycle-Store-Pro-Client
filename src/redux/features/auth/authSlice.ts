@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type TUser = {
     userId: string;
-    email: string;
+    userEmail: string;
     role: string;
     iat: number;
     exp: number;

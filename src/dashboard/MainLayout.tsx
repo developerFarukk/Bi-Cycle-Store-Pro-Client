@@ -13,9 +13,14 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 
 
 const MainLayout = () => {
-    const userRole = useSelector((state: RootState) => state.auth.user?.role);
-    // console.log(userRole);
+    const user = useSelector((state: RootState) => state.auth.user);
+    const userRole = user?.role;
+    const email = user?.userEmail
+
+
     const pathsToRender = userRole === 'admin' ? adminPaths : userRole === 'customer' ? customerPaths : [];
+    console.log(pathsToRender);
+    
 
     const navigate = useNavigate();
 
@@ -24,15 +29,23 @@ const MainLayout = () => {
             <Sidebar>
                 <SidebarContent>
                     <SidebarGroup>
-                        <SidebarGroupLabel className="text-2xl text-center flex justify-center items-center hover:bg-blue-100">
-                            <Link to="/">DASHBOARD</Link>
+                        <SidebarGroupLabel className="mt-2 mb-6 text-2xl text-center flex justify-center items-center hover:bg-blue-100">
+                            <div className="p-2 ">
+                                <Link to="/">DASHBOARD</Link>
+                                <div className="text-black text-sm underline">{email}</div>
+                            </div>
                         </SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
                                 {pathsToRender.map((item) => (
                                     <SidebarMenuItem key={item.path}>
                                         <SidebarMenuButton onClick={() => navigate(`/${userRole}/${item.path}`)}>
-                                            {item.name}
+                                            <div className="text-lg flex items-center gap-2">
+                                                <div>{item.icons}</div>
+                                                <div>
+                                                    {item.name}
+                                                </div>
+                                            </div>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
                                 ))}
