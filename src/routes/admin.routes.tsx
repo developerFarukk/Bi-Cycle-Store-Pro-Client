@@ -1,5 +1,5 @@
 import AdminDashboard from "@/pages/admin/AdminDashboard";
-// import CustomerDashboard from "@/pages/customer/CustomerDashboard";
+import PrivateRoute from "@/privateRoures/PrivetRout";
 
 
 
@@ -7,7 +7,7 @@ export const adminPaths = [
     {
         name: 'Dashboard',
         path: 'admindashboard',
-        element: <AdminDashboard />,
+        element: <PrivateRoute ><AdminDashboard /></PrivateRoute>,
     },
     // {
     //     name: 'Home',
