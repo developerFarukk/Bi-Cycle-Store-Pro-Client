@@ -1,10 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useGetAllUsersQuery } from "@/redux/features/userManagment/userManagmentApi";
+import { useDeleteUserMutation, useGetAllUsersQuery } from "@/redux/features/userManagment/userManagmentApi";
 import LoadingProgress from "@/shared/LoadingProgress";
 import { useEffect, useState } from "react";
 import UpdateRole from "./UpdateRole";
 import UpdateUserStatus from "./UpdateUserStatus";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
+import { toast } from "sonner";
+import Swal from 'sweetalert2'
 
 
 export interface Tuserss {
@@ -23,27 +27,95 @@ export interface Tuserss {
 
 const AllUser = () => {
 
+    const [deleteUser] = useDeleteUserMutation();
 
     const { data: userData, isLoading, isError } = useGetAllUsersQuery(undefined);
     const [users, setUsers] = useState<Tuserss[]>([]);
+    const currentUser = useSelector((state: RootState) => state.auth.user);
 
-    useEffect(() => { 
+    useEffect(() => {
         if (userData && !isLoading && !isError) {
             setUsers(userData.data.result);
         }
-    }, [userData, isLoading, isError]); 
+    }, [userData, isLoading, isError]);
 
-    const totalUser = users.length; 
+    const totalUser = users.length;
 
     if (isLoading) {
-        return <div><LoadingProgress></LoadingProgress></div>; 
+        return <div><LoadingProgress></LoadingProgress></div>;
     }
 
     if (isError) {
         return <div>Error loading users.</div>;
     }
 
+    // const handleDeleteUser = async (user: any) => {
+    //     // console.log(user);
 
+    //     if (!currentUser) {
+    //         toast.error('You must be logged in to perform this action');
+    //         return;
+    //     }
+
+    //     if (currentUser.userEmail === user.email) {
+    //         toast.error('Action Not Allowed');
+    //         return;
+    //     }
+
+
+    //     try {
+    //      await deleteUser({ id: user._id, body: { isDeleted: true } }).unwrap();
+    //         // console.log("Update Result:", result);
+    //         toast.success('User deleted successfully');
+    //     } catch (error) {
+    //         // console.error("Update Error:", error);
+    //         toast.error(error?.data?.message || 'Failed to update user role');
+    //     }
+
+    // }
+
+    const handleDeleteUser = async (user: any) => {
+        if (!currentUser) {
+            toast.error('You must be logged in to perform this action');
+            return;
+        }
+
+        if (currentUser.userEmail === user.email) {
+            toast.error('Action Not Allowed');
+            return;
+        }
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const deleteResult = await deleteUser({ id: user._id, body: { isDeleted: true } }).unwrap();
+                    console.log("Delete Result:", deleteResult);
+                    // toast.success('User deleted successfully');
+                    Swal.fire({ 
+                        title: "Deleted!",
+                        text: "The user has been deleted.",
+                        icon: "success"
+                    });
+                } catch (error) {
+                    console.error("Delete Error:", error);
+                    toast.error(error?.data?.message || 'Failed to delete user');
+                    Swal.fire({ // Show error message with SweetAlert2
+                        title: "Error!",
+                        text: error?.data?.message || 'Failed to delete user',
+                        icon: "error"
+                    });
+                }
+            }
+        });
+    };
 
 
     return (
@@ -126,19 +198,21 @@ const AllUser = () => {
                                                             <span className="h-1.5 w-1.5 rounded-full "></span>
 
                                                             <h2 className="text-sm font-normal ">
-                                                                <UpdateUserStatus userStatus={user.status} userId={user._id} email={user.email}/></h2>
+                                                                <UpdateUserStatus userStatus={user.status} userId={user._id} email={user.email} /></h2>
                                                         </div>
                                                     </td>
                                                     <td className="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap flex justify-center">
                                                         <div className="text-center inline-flex items-center px-3 py-1 rounded-full gap-x-2">
-                                                           {/* {user.role} */}
-                                                           <UpdateRole userRole={user.role} userId={user._id} email={user.email} />
+                                                            {/* {user.role} */}
+                                                            <UpdateRole userRole={user.role} userId={user._id} email={user.email} />
                                                         </div>
                                                     </td>
                                                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{user.email}</td>
                                                     <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                         <div className="flex items-center gap-x-6">
-                                                            <button className="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none">
+                                                            <button
+                                                                onClick={() => handleDeleteUser(user)}
+                                                                className="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                                 </svg>

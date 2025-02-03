@@ -45,6 +45,17 @@ const userManagementApi = baseApi.injectEndpoints({
             invalidatesTags: ['User']
         }),
 
+
+        // Delete User
+        deleteUser: builder.mutation({
+            query: ({ id, body }) => ({
+                url: `/users/${id}`,
+                method: 'PATCH',
+                body,
+            }),
+            invalidatesTags: ['User']
+        }),
+
         // create student API
         // addStudent: builder.mutation({
         //     query: (data) => ({
@@ -60,5 +71,6 @@ const userManagementApi = baseApi.injectEndpoints({
 export const {
     // useAddStudentMutation,
     useGetAllUsersQuery,
-    useUpdateUserMutation
+    useUpdateUserMutation,
+    useDeleteUserMutation
 } = userManagementApi;

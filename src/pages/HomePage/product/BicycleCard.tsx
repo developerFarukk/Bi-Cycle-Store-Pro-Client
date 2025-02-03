@@ -44,41 +44,6 @@ const BicycleCard = (
         }
     }, [user, cartItems]);
 
-    //     const handleAddToCart = (bi: TBicycle) => {
-    // // console.log(bi);
-
-    //         if (!user) {
-    //             toast.error("You must be logged in to add to cart.");
-    //             return;
-    //         }
-
-    //         const productInCart = cartItem.items.find((item: any) => item._id === bi._id);
-    //         console.log(productInCart);
-
-
-    //         if (productInCart) {
-    //             toast.info("Product is already exsist in your cart.");
-    //             return;
-    //         }
-
-    //         const toastId = toast.loading("Logging out...");
-    //         dispatch(
-    //             addToCart({
-    //                 _id: bi._id,
-    //                 bicycleImage: bi.bicycleImage,
-    //                 brand: bi.brand,
-    //                 description: bi.description,
-    //                 name: bi.name,
-    //                 price: bi.price,
-    //                 model: bi.model,
-    //                 quantity: 1,
-    //                 status: bi.status,
-    //                 type: bi.type,
-    //             }),
-    //             user.userId
-    //         );
-    //         toast.success("Add to Card successfully", { id: toastId, duration: 1500 });
-    //     };
 
     if (isLoading) {
         return <LoadingProgress />;
