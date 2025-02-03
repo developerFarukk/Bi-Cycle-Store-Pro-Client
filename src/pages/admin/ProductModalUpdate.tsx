@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -13,7 +15,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useUpdateProductMutation } from "@/redux/features/bicycleProducts/bicycleManagmentApi";
-// import { TResponse } from "@/types";
+import LoadingProgress from "@/shared/LoadingProgress";
 
 // Zod schema for product validation
 const productSchema = z.object({
@@ -29,23 +31,15 @@ const productSchema = z.object({
 
 interface TTitle {
     title: string;
-    product: any; // Replace `any` with a proper type if possible
+    product: any;
    
 }
 
 const ProductModalUpdate = ({ title, product }: TTitle) => {
     const [updateProduct] = useUpdateProductMutation();
-    
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        watch,
-        reset,
-        formState: { errors },
-    } = useForm({
+    const { register, handleSubmit, setValue, watch, reset, formState: { errors }} = useForm({
         resolver: zodResolver(productSchema),
         mode: "onBlur",
     });
@@ -68,46 +62,9 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
         }
     }, [isDialogOpen, product, setValue]);
 
-    // Handle form submission
-    // const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    //     const toastId = toast.loading("Updating...");
-
-    //     try {
-    //         // Check if the product ID is valid
-    //         if (!product?._id) {
-    //             toast.error("Invalid product ID", { id: toastId });
-    //             return;
-    //         }
-
-    //         // Convert price and quantity to numbers
-    //         const productData = {
-    //             ...data,
-    //             price: Number(data.price),
-    //             quantity: Number(data.quantity),
-    //             _id: product._id,
-    //         };
-
-    //         // console.log("Submitting data:", productData); 
-
-    //         // const res = (await updateProduct(productData)) as TResponse<any>;
-    //         const res = await updateProduct({ id, body: { data: productData } }).unwrap();
-    //         console.log(res);
-
-    //         if (res.error) {
-    //             toast.error(res.error.data.message, { id: toastId });
-    //         } else {
-    //             toast.success("Product updated successfully", { id: toastId });
-    //             reset();
-    //             setIsDialogOpen(false);
-    //         }
-    //     } catch (err) {
-    //         toast.error("Something went wrong", { id: toastId });
-    //     }
-    // };
-
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        const toastId = toast.loading("Updating...");
+        const toastId = toast.loading(<LoadingProgress />);
 
         try {
             if (!product?._id) {
@@ -121,11 +78,8 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
                 quantity: Number(data.quantity),
             };
             
-
             // Correct way to call the mutation:
             const res = await updateProduct({ bicycleId: product._id, body: productData }).unwrap(); 
-
-            console.log(res);
 
             if (res.error) {
                 toast.error(res.error.data.message, { id: toastId });
