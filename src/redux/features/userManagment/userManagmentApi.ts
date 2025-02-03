@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { baseApi } from "@/redux/api/baseApi";
 import { TQueryParam, TResponseRedux } from "@/types/global";
@@ -10,7 +11,8 @@ const userManagementApi = baseApi.injectEndpoints({
         // Get All Bicycle
         getAllUsers: builder.query({
             query: (args) => {
-                console.log(args);
+                // console.log(args);
+                
                 const params = new URLSearchParams();
 
                 if (args) {
@@ -25,6 +27,7 @@ const userManagementApi = baseApi.injectEndpoints({
                     params: params,
                 };
             },
+            providesTags: ['User'],
             transformResponse: (response: TResponseRedux<TUser[]>) => {
                 return {
                     data: response.data,
@@ -32,21 +35,15 @@ const userManagementApi = baseApi.injectEndpoints({
             },
         }),
 
-        // Get single Bicycle
-        // getSingleBicycle: builder.query({
-        //     query: (id) => {
-        //         return {
-        //             url: `/bicycle/${id}`,
-        //             method: 'GET',
-        //         };
-        //     },
-        //     transformResponse: (response: TResponseRedux<any>) => {
-        //         return {
-        //             data: response.data,
-        //             // meta: response.meta,
-        //         };
-        //     },
-        // }),
+        // Update User
+        updateUser: builder.mutation({
+            query: ({ userId, body }) => ({
+                url: `/users/${userId}`,
+                method: 'PATCH',
+                body,
+            }),
+            invalidatesTags: ['User']
+        }),
 
         // create student API
         // addStudent: builder.mutation({
@@ -63,5 +60,5 @@ const userManagementApi = baseApi.injectEndpoints({
 export const {
     // useAddStudentMutation,
     useGetAllUsersQuery,
-    // useGetSingleBicycleQuery,
+    useUpdateUserMutation
 } = userManagementApi;
