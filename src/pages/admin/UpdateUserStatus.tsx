@@ -1,20 +1,19 @@
-
-
-
-import { toast } from "sonner";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import UpdateUserModal from "@/components/modal/UpdateUserModal";
+import UpdateUserStat from "@/components/modal/UpdateUserStat";
 import { useUpdateUserMutation } from "@/redux/features/userManagment/userManagmentApi";
+import { RootState } from "@/redux/store";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { toast } from "sonner";
 
-export interface TRole {
-    userRole: string;
+ interface TStatus {
+    userStatus: string;
     userId: string;
     email: string;
 }
 
-const UpdateRole = ({ userRole, userId, email }: TRole) => {
+
+const UpdateUserStatus = ({ userStatus, userId, email }: TStatus) => {
+
     const [updateUser] = useUpdateUserMutation();
     // console.log(updateUser);
 
@@ -23,7 +22,7 @@ const UpdateRole = ({ userRole, userId, email }: TRole) => {
     const [isOpen, setIsOpen] = useState(false);
 
     // Modal handler function
-    const modalHandler = async (selectedRole: string) => {
+    const modalHandler = async (selectedStatus: string) => {
         // Check if currentUser is null
         if (!currentUser) {
             toast.error('You must be logged in to perform this action');
@@ -31,7 +30,7 @@ const UpdateRole = ({ userRole, userId, email }: TRole) => {
             return;
         }
 
-        // Check if the current user is trying to update their own role
+        // Check if the current user is trying to update their own status
         if (currentUser.userEmail === email) {
             toast.error('Action Not Allowed');
             setIsOpen(false);
@@ -40,13 +39,13 @@ const UpdateRole = ({ userRole, userId, email }: TRole) => {
 
 
         try {
-             await updateUser({ userId, body: { role: selectedRole } }).unwrap();
-            // console.log("Update Result:", result);
-            toast.success('User role updated successfully');
+            const result = await updateUser({ userId, body: { status: selectedStatus } }).unwrap();
+            console.log("Update Result:", result);
+            toast.success('User status updated successfully');
             setIsOpen(false);
         } catch (error) {
-            // console.error("Update Error:", error);
-            toast.error(error?.data?.message || 'Failed to update user role');
+            console.error("Update Error:", error);
+            toast.error(error?.data?.message || 'Failed to update user status');
         }
 
     };
@@ -61,17 +60,18 @@ const UpdateRole = ({ userRole, userId, email }: TRole) => {
                     aria-hidden='true'
                     className='absolute inset-0 bg-green-200 opacity-50 rounded-full'
                 ></span>
-                <span className='relative'>{userRole}</span>
+                <span className='relative'>{userStatus}</span>
             </button>
             {/* Update User Modal */}
-            <UpdateUserModal
+
+            <UpdateUserStat
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
                 modalHandler={modalHandler}
-                userRole={userRole}
+                userStatus={userStatus}
             />
         </>
     );
 };
 
-export default UpdateRole;
+export default UpdateUserStatus;
