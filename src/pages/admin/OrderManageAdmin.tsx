@@ -22,7 +22,7 @@ const OrderManageAdmin = () => {
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
-        return date.toLocaleDateString(); // Customize date format as needed
+        return date.toLocaleDateString();
     };
 
 
@@ -135,15 +135,6 @@ const OrderManageAdmin = () => {
                                                     {/* Payment-Status */}
                                                     <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                         <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
-                                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M10 3L4.5 8.5L2 6"
-                                                                    stroke="currentColor"
-                                                                    strokeWidth="1.5"
-                                                                    strokeLinecap="round"
-                                                                    strokeLinejoin="round"
-                                                                />
-                                                            </svg>
                                                             <h2 className="text-sm font-normal">{or.paymentStatus}</h2>
                                                         </div>
                                                     </td>
