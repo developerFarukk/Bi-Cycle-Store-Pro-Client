@@ -17,4 +17,14 @@ export enum BicycleBrand {
     RoyalEnfield = "Royal Enfield", 
 }
 
+export type TBicycleType = 'Road' | 'Mountain' | 'Hybrid' | 'Electric';
+
+
+export enum BicycleType {
+    Road = "Road",
+    Mountain = "Mountain",
+    Hybrid = "Hybrid",
+    Electric = "Electric"
+}
+
 
