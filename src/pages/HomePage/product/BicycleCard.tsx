@@ -93,10 +93,7 @@ const BicycleCard = (
                                     alt={bi.name}
                                     className="h-64 w-full rounded-tl-md rounded-tr-md object-cover transition duration-500 group-hover:scale-105 sm:h-72"
                                 />
-                                {/* Overlay Text */}
-                                {/* <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                                    <BiModel title="See Details..." id={bi._id} />
-                                </div> */}
+                               
                             </div>
 
                             {/* Product Details */}

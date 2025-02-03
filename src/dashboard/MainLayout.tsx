@@ -54,7 +54,7 @@ const MainLayout = () => {
                     </SidebarGroup>
                 </SidebarContent>
             </Sidebar>
-            <main className=" p-4 flex ">
+            <main className=" p-4 flex">
                 <Outlet />
             </main>
         </div>

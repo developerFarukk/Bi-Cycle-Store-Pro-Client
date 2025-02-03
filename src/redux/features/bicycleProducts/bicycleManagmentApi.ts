@@ -10,7 +10,7 @@ const productManagementApi = baseApi.injectEndpoints({
         // Get All Bicycle
         getAllProducts: builder.query({
             query: (args) => {
-                console.log(args);
+                // console.log(args);
                 const params = new URLSearchParams();
 
                 if (args) {
@@ -25,6 +25,7 @@ const productManagementApi = baseApi.injectEndpoints({
                     params: params,
                 };
             },
+            providesTags: ['Bicycle'],
             transformResponse: (response: TResponseRedux<TBicycle[]>) => {
                 return {
                     data: response.data,
@@ -56,6 +57,17 @@ const productManagementApi = baseApi.injectEndpoints({
             }),
         }),
 
+        // delete product Api
+        // Delete User
+        deleteProduct: builder.mutation({
+            query: ({ id, body }) => ({
+                url: `/bicycle/${id}`,
+                method: 'PATCH',
+                body,
+            }),
+            invalidatesTags: ['Bicycle']
+        }),
+
     }),
 });
 
@@ -63,4 +75,5 @@ export const {
     useAddProductMutation,
     useGetAllProductsQuery,
     useGetSingleBicycleQuery,
+    useDeleteProductMutation
 } = productManagementApi;
