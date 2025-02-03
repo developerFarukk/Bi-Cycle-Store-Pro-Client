@@ -5,6 +5,8 @@ import { MdManageAccounts } from "react-icons/md";
 import { IoMdBicycle } from "react-icons/io";
 import { FaCreativeCommonsShare } from "react-icons/fa";
 import ProductsManagment from "@/pages/admin/ProductsManagment";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
+import OrderManageAdmin from "@/pages/admin/OrderManageAdmin";
 
 
 
@@ -13,7 +15,7 @@ export const adminPaths = [
         name: 'User Managments',
         index: true,
         icons: <MdManageAccounts />,
-        path: 'usermanage',
+        path: 'usermanagements',
         element: <PrivateRoute ><AdminDashboard /></PrivateRoute>,
     },
     {
@@ -25,7 +27,13 @@ export const adminPaths = [
     {
         name: 'Product Managments',
         icons: <IoMdBicycle />,
-        path: 'productmanagment',
+        path: 'productmanagments',
         element: <PrivateRoute ><ProductsManagment /></PrivateRoute>,
+    },
+    {
+        name: 'Order Managments',
+        icons: <MdOutlineAddShoppingCart />,
+        path: 'ordermanagments',
+        element: <PrivateRoute ><OrderManageAdmin /></PrivateRoute>,
     },
 ];

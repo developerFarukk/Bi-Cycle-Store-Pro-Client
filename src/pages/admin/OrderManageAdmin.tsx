@@ -1,133 +1,203 @@
+import { useGetAllOrdersQuery } from "@/redux/features/orderManagmentApi/OrderManagmentApi";
+import LoadingProgress from "@/shared/LoadingProgress";
+import { TOrders } from "@/types/orderTypes";
+
+
+
 const OrderManageAdmin = () => {
+
+    const { data: orderData, isLoading, isError } = useGetAllOrdersQuery(undefined);
+    const order = orderData?.data?.result;
+    console.log(order);
+
+
+
+    if (isLoading) {
+        return <LoadingProgress />;
+    }
+
+    if (isError) {
+        return <div>Data no fatch</div>;
+    }
+
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString(); // Customize date format as needed
+    };
+
+
     return (
         <div>
-            <section className="container px-4 mx-auto ">
+            <section className="container px-4 mx-auto">
                 <div className="flex flex-col">
                     <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                             <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-
                                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-
+                                    {/* Table Header */}
                                     <thead className="bg-gray-50 dark:bg-gray-800">
-
                                         <tr>
+                                            {/* SL */}
                                             <th scope="col" className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                <div className="flex items-center gap-x-3">
-                                                    SL
-                                                </div>
+                                                <div className="flex items-center gap-x-3">SL</div>
                                             </th>
 
+                                            {/* Order-Created */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                 Order-Created
                                             </th>
 
+                                            {/* Customer */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                 Customer
                                             </th>
 
+                                            {/* Payment-Status */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                               Payment-Status
+                                                Payment-Status
                                             </th>
 
+                                            {/* Order-Status */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                               Order-Status
+                                                Order-Status
                                             </th>
 
+                                            {/* Product-name */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                               Product-name
+                                                Product-name
                                             </th>
 
+                                            {/* Product-brand */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                               Product-brand
+                                                Product-brand
                                             </th>
 
+                                            {/* Model */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                               Quantity
+                                                Model
                                             </th>
 
+                                            {/* Type */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                               Model
+                                                Type
                                             </th>
 
+                                            {/* Quantity */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                               Type
+                                                Quantity
                                             </th>
 
+                                            {/* Unit-Price */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                               Unit-Price
+                                                Unit-Price
                                             </th>
 
+                                            {/* Total-Price */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                               Total-Price
+                                                Total-Price
                                             </th>
 
-                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                               Action
+                                            {/* Action */}
+                                            <th scope="col" className="text-center px-4 py-3.5 text-sm font-normal  rtl:text-right text-gray-500 dark:text-gray-400">
+                                                Action
                                             </th>
-
                                         </tr>
                                     </thead>
 
+                                    {/* Table Body */}
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                                        {
+                                            order.map((or: TOrders, index: number) =>
+                                                <tr key={or._id}>
+                                                    {/* SL */}
+                                                    <td className="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
+                                                        <div className="inline-flex items-center gap-x-3">{index + 1}</div>
+                                                    </td>
 
-                                        <tr>
-                                            <td className="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                                <div className="inline-flex items-center gap-x-3">
-                                                    1
-                                                </div>
-                                            </td>
+                                                    {/* Order-Created */}
+                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"> {formatDate(or.createdAt)}</td>
 
-                                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Jan 6, 2022</td>
-                                            <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                                <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
-                                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M10 3L4.5 8.5L2 6"
-                                                            stroke="currentColor"
-                                                            strokeWidth="1.5"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                    </svg>
-                                                    <h2 className="text-sm font-normal">Paid</h2>
-                                                </div>
-                                            </td>
-                                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                <div className="flex items-center gap-x-2">
-                                                    <img
-                                                        className="object-cover w-8 h-8 rounded-full"
-                                                        src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-                                                        alt="Arthur Melo"
-                                                    />
-                                                    <div>
-                                                        <h2 className="text-sm font-medium text-gray-800 dark:text-white">Arthur Melo</h2>
-                                                        <p className="text-xs font-normal text-gray-600 dark:text-gray-400">authurmelo@example.com</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Monthly subscription</td>
-                                            <td className="px-4 py-4 text-sm whitespace-nowrap">
-                                                <div className="flex items-center gap-x-6">
-                                                    <button className="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                                        Archive
-                                                    </button>
-                                                    <button className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
-                                                        Download
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                    {/* Customer */}
+                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                                        <div className="flex items-center gap-x-2">
+                                                            <img
+                                                                className="object-cover w-8 h-8 rounded-full"
+                                                                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+                                                                alt="Customer"
+                                                            />
+                                                            <div>
+                                                                <h2 className="text-sm font-medium text-gray-800 dark:text-white">{or.user.name}</h2>
+                                                                <p className="text-xs font-normal text-gray-600 dark:text-gray-400"> {or.user.email}</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    {/* Payment-Status */}
+                                                    <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                                        <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
+                                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M10 3L4.5 8.5L2 6"
+                                                                    stroke="currentColor"
+                                                                    strokeWidth="1.5"
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                />
+                                                            </svg>
+                                                            <h2 className="text-sm font-normal">{or.paymentStatus}</h2>
+                                                        </div>
+                                                    </td>
+
+                                                    {/* Order-Status */}
+                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{or.status}</td>
+
+                                                    {/* Product-name */}
+                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{or.productId.model}</td>
+
+                                                    {/* Product-brand */}
+                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{or.productId.brand}</td>
+
+
+
+                                                    {/* Model */}
+                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{or.productId.model}</td>
+
+                                                    {/* Type */}
+                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{or.productId.type}</td>
+
+                                                    {/* Quantity */}
+                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap text-center">{or.quantity}</td>
+
+                                                    {/* Unit-Price */}
+                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{or.productId.price}</td>
+
+                                                    {/* Total-Price */}
+                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{or.totalPrice}</td>
+
+                                                    {/* Action */}
+                                                    <td className="px-4 py-4 text-sm whitespace-nowrap">
+                                                        <div className="flex items-center gap-x-6">
+                                                            <button className="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
+                                                                Edit
+                                                            </button>
+                                                            <button className="text-red-500 transition-colors duration-200 hover:text-red-700 focus:outline-none">
+                                                                Delete
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        }
 
                                         {/* Repeat the above <tr> block for other rows */}
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                {/* Pagination */}
                 <div className="flex items-center justify-between mt-6">
                     <a href="#" className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 rtl:-scale-x-100">
