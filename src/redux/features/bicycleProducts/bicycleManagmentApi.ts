@@ -20,7 +20,7 @@ const productManagementApi = baseApi.injectEndpoints({
                 }
 
                 return {
-                    url: '/bicycle?limit=6',
+                    url: '/bicycle?limit=20',
                     method: 'GET',
                     params: params,
                 };
@@ -43,25 +43,24 @@ const productManagementApi = baseApi.injectEndpoints({
             transformResponse: (response: TResponseRedux<any>) => {
                 return {
                     data: response.data,
-                    // meta: response.meta,
                 };
             },
         }),
 
-        // create student API
-        // addStudent: builder.mutation({
-        //     query: (data) => ({
-        //         url: '/users/create-student',
-        //         method: 'POST',
-        //         body: data,
-        //     }),
-        // }),
+        // create Product API
+        addProduct: builder.mutation({
+            query: (data) => ({
+                url: '/bicycle/create-bicycle',
+                method: 'POST',
+                body: data,
+            }),
+        }),
 
     }),
 });
 
 export const {
-    // useAddStudentMutation,
+    useAddProductMutation,
     useGetAllProductsQuery,
     useGetSingleBicycleQuery,
 } = productManagementApi;
