@@ -112,7 +112,7 @@ const CreatProduct = () => {
                 {/* Input Name */}
                 <div className="p-1">
                     <Label>Name</Label>
-                    <Input className="w-[500px]" placeholder="Input Product name" {...register("name", { required: "Name is required" })} />
+                    <Input type="text" className="w-[500px]" placeholder="Input Product name" {...register("name", { required: "Name is required" })} />
                     <div className="flex justify-end mt-1">
                         <Label className={errors.name ? "text-red-700 text-sm" : "hidden"}>{errors.name?.message}</Label>
                     </div>
@@ -121,7 +121,7 @@ const CreatProduct = () => {
                 {/* Description */}
                 <div className="p-1">
                     <Label>Description</Label>
-                    <Textarea placeholder="Input product description" {...register("description", { required: "Description is Required" })} />
+                    <Textarea typeof="text" placeholder="Input product description" {...register("description", { required: "Description is Required" })} />
                     <div className="flex justify-end mt-1">
                         <Label className={errors.description ? "text-red-700 text-sm" : "hidden"}>{errors.description?.message}</Label>
                     </div>
@@ -145,6 +145,31 @@ const CreatProduct = () => {
                             </SelectGroup>
                         </SelectContent>
                     </Select>
+                </div>
+
+                {/* Input products Price */}
+                <div className="p-1">
+                    <Label>Product price</Label>
+                    {/* <Input type="number" defaultValue={1} className="w-[500px]" placeholder="Input Product price" {...register("price", { required: "price is required" })} /> */}
+                    <Input
+                        type="number"
+                        defaultValue={1}
+                        className="w-[500px]"
+                        placeholder="Input Product price"
+                        {...register("price", {
+                            required: "Price is required",
+                            min: 1, 
+                            validate: (value) => {
+                                if (value < 1) {
+                                    return "Price cannot be negative";
+                                }
+                                return true; 
+                            },
+                        })}
+                    />
+                    <div className="flex justify-end mt-1">
+                        <Label className={errors.price ? "text-red-700 text-sm" : "hidden"}>{errors.price?.message}</Label>
+                    </div>
                 </div>
 
                 {/* Submit */}
