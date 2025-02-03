@@ -75,12 +75,6 @@ const CreatProduct = () => {
                         {...register("price", {
                             required: "Price is required",
                             min: 1,
-                            validate: (value) => {
-                                if (value < 1) {
-                                    return "Price cannot be negative";
-                                }
-                                return true;
-                            },
                         })}
                     />
                     <div className="flex justify-end mt-1">
@@ -100,7 +94,7 @@ const CreatProduct = () => {
                 {/* Select Type */}
                 <div className="p-1 mt-2">
                     <Label className="p-1">Product Type</Label>
-                    <Select onValueChange={(value: BicycleType) => setValue("brand", value)} value={selectedType} required>
+                    <Select onValueChange={(value: BicycleType) => setValue("type", value)} value={selectedType} required>
                         <SelectTrigger className="">
                             <SelectValue placeholder="Select Type" />
                         </SelectTrigger>
@@ -125,15 +119,9 @@ const CreatProduct = () => {
                         defaultValue={1}
                         className="w-[500px]"
                         placeholder="Input Product Quantity"
-                        {...register("price", {
+                        {...register("quantity", {
                             required: "Quantity is required",
                             min: 1,
-                            validate: (value) => {
-                                if (value < 1) {
-                                    return "Quantity cannot be negative";
-                                }
-                                return true;
-                            },
                         })}
                     />
                     <div className="flex justify-end mt-1">
@@ -146,7 +134,6 @@ const CreatProduct = () => {
                     <Label>Product Image Link</Label>
                     <Input type="text" className="w-[500px]" placeholder="Input product image link" {...register("bicycleImage")} />
                 </div>
-
 
 
                 {/* Submit */}
