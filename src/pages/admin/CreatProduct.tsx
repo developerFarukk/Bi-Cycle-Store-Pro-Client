@@ -17,7 +17,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // Define the schema for validation
-const productSchema = z.object({
+ const productSchema = z.object({
     name: z.string().min(1, "Name is required"),
     description: z.string().min(1, "Description is required"),
     brand: z.nativeEnum(BicycleBrand),

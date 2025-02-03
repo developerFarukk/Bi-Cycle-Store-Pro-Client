@@ -58,10 +58,19 @@ const productManagementApi = baseApi.injectEndpoints({
         }),
 
         // delete product Api
-        // Delete User
         deleteProduct: builder.mutation({
             query: ({ id, body }) => ({
                 url: `/bicycle/${id}`,
+                method: 'PATCH',
+                body,
+            }),
+            invalidatesTags: ['Bicycle']
+        }),
+
+        // Update Product
+        updateProduct: builder.mutation({
+            query: ({ bicycleId, body }) => ({
+                url: `/bicycle/${bicycleId}`,
                 method: 'PATCH',
                 body,
             }),
@@ -75,5 +84,6 @@ export const {
     useAddProductMutation,
     useGetAllProductsQuery,
     useGetSingleBicycleQuery,
-    useDeleteProductMutation
+    useDeleteProductMutation,
+    useUpdateProductMutation,
 } = productManagementApi;
