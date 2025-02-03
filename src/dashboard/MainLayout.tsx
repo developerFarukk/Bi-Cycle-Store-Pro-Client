@@ -25,7 +25,7 @@ const MainLayout = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex h-screen">
+        <div className="flex h-screen justify-center">
             <Sidebar>
                 <SidebarContent>
                     <SidebarGroup>
@@ -54,7 +54,7 @@ const MainLayout = () => {
                     </SidebarGroup>
                 </SidebarContent>
             </Sidebar>
-            <main className="flex-1 p-4">
+            <main className=" p-4 flex ">
                 <Outlet />
             </main>
         </div>
