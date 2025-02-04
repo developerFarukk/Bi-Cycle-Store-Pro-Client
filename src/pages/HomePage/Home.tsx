@@ -1,4 +1,6 @@
+import AboutPage from "./AboutPage";
 import BicycleNewsLetter from "./BicycleNewsLetter";
+import Contact from "./Contact";
 import BicycleCard from "./product/BicycleCard";
 import Slider from "./slider/Slider";
 
@@ -22,6 +24,16 @@ const Home = () => {
             {/* News Letter */}
             <div>
                 <BicycleNewsLetter />
+            </div>
+
+            {/* About Page */}
+            <div id="about">
+                <AboutPage />
+            </div>
+
+            {/* Contact page */}
+            <div id="contact">
+                <Contact />
             </div>
 
         </div>

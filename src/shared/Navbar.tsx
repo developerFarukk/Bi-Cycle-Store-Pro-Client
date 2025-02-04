@@ -26,7 +26,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="fixed w-full top-0 z-50">
+        <div className="fixed w-full top-0 z-50" >
             <nav className="bg-white shadow dark:bg-gray-800">
                 <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
                     <div className="flex items-center justify-between">
@@ -86,7 +86,7 @@ const Navbar = () => {
                     >
                         <div className="flex flex-col md:flex-row md:mx-6">
                             <Link
-                                to="/"
+                               to="/"
                                 className="my-2 hover-underline-animation text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0"
                             >
                                 Home
@@ -108,9 +108,15 @@ const Navbar = () => {
                             )}
                             <a
                                 className="my-2 hover-underline-animation text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0"
-                                href="#"
+                                href="#about"
                             >
                                 About
+                            </a>
+                            <a 
+                                className="my-2 hover-underline-animation text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0"
+                                href="#contact"
+                            >
+                                Contact
                             </a>
 
                             {/* Login and Registration buttons for small and medium devices */}
