@@ -10,12 +10,12 @@ const Home = () => {
         <div>
 
             {/* Slider */}
-            <div className="mt-2 p-4 ">
+            <div className="mt-24 p-4">
                 <Slider />
             </div>
 
             {/* Bicycle Card Page */}
-            <div id="BicycleCard" className="lg:p-4 p-2">
+            <div id="BicycleCard" className="lg:p-4 p-2 ">
                 <BicycleCard />
             </div>
 

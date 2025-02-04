@@ -51,7 +51,7 @@ const AllBicyclesPage = () => {
     }
 
     return (
-        <div className="lg:p-2">
+        <div className="lg:p-2 mt-20">
             <div className="text-center p-4 mb-4">
                 <h2 className="text-4xl font-bold">All Bicycle Products</h2>
             </div>
