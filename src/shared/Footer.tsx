@@ -1,14 +1,13 @@
+
+
 import { Link } from "react-router";
 import Ridenest from "./Ridenest";
-
-
-
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
-
     return (
-        <div>
-            <footer className="bg-white dark:bg-gray-900">
+        <div className="">
+            <footer className="bg-zinc-100 dark:bg-gray-900">
                 <div className="container p-6 mx-auto">
                     <div className="lg:flex">
                         {/* Left Section */}
@@ -22,6 +21,25 @@ const Footer = () => {
                                     Join 31,000+ others and never miss out on new tips, tutorials,
                                     and more.
                                 </p>
+
+                                {/* Social Media Icons */}
+                                <div className="flex mt-4 space-x-4">
+                                    <a href="#" className="text-gray-500 hover:text-gray-700 dark:hover:text-white">
+                                        <FaFacebook size={24} />
+                                    </a>
+                                    <a href="#" className="text-gray-500 hover:text-gray-700 dark:hover:text-white">
+                                        <FaTwitter size={24} />
+                                    </a>
+                                    <a href="#" className="text-gray-500 hover:text-gray-700 dark:hover:text-white">
+                                        <FaInstagram size={24} />
+                                    </a>
+                                    <a href="#" className="text-gray-500 hover:text-gray-700 dark:hover:text-white">
+                                        <FaLinkedin size={24} />
+                                    </a>
+                                    <a href="#" className="text-gray-500 hover:text-gray-700 dark:hover:text-white">
+                                        <FaYoutube size={24} />
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
@@ -31,70 +49,43 @@ const Footer = () => {
                                 {/* About Section */}
                                 <div>
                                     <h3 className="text-gray-700 uppercase dark:text-white">About</h3>
-                                    <a
-                                        href="#"
-                                        className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                                    >
+                                    <Link to="/about" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
                                         Company
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                                    >
+                                    </Link>
+                                    <Link to="/" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
                                         Community
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                                    >
+                                    </Link>
+                                    <Link to="/" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
                                         Careers
-                                    </a>
+                                    </Link>
                                 </div>
 
                                 {/* Blog Section */}
                                 <div>
                                     <h3 className="text-gray-700 uppercase dark:text-white">Blog</h3>
-                                    <a
-                                        href="#"
-                                        className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                                    >
+                                    <Link to="/" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
                                         Tech
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                                    >
+                                    </Link>
+                                    <Link to="/" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
                                         Music
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                                    >
+                                    </Link>
+                                    <Link to="/" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
                                         Videos
-                                    </a>
+                                    </Link>
                                 </div>
 
                                 {/* Products Section */}
                                 <div>
                                     <h3 className="text-gray-700 uppercase dark:text-white">Products</h3>
-                                    <a
-                                        href="#"
-                                        className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                                    >
+                                    <Link to="/" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
                                         Mega Cloud
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                                    >
-                                        Degital Marketing
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                                    >
-                                        Web development
-                                    </a>
+                                    </Link>
+                                    <Link to="/" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
+                                        Digital Marketing
+                                    </Link>
+                                    <Link to="/" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
+                                        Web Development
+                                    </Link>
                                 </div>
 
                                 {/* Contact Section */}
@@ -104,7 +95,10 @@ const Footer = () => {
                                         +1 526 654 8965
                                     </span>
                                     <span className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
-                                        example@email.com
+                                        ridenest@email.com
+                                    </span>
+                                    <span className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
+                                        123 Main St, New York, NY 10001
                                     </span>
                                 </div>
                             </div>
@@ -117,7 +111,7 @@ const Footer = () => {
                     {/* Copyright Section */}
                     <div>
                         <p className="text-center text-gray-500 dark:text-gray-400">
-                            © Brand 2020 - All rights reserved
+                            © Brand 2025 - All rights reserved
                         </p>
                     </div>
                 </div>
