@@ -6,7 +6,7 @@ const BicycleNewsLetter = () => {
     return (
         <div>
             <section className="bg-white dark:bg-gray-900">
-                <div className="container px-6 py-10 mx-auto">
+                <div className="container px-6 py-10 mx-auto text-center">
                     <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">
                         Explore Our <br /> Awesome Bicycle Collection
                     </h1>

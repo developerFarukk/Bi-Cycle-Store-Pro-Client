@@ -20,7 +20,7 @@ const MainLayout = () => {
 
     const pathsToRender = userRole === 'admin' ? adminPaths : userRole === 'customer' ? customerPaths : [];
     // console.log(pathsToRender);
-    
+
 
     const navigate = useNavigate();
 
@@ -33,6 +33,11 @@ const MainLayout = () => {
                             <div className="p-2 ">
                                 <Link to="/">DASHBOARD</Link>
                                 <div className="text-black text-sm underline">{email}</div>
+                                {/* <div className="">
+                                    <span className="inline-block w-40 h-1 bg-blue-500 rounded-full"></span>
+                                    <span className="inline-block w-3 h-1 ml-1 bg-blue-500 rounded-full"></span>
+                                    <span className="inline-block w-1 h-1 ml-1 bg-blue-500 rounded-full"></span>
+                                </div> */}
                             </div>
                         </SidebarGroupLabel>
                         <SidebarGroupContent>
