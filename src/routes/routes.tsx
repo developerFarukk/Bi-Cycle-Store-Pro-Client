@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet} from "react-router";
+import { createBrowserRouter } from "react-router";
 import Error from "../pages/Error";
 import HomeRoot from "./HomeRoot";
 import Home from "@/pages/HomePage/Home";
