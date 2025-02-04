@@ -1,6 +1,5 @@
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,22 +19,20 @@ interface TTitle {
 }
 
 const BiModel = ({ title, id }: TTitle) => {
-
     const user = useSelector((state: RootState) => state.auth.user);
     const cartItem = useAppSelector((state: RootState) => state.cart);
-    // console.log(cartItem);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    
     const { data: bi, isLoading, isError } = useGetSingleBicycleQuery(id);
     const bicycle = bi?.data;
     const dispatch = useAppDispatch();
-    // console.log(bicycle._id);
-
-
     const [quantity, setQuantity] = useState<number>(1);
 
     const handleIncrement = () => {
-        setQuantity((prev) => prev + 1);
+        if (quantity < bicycle.quantity) {
+            setQuantity((prev) => prev + 1);
+        } else {
+            toast.error("You cannot add more than available stock.");
+        }
     };
 
     const handleDecrement = () => {
@@ -44,16 +41,12 @@ const BiModel = ({ title, id }: TTitle) => {
         }
     };
 
-    // const handleAddToCart = () => {
-    //     console.log(quantity);
-
-    // };
-
-
 
     const handleAddToCart = (bi: TBicycle) => {
-        console.log(bi);
-        
+        if (user?.role === "admin") {
+            toast.error("Admins cannot place orders.");
+            return;
+        }
 
         if (!user) {
             toast.error("You must be logged in to add to cart.");
@@ -61,15 +54,12 @@ const BiModel = ({ title, id }: TTitle) => {
         }
 
         const productInCart = cartItem.items.find((item: any) => item._id === bi._id);
-        console.log(cartItem.items);
-
-
         if (productInCart) {
-            toast.info("Product is already exsist in your cart.");
+            toast.info("Product already exists in your cart.");
             return;
         }
 
-        const toastId = toast.loading("Logging out...");
+        const toastId = toast.loading("Adding to cart...");
         dispatch(
             addToCart({
                 _id: bi._id,
@@ -82,19 +72,14 @@ const BiModel = ({ title, id }: TTitle) => {
                 quantity: quantity,
                 status: bi.status,
                 type: bi.type,
-            }),
-            user.userId
+            })
         );
-        toast.success("Add to Card successfully", { id: toastId, duration: 1500 });
+        toast.success("Added to cart successfully", { id: toastId, duration: 1500 });
         setIsDialogOpen(false);
     };
 
-
-
-
-
     if (isLoading) {
-        return <div><LoadingProgress></LoadingProgress></div>;
+        return <div><LoadingProgress /></div>;
     }
 
     if (isError) {
@@ -113,7 +98,7 @@ const BiModel = ({ title, id }: TTitle) => {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[90%] md:max-w-3xl lg:max-w-4xl xl:max-w-6xl">
                     <DialogHeader>
-                        <DialogTitle  className="text-center">Bicycle Products Details</DialogTitle>
+                        <DialogTitle className="text-center">Bicycle Products Details</DialogTitle>
                     </DialogHeader>
                     <div className="bg-gray-100 dark:bg-gray-800 py-4 md:py-8 rounded-md">
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -159,16 +144,15 @@ const BiModel = ({ title, id }: TTitle) => {
                                             <span className="font-bold text-gray-700 dark:text-gray-300">Available Stock:</span>
                                             <div className="flex flex-wrap items-center gap-2">
                                                 <div className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-1 px-3 rounded-full font-bold hover:bg-gray-400 dark:hover:bg-gray-600">
-                                                    {bicycle.quantity} {/* Display the actual quantity from the data */}
+                                                    {bicycle.quantity}
                                                 </div>
                                             </div>
                                         </div>
                                         <div>
                                             <span className="font-bold text-gray-700 dark:text-gray-300">Type:</span>
-                                            <span className="text-gray-600 dark:text-gray-300 ml-2">{bicycle.type}</span> {/* Display the actual type from the data */}
+                                            <span className="text-gray-600 dark:text-gray-300 ml-2">{bicycle.type}</span>
                                         </div>
                                     </div>
-
 
                                     <div className="mt-4 flex items-center justify-start gap-2">
                                         <label htmlFor="Quantity" className="font-bold text-gray-700 dark:text-gray-300">
@@ -186,7 +170,14 @@ const BiModel = ({ title, id }: TTitle) => {
                                                 type="number"
                                                 id="Quantity"
                                                 value={quantity}
-                                                onChange={(e) => setQuantity(Number(e.target.value))}
+                                                onChange={(e) => {
+                                                    const newQuantity = Number(e.target.value);
+                                                    if (newQuantity <= bicycle.quantity && newQuantity >= 1) {
+                                                        setQuantity(newQuantity);
+                                                    } else {
+                                                        toast.error("Quantity cannot exceed available stock.");
+                                                    }
+                                                }}
                                                 className="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                                             />
                                             <button
@@ -201,7 +192,6 @@ const BiModel = ({ title, id }: TTitle) => {
 
                                     <div className="mt-auto">
                                         <Button
-                                            // onClick={handleAddToCart}
                                             onClick={() => handleAddToCart(bicycle)}
                                             className="block w-full rounded-sm bg-blue-800 text-sm font-medium transition hover:scale-105"
                                         >
