@@ -8,7 +8,7 @@ export const customerPaths = [
     {
         name: 'My Cart',
         index: true,
-        path: 'Order Managments',
+        path: 'ordermanagments',
         icons: <FaShopify />,
         element: <MyCart />,
     },
