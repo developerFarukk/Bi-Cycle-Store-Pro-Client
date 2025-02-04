@@ -11,6 +11,7 @@ import { customerPaths } from "./customer.routes";
 import { routeGenerator } from "@/utils/routesGenerator";
 import PrivateRoute from "@/privateRoures/PrivetRout";
 import AdminPrivateRoute from "@/privateRoures/AdminPrivateRoute";
+import AllBicycle from "@/pages/HomePage/product/AllBicycle";
 
 
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />
+            },
+            {
+                path: "/all-bicycles",
+                element: <AllBicycle />
             }
         ]
     },
