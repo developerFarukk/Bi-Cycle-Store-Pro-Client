@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { toast } from "sonner";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { addToCart } from "@/redux/features/cart/cartSlice";
+import { addToCart, updateQuantity } from "@/redux/features/cart/cartSlice";
 
 interface TTitle {
     title: string;
@@ -54,8 +54,11 @@ const BiModel = ({ title, id }: TTitle) => {
         }
 
         const productInCart = cartItem.items.find((item: any) => item._id === bi._id);
+       
         if (productInCart) {
-            toast.info("Product already exists in your cart.");
+            dispatch(updateQuantity({ id: bi._id, quantity }));
+            toast.success("Quantity updated successfully");
+            setIsDialogOpen(false);
             return;
         }
 
