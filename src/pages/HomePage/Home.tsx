@@ -1,3 +1,4 @@
+import BicycleNewsLetter from "./BicycleNewsLetter";
 import BicycleCard from "./product/BicycleCard";
 import Slider from "./slider/Slider";
 
@@ -16,6 +17,11 @@ const Home = () => {
             {/* Bicycle Card Page */}
             <div id="BicycleCard" className="lg:p-4 p-2">
                 <BicycleCard />
+            </div>
+
+            {/* News Letter */}
+            <div>
+                <BicycleNewsLetter />
             </div>
 
         </div>

@@ -160,6 +160,7 @@ import { setCartItems, TCartItem } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import BiModel from "@/shared/BiModel";
+import HookButton from "@/shared/HookButton";
 import LoadingProgress from "@/shared/LoadingProgress";
 import { TBicycle } from "@/types/productsManagment";
 import { getCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "@/utils/localUtils";
@@ -281,11 +282,15 @@ const BicycleCard = () => {
 
             {/* View All Button */}
             <div className="text-center mt-6">
-                <button
+                {/* <button
                     onClick={() => navigate('/all-bicycles')} // Redirect to the "All Bicycles" page
                     className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
                 >
                     View All
+
+                </button> */}
+                <button onClick={() => navigate('/all-bicycles')}>
+                    <HookButton title="View All" />
                 </button>
             </div>
         </div>
