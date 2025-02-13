@@ -5,7 +5,6 @@ import { removeFromCart } from "@/redux/features/cart/cartSlice";
 import { useAddOrderMutation } from "@/redux/features/orderManagmentApi/OrderManagmentApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-import LoadingProgress from "@/shared/LoadingProgress";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
@@ -15,7 +14,7 @@ const MyCart = () => {
     const dispatch = useAppDispatch();
     const [createOrder, { isLoading, isSuccess, data, isError, error }] = useAddOrderMutation();
 
-    console.log(cartItems.items);
+    // console.log(cartItems.items);
 
     const handleCheckOut = async () => {
         // const order = await createOrder({ products: cartItems.items });
@@ -26,19 +25,21 @@ const MyCart = () => {
         }));
 
         // Send the transformed data to the backend
-        const order = await createOrder({ products: transformedCartItems });
-        console.log(order);
+       await createOrder({ products: transformedCartItems });
+        // console.log(order);
     };
 
     const toastId = "cart";
     useEffect(() => {
-        if (isLoading) toast.loading(<LoadingProgress />, { id: toastId });
+        if (isLoading) toast.loading("Processing ...", { id: toastId });
 
         if (isSuccess) {
             toast.success(data?.message, { id: toastId });
-            if (data?.data) {
+            console.log(data?.data?.paymentUrl);
+            
+            if (data?.data?.paymentUrl) {
                 setTimeout(() => {
-                    window.location.href = data.data;
+                    window.location.href = data.data.paymentUrl;
                 }, 1000);
             }
         }
