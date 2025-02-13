@@ -40,7 +40,7 @@ const MyCart = () => {
             if (data?.data?.paymentUrl) {
                 setTimeout(() => {
                     window.location.href = data.data.paymentUrl;
-                }, 1000);
+                }, 300);
             }
         }
 

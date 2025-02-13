@@ -57,6 +57,15 @@ const orderManagementApi = baseApi.injectEndpoints({
             }),
         }),
 
+        // Verify Order
+        verifyOrder: builder.query({
+            query: (order_id) => ({
+                url: "/orders/verify",
+                params: { order_id },
+                method: "GET",
+            }),
+        }),
+
         // delete product Api
         // deleteProduct: builder.mutation({
         //     query: ({ id, body }) => ({
@@ -83,6 +92,7 @@ const orderManagementApi = baseApi.injectEndpoints({
 export const {
     useAddOrderMutation,
     useGetAllOrdersQuery,
+    useVerifyOrderQuery,
     // useGetSingleBicycleQuery,
     // useDeleteProductMutation,
     // useUpdateProductMutation,

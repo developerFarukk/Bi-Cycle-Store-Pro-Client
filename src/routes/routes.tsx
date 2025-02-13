@@ -13,6 +13,7 @@ import PrivateRoute from "@/privateRoures/PrivetRout";
 import AdminPrivateRoute from "@/privateRoures/AdminPrivateRoute";
 import AllBicycle from "@/pages/HomePage/product/AllBicycle";
 import VerifyOrder from "@/pages/customer/VerifyOrder";
+import OrderDetails from "@/pages/customer/Order";
 
 
 
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
     {
         path: "/orders/verify",
         element: <PrivateRoute><VerifyOrder /></PrivateRoute>
+    },
+    {
+        path: "/order",
+        element: <PrivateRoute><OrderDetails /></PrivateRoute>
     }
 ]);
 
