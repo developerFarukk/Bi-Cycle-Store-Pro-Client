@@ -8,30 +8,30 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 
 const MyCart = () => {
-    // Redux থেকে কার্ট আইটেম এবং ডিসপ্যাচ লোড করুন
+   
     const cartItems = useAppSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
     const [createOrder, { isLoading, isSuccess, data, isError, error }] = useAddOrderMutation();
 
-    // কার্ট রিসেট করার ফাংশন
+  
     const resetCart = () => {
         cartItems.items.forEach((item) => {
             dispatch(removeFromCart(item._id));
         });
     };
 
-    // চেকআউট হ্যান্ডলার
+    
     const handleCheckOut = async () => {
         const transformedCartItems = cartItems.items.map((item) => ({
-            product: item._id, // Map _id to product
+            product: item._id, 
             quantity: item.quantity,
         }));
 
-        // ট্রান্সফর্মড ডাটা ব্যাকেন্ডে পাঠান
+        
         await createOrder({ products: transformedCartItems });
     };
 
-    // টোস্ট এবং রিডাইরেক্ট লজিক
+   
     const toastId = "cart";
     useEffect(() => {
         if (isLoading) toast.loading("Processing ...", { id: toastId });
@@ -40,10 +40,10 @@ const MyCart = () => {
             toast.success(data?.message, { id: toastId });
             console.log(data?.data?.paymentUrl);
 
-            // কার্ট রিসেট করুন
+         
             resetCart();
 
-            // পেমেন্ট URL এ রিডাইরেক্ট করুন
+           
             if (data?.data?.paymentUrl) {
                 setTimeout(() => {
                     window.location.href = data.data.paymentUrl;

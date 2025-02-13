@@ -1,7 +1,24 @@
 
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 
-// PDF এর স্টাইল ডিফাইন করুন
+type DownloadRiciptProps = {
+    orderData: OrderData;
+};
+
+type OrderData = {
+    order_id: string;
+    currency: string;
+    amount: number;
+    bank_status: string;
+    date_time: string;
+    bank_trx_id: string;
+    invoice_no: string;
+    name: string;
+    email: string;
+    phone_no: string;
+};
+
+
 const styles = StyleSheet.create({
     page: {
         flexDirection: "column",
@@ -34,14 +51,14 @@ const styles = StyleSheet.create({
     },
 });
 
-// PDF রিসিপ্ট কম্পোনেন্ট
-const DownloadRicipt = ({ orderData }) => (
+
+const DownloadRicipt = ({ orderData }: DownloadRiciptProps) => (
     <Document>
         <Page size="A4" style={styles.page}>
-            {/* হেডার */}
+
             <Text style={styles.header}>Order Receipt</Text>
 
-            {/* অর্ডার ডিটেইলস */}
+
             <View style={styles.section}>
                 <Text style={styles.label}>Order ID:</Text>
                 <Text style={styles.value}>{orderData?.order_id}</Text>
@@ -66,7 +83,7 @@ const DownloadRicipt = ({ orderData }) => (
                 </Text>
             </View>
 
-            {/* পেমেন্ট ইনফরমেশন */}
+
             <View style={styles.section}>
                 <Text style={styles.label}>Transaction ID:</Text>
                 <Text style={styles.value}>{orderData?.bank_trx_id}</Text>
@@ -77,7 +94,7 @@ const DownloadRicipt = ({ orderData }) => (
                 <Text style={styles.value}>{orderData?.invoice_no}</Text>
             </View>
 
-            {/* কাস্টমার ইনফরমেশন */}
+
             <View style={styles.section}>
                 <Text style={styles.label}>Name:</Text>
                 <Text style={styles.value}>{orderData?.name}</Text>
@@ -93,7 +110,7 @@ const DownloadRicipt = ({ orderData }) => (
                 <Text style={styles.value}>{orderData?.phone_no}</Text>
             </View>
 
-            {/* ফুটার */}
+
             <View style={styles.footer}>
                 <Text>Thank you for your purchase!</Text>
             </View>
