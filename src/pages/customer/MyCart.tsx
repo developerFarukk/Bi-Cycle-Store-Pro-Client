@@ -40,9 +40,7 @@ const MyCart = () => {
             toast.success(data?.message, { id: toastId });
             console.log(data?.data?.paymentUrl);
 
-
             resetCart();
-
 
             if (data?.data?.paymentUrl) {
                 setTimeout(() => {

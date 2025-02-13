@@ -162,9 +162,6 @@ const VerifyOrder = () => {
                         </div>
                     </CardContent>
                     <CardFooter className="flex gap-4">
-                        {/* <Link to="/order">
-                            <Button className="w-full">View Orders</Button>
-                        </Link> */}
 
                         <PDFDownloadLink
                             document={<DownloadRicipt orderData={orderData} />}
