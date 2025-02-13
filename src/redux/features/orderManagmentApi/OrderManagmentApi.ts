@@ -49,13 +49,13 @@ const orderManagementApi = baseApi.injectEndpoints({
         // }),
 
         // create Product API
-        // addProduct: builder.mutation({
-        //     query: (data) => ({
-        //         url: '/bicycle/create-bicycle',
-        //         method: 'POST',
-        //         body: data,
-        //     }),
-        // }),
+        addOrder: builder.mutation({
+            query: (data) => ({
+                url: '/orders/create-order',
+                method: 'POST',
+                body: data,
+            }),
+        }),
 
         // delete product Api
         // deleteProduct: builder.mutation({
@@ -81,7 +81,7 @@ const orderManagementApi = baseApi.injectEndpoints({
 });
 
 export const {
-    // useAddProductMutation,
+    useAddOrderMutation,
     useGetAllOrdersQuery,
     // useGetSingleBicycleQuery,
     // useDeleteProductMutation,

@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type TCartItem = {
     _id: string;
+    product: string;
     bicycleImage: string | undefined;
     brand: string;
     description: string;

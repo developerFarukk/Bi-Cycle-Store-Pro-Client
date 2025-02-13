@@ -2,15 +2,49 @@
 
 
 import { removeFromCart } from "@/redux/features/cart/cartSlice";
+import { useAddOrderMutation } from "@/redux/features/orderManagmentApi/OrderManagmentApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
+import LoadingProgress from "@/shared/LoadingProgress";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 const MyCart = () => {
     // Use useAppSelector to get the cart items from the Redux store
     const cartItems = useAppSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
+    const [createOrder, { isLoading, isSuccess, data, isError, error }] = useAddOrderMutation();
 
-    // console.log(cartItems.items);
+    console.log(cartItems.items);
+
+    const handleCheckOut = async () => {
+        // const order = await createOrder({ products: cartItems.items });
+        // console.log(order);
+        const transformedCartItems = cartItems.items.map((item) => ({
+            product: item._id, // Map _id to product
+            quantity: item.quantity,
+        }));
+
+        // Send the transformed data to the backend
+        const order = await createOrder({ products: transformedCartItems });
+        console.log(order);
+    };
+
+    const toastId = "cart";
+    useEffect(() => {
+        if (isLoading) toast.loading(<LoadingProgress />, { id: toastId });
+
+        if (isSuccess) {
+            toast.success(data?.message, { id: toastId });
+            if (data?.data) {
+                setTimeout(() => {
+                    window.location.href = data.data;
+                }, 1000);
+            }
+        }
+
+        if (isError) toast.error(JSON.stringify(error), { id: toastId });
+    }, [data?.data, data?.message, error, isError, isLoading, isSuccess]);
 
     return (
         <div>
@@ -132,12 +166,12 @@ const MyCart = () => {
                                     </dl>
 
                                     <div className="flex justify-end">
-                                        <a
-                                            href="#"
+                                        <button
+                                            onClick={handleCheckOut}
                                             className="block rounded-sm bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
                                         >
                                             Checkout
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

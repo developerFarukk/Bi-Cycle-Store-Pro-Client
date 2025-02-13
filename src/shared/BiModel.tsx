@@ -66,6 +66,7 @@ const BiModel = ({ title, id }: TTitle) => {
         dispatch(
             addToCart({
                 _id: bi._id,
+                product: bi._id,
                 bicycleImage: bi.bicycleImage,
                 brand: bi.brand,
                 description: bi.description,
