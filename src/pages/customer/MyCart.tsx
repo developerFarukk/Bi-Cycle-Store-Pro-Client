@@ -4,34 +4,34 @@ import { removeFromCart } from "@/redux/features/cart/cartSlice";
 import { useAddOrderMutation } from "@/redux/features/orderManagmentApi/OrderManagmentApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { toast } from "sonner";
 
 const MyCart = () => {
-   
+
     const cartItems = useAppSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
     const [createOrder, { isLoading, isSuccess, data, isError, error }] = useAddOrderMutation();
 
-  
-    const resetCart = () => {
+
+    const resetCart = useCallback(() => {
         cartItems.items.forEach((item) => {
             dispatch(removeFromCart(item._id));
         });
-    };
+    }, [cartItems.items, dispatch]);
 
-    
+
     const handleCheckOut = async () => {
         const transformedCartItems = cartItems.items.map((item) => ({
-            product: item._id, 
+            product: item._id,
             quantity: item.quantity,
         }));
 
-        
+
         await createOrder({ products: transformedCartItems });
     };
 
-   
+
     const toastId = "cart";
     useEffect(() => {
         if (isLoading) toast.loading("Processing ...", { id: toastId });
@@ -40,10 +40,10 @@ const MyCart = () => {
             toast.success(data?.message, { id: toastId });
             console.log(data?.data?.paymentUrl);
 
-         
+
             resetCart();
 
-           
+
             if (data?.data?.paymentUrl) {
                 setTimeout(() => {
                     window.location.href = data.data.paymentUrl;
@@ -52,7 +52,7 @@ const MyCart = () => {
         }
 
         if (isError) toast.error(JSON.stringify(error), { id: toastId });
-    }, [data?.data, data?.message, error, isError, isLoading, isSuccess]);
+    }, [data?.data, data?.message, error, isError, isLoading, isSuccess, resetCart]);
 
     return (
         <div>
