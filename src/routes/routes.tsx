@@ -12,6 +12,7 @@ import { routeGenerator } from "@/utils/routesGenerator";
 import PrivateRoute from "@/privateRoures/PrivetRout";
 import AdminPrivateRoute from "@/privateRoures/AdminPrivateRoute";
 import AllBicycle from "@/pages/HomePage/product/AllBicycle";
+import VerifyOrder from "@/pages/customer/VerifyOrder";
 
 
 
@@ -28,21 +29,22 @@ const router = createBrowserRouter([
             {
                 path: "/all-bicycles",
                 element: <AllBicycle />
-            }
+            },
+
         ]
     },
     {
         path: '/dashboard',
-        element: ( <PrivateRoute><SidebarProvider><main><SidebarTrigger /><App /></main></SidebarProvider></PrivateRoute> ),
+        element: (<PrivateRoute><SidebarProvider><main><SidebarTrigger /><App /></main></SidebarProvider></PrivateRoute>),
     },
     {
         path: '/admin',
-        element: ( <AdminPrivateRoute><SidebarProvider><main><SidebarTrigger /><App /></main> </SidebarProvider></AdminPrivateRoute> ),
+        element: (<AdminPrivateRoute><SidebarProvider><main><SidebarTrigger /><App /></main> </SidebarProvider></AdminPrivateRoute>),
         children: routeGenerator(adminPaths),
-    },  
+    },
     {
         path: '/customer',
-        element: ( <SidebarProvider> <main> <SidebarTrigger /> <App /></main> </SidebarProvider> ),
+        element: (<SidebarProvider> <main> <SidebarTrigger /> <App /></main> </SidebarProvider>),
         children: routeGenerator(customerPaths),
     },
 
@@ -54,6 +56,10 @@ const router = createBrowserRouter([
         path: '/register',
         element: <RegistationAuth />,
     },
+    {
+        path: "/orders/verify",
+        element: <PrivateRoute><VerifyOrder /></PrivateRoute>
+    }
 ]);
 
 export default router;

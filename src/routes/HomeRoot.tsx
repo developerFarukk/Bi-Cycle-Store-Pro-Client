@@ -10,7 +10,9 @@ const HomeRoot = () => {
     return (
         <div>
             <Navbar />
-            <Outlet></Outlet>
+            <div className="min-h-screen mx-auto">
+                <Outlet></Outlet>
+            </div>
             <Footer />
         </div>
     );
