@@ -12,7 +12,7 @@ const userManagementApi = baseApi.injectEndpoints({
         getAllUsers: builder.query({
             query: (args) => {
                 // console.log(args);
-                
+
                 const params = new URLSearchParams();
 
                 if (args) {
@@ -56,14 +56,13 @@ const userManagementApi = baseApi.injectEndpoints({
             invalidatesTags: ['User']
         }),
 
-        // create student API
-        // addStudent: builder.mutation({
-        //     query: (data) => ({
-        //         url: '/users/create-student',
-        //         method: 'POST',
-        //         body: data,
-        //     }),
-        // }),
+        // Get me user API
+        getMeUser: builder.query({
+            query: () => ({
+                url: '/users/me',
+                method: 'GET',
+            }),
+        }),
 
     }),
 });
@@ -72,5 +71,6 @@ export const {
     // useAddStudentMutation,
     useGetAllUsersQuery,
     useUpdateUserMutation,
-    useDeleteUserMutation
+    useDeleteUserMutation,
+    useGetMeUserQuery
 } = userManagementApi;
