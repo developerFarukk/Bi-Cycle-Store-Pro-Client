@@ -1,5 +1,6 @@
-// import PropTypes from 'prop-types'
-import { Fragment, useState } from 'react'
+
+
+import { Fragment, useState } from 'react';
 import {
     Dialog,
     Listbox,
@@ -10,21 +11,23 @@ import {
     ListboxButton,
     ListboxOption,
     ListboxOptions,
-} from '@headlessui/react'
-import { BsCheckLg } from 'react-icons/bs'
-import { AiOutlineDown } from 'react-icons/ai'
-const status = ['in-progress', 'blocked']
+} from '@headlessui/react';
+import { BsCheckLg } from 'react-icons/bs';
+import { AiOutlineDown } from 'react-icons/ai';
+
+const status = ["Pending", "Paid", "Shipped", "Completed", "Cancelled"];
 
 interface THandModal {
     setIsOpen: (isOpen: boolean) => void;
     isOpen: boolean;
-    // modalHandler: (modal: Dialog) => void;
     modalHandler: (selectedStatus: string) => void;
-    userStatus: string
+    // modalHandler: (modal: Dialog) => void;
+    orderStatus: string;
 }
 
-const UpdateUserStat = ({ setIsOpen, isOpen, modalHandler, userStatus }: THandModal) => {
-    const [selected, setSelected] = useState(userStatus)
+const UpOrderStateAdmin = ({ setIsOpen, isOpen, modalHandler, orderStatus }: THandModal) => {
+    const [selected, setSelected] = useState(orderStatus);
+
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog
@@ -55,17 +58,17 @@ const UpdateUserStat = ({ setIsOpen, isOpen, modalHandler, userStatus }: THandMo
                             leaveFrom='opacity-100 scale-100'
                             leaveTo='opacity-0 scale-95'
                         >
-                            <DialogPanel className='w-full h-56 max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                            <DialogPanel className='w-full h-80 max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                                 <DialogTitle
                                     as='h3'
                                     className='text-lg font-medium text-center leading-6 text-gray-900'
                                 >
-                                    Update User status
+                                    Update Order Status
                                 </DialogTitle>
                                 <div className='mt-4 w-full'>
                                     <Listbox value={selected} onChange={setSelected}>
                                         <div className='relative mt-1'>
-                                            <ListboxButton className='relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'>
+                                            <ListboxButton className='relative  w-full  overflow-auto  cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'>
                                                 <span className='block truncate'>{selected}</span>
                                                 <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
                                                     <AiOutlineDown
@@ -74,6 +77,7 @@ const UpdateUserStat = ({ setIsOpen, isOpen, modalHandler, userStatus }: THandMo
                                                     />
                                                 </span>
                                             </ListboxButton>
+                                            
                                             <Transition
                                                 as={Fragment}
                                                 leave='transition ease-in duration-100'
@@ -118,7 +122,7 @@ const UpdateUserStat = ({ setIsOpen, isOpen, modalHandler, userStatus }: THandMo
                                     <button
                                         type='button'
                                         className='inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2'
-                                        onClick={() => modalHandler(selected)}
+                                        onClick={() => modalHandler(selected)} // Pass selected status
                                     >
                                         Update
                                     </button>
@@ -136,8 +140,7 @@ const UpdateUserStat = ({ setIsOpen, isOpen, modalHandler, userStatus }: THandMo
                 </div>
             </Dialog>
         </Transition>
-    )
-}
+    );
+};
 
-
-export default UpdateUserStat;
+export default UpOrderStateAdmin;

@@ -7,6 +7,7 @@ import { TOrders } from "@/types/orderTypes";
 import { useState } from "react";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
+import UpdateOrderStatusByAdmin from "./UpdateOrderStatusByAdmin";
 
 const OrderManageAdmin = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -182,8 +183,19 @@ const OrderManageAdmin = () => {
 
                                                     {/* Order-Status */}
                                                     <td className="px-4 py-4 text-sm text-blue-500 dark:text-gray-300 whitespace-nowrap">
-                                                        {or.status}
+                                                        {/* {or.status} */}
+                                                        <UpdateOrderStatusByAdmin orderStatus={or.status} orderId={or._id} />
                                                     </td>
+
+                                                    {/* <td className="px-12 py-4 text-sm font-medium  whitespace-nowrap">
+                                                        <div className="">
+                                                            <span className="h-1.5 w-1.5 rounded-full "></span>
+
+                                                            <h2 className="text-sm font-normal ">
+                                                                
+                                                            </h2>
+                                                        </div>
+                                                    </td> */}
 
                                                     {/* Product Details */}
                                                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">

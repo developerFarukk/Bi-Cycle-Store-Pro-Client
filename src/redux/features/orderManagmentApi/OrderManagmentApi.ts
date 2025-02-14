@@ -77,15 +77,15 @@ const orderManagementApi = baseApi.injectEndpoints({
             invalidatesTags: ['Order']
         }),
 
-        // Update Product
-        // updateProduct: builder.mutation({
-        //     query: ({ bicycleId, body }) => ({
-        //         url: `/bicycle/${bicycleId}`,
-        //         method: 'PATCH',
-        //         body,
-        //     }),
-        //     invalidatesTags: ['Bicycle']
-        // }),
+        // Update Order
+        updateOrder: builder.mutation({
+            query: ({ orderId, body }) => ({
+                url: `/orders/${orderId}`,
+                method: 'PATCH',
+                body,
+            }),
+            invalidatesTags: ['Order']
+        }),
 
     }),
 });
@@ -95,7 +95,6 @@ export const {
     useGetAllOrdersQuery,
     useVerifyOrderQuery,
     useDeleteOrderMutation,
-    // useGetSingleBicycleQuery,
-    // useDeleteProductMutation,
-    // useUpdateProductMutation,
+    useUpdateOrderMutation,
+    
 } = orderManagementApi;
