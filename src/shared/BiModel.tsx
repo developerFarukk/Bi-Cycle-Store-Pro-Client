@@ -12,6 +12,7 @@ import { RootState } from "@/redux/store";
 import { toast } from "sonner";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addToCart, updateQuantity } from "@/redux/features/cart/cartSlice";
+import { Link } from "react-router";
 
 interface TTitle {
     title: string;
@@ -54,7 +55,7 @@ const BiModel = ({ title, id }: TTitle) => {
         }
 
         const productInCart = cartItem.items.find((item: any) => item._id === bi._id);
-       
+
         if (productInCart) {
             dispatch(updateQuantity({ id: bi._id, quantity }));
             toast.success("Quantity updated successfully");
@@ -195,12 +196,22 @@ const BiModel = ({ title, id }: TTitle) => {
                                     </div>
 
                                     <div className="mt-auto">
-                                        <Button
-                                            onClick={() => handleAddToCart(bicycle)}
-                                            className="block w-full rounded-sm bg-blue-800 text-sm font-medium transition hover:scale-105"
-                                        >
-                                            Add to Cart
-                                        </Button>
+                                        <div className="flex  gap-4">
+                                            <Button
+                                                onClick={() => handleAddToCart(bicycle)}
+                                                className="block w-full rounded-sm bg-blue-800 text-sm font-medium transition hover:scale-105"
+                                            >
+                                                Add to Cart
+                                            </Button>
+                                            <Link to="/customer/ordermanagments">
+                                                <Button
+                                                    onClick={() => handleAddToCart(bicycle)}
+                                                    className="block w-full rounded-sm bg-blue-800 text-sm font-medium transition hover:scale-105"
+                                                >
+                                                    Buy Now
+                                                </Button>
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
