@@ -32,6 +32,7 @@ const OrderManageAdmin = () => {
         return <div>Data no fetch</div>;
     }
 
+    // Date formeting function
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
         return date.toLocaleDateString();
