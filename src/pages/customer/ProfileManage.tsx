@@ -1,25 +1,18 @@
 
-import { useGetMeUserQuery } from "@/redux/features/userManagment/userManagmentApi";
+import { useState } from "react";
+import { useGetMeUserQuery, useUpdateUserMutation } from "@/redux/features/userManagment/userManagmentApi";
 import { FaPhone } from "react-icons/fa6";
 import { SiStatuspage } from "react-icons/si";
 import { FaCriticalRole } from "react-icons/fa";
-
-import { Button } from "@/components/ui/button"
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { toast } from "sonner";
 
 // Define the schema for validation
 const userSchema = z.object({
@@ -28,48 +21,36 @@ const userSchema = z.object({
     mobile: z.string().optional(),
 });
 
-
 const ProfileManage = () => {
-
-    const { register, handleSubmit, setValue, watch, reset, formState: { errors }, } = useForm({
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const { register, handleSubmit, reset } = useForm({
         resolver: zodResolver(userSchema),
         mode: "onBlur",
     });
 
-    const { data: userData, isLoading, isError } = useGetMeUserQuery(undefined);
+    // Use the `refetch` function from `useGetMeUserQuery`
+    const { data: userData, isLoading, isError, refetch } = useGetMeUserQuery(undefined);
     const user = userData?.data;
-    // console.log(user);
 
+    const [updateUser] = useUpdateUserMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        try {
+            await updateUser({ userId: user._id, body: data }).unwrap();
+            toast.success('User updated successfully');
 
-        console.log(data);
+            // Reset the form fields
+            reset();
 
+            // Close the modal
+            setIsDialogOpen(false);
 
-        // const toastId = toast.loading('Creating...');
-
-        // try {
-        //     // Convert price and quantity to numbers
-        //     const productData = {
-        //         ...data,
-        //         price: Number(data.price),
-        //         quantity: Number(data.quantity),
-        //     };
-
-        //     const res = (await createProduct(productData)) as TResponse<any>;
-        //     // console.log(res);
-        //     if (res.error) {
-        //         toast.error(res.error.data.message, { id: toastId });
-        //     } else {
-        //         toast.success('Product created Successfully', { id: toastId });
-        //     }
-        //     reset()
-        // } catch (err) {
-        //     toast.error('Something went wrong', { id: toastId });
-        // }
+            // Refetch user data after a successful update
+            refetch();
+        } catch (error) {
+            toast.error(error?.data?.message || 'Failed to update user');
+        }
     };
-
-
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -78,8 +59,6 @@ const ProfileManage = () => {
     if (isError) {
         return <div>Error fetching user data</div>;
     }
-
-
 
     return (
         <div className="lg:ml-24 md:ml-12">
@@ -90,13 +69,13 @@ const ProfileManage = () => {
                     alt="avatar"
                 />
 
-
                 <div className="px-6 py-4">
                     <h1 className="text-xl font-semibold text-gray-800 dark:text-white">{user.name}</h1>
 
                     <p className="py-2 text-gray-700 dark:text-gray-400">
                         Full Stack maker & UI / UX Designer, love hip hop music Author of Building UI.
                     </p>
+
                     {/* Address */}
                     <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                         <svg
@@ -159,7 +138,7 @@ const ProfileManage = () => {
                     </div>
 
                     <div className="flex justify-center mx-auto mt-4">
-                        <Dialog>
+                        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                             <DialogTrigger asChild>
                                 <Button variant="outline">Edit Profile</Button>
                             </DialogTrigger>
@@ -182,14 +161,15 @@ const ProfileManage = () => {
 
                                         {/* Phone */}
                                         <div className="grid grid-cols-4 items-center gap-4">
-                                            <Label htmlFor="name" className="text-right">
-                                                Name
+                                            <Label htmlFor="mobile" className="text-right">
+                                                Phone
                                             </Label>
-                                            <Input type="number" id="name" defaultValue={user.mobile} {...register("mobile")} className="col-span-3" />
+                                            <Input type="number" id="mobile" defaultValue={user.mobile} {...register("mobile")} className="col-span-3" />
                                         </div>
 
+                                        {/* Address */}
                                         <div className="grid grid-cols-4 items-center gap-4">
-                                            <Label htmlFor="username" className="text-right">
+                                            <Label htmlFor="address" className="text-right">
                                                 Address
                                             </Label>
                                             <Textarea defaultValue={user.address} {...register("address")} className="col-span-3" placeholder="Type your address here." />
