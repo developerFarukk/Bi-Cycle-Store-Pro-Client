@@ -26,10 +26,14 @@ export interface Tuserss {
 
 
 const AllUser = () => {
-
+    const [currentPage, setCurrentPage] = useState(1);
     const [deleteUser] = useDeleteUserMutation();
 
-    const { data: userData, isLoading, isError } = useGetAllUsersQuery(undefined);
+    const { data: userData, isLoading, isError } = useGetAllUsersQuery([
+        { name: "page", value: currentPage },
+        { name: "limit", value: 6 },
+    ]);
+    // const { data: userData, isLoading, isError } = useGetAllUsersQuery(undefined);
     const [users, setUsers] = useState<Tuserss[]>([]);
     const currentUser = useSelector((state: RootState) => state.auth.user);
 
@@ -39,7 +43,15 @@ const AllUser = () => {
         }
     }, [userData, isLoading, isError]);
 
-    const totalUser = users.length;
+    const totalUser = userData?.data?.meta?.total;
+    const totalPage = userData?.data?.meta?.page;
+    const limit = userData?.data?.meta?.limit;
+
+    console.log("total Page", userData?.data?.meta?.page);
+
+
+
+
 
     if (isLoading) {
         return <div><LoadingProgress></LoadingProgress></div>;
@@ -99,7 +111,7 @@ const AllUser = () => {
                     const deleteResult = await deleteUser({ id: user._id, body: { isDeleted: true } }).unwrap();
                     console.log("Delete Result:", deleteResult);
                     // toast.success('User deleted successfully');
-                    Swal.fire({ 
+                    Swal.fire({
                         title: "Deleted!",
                         text: "The user has been deleted.",
                         icon: "success"
@@ -116,6 +128,24 @@ const AllUser = () => {
             }
         });
     };
+
+
+    const handleNextPage = () => {
+        if (currentPage < totalPage) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
 
 
     return (
@@ -156,7 +186,7 @@ const AllUser = () => {
                                             </th>
 
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                                                <button className="flex items-center gap-x-2">
+                                                <button className="flex items-center justify-center gap-x-2">
                                                     <span>Role</span>
 
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4">
@@ -223,11 +253,6 @@ const AllUser = () => {
                                                 </tr>
                                             )
                                         }
-
-
-
-
-
                                     </tbody>
                                 </table>
                             </div>
@@ -235,8 +260,11 @@ const AllUser = () => {
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between mt-6">
-                    <a href="#" className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+                <div className="flex items-center justify-between mt-6 mb-10">
+                    <button
+                        onClick={handlePreviousPage}
+                        disabled={currentPage === 1}
+                        className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 rtl:-scale-x-100">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
                         </svg>
@@ -244,19 +272,24 @@ const AllUser = () => {
                         <span>
                             previous
                         </span>
-                    </a>
+                    </button>
 
-                    <div className="items-center hidden lg:flex gap-x-3">
-                        <a href="#" className="px-2 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60">1</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">2</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">3</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">...</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">12</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">13</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">14</a>
+                    <div className="items-center hidden md:flex gap-x-3">
+                        {Array.from({ length: totalPage }, (_, index) => (
+                            <button
+                                key={index + 1}
+                                onClick={() => handlePageChange(index + 1)}
+                                className={`px-2 py-1 text-sm ${currentPage === index + 1 ? 'text-blue-500 bg-blue-100/60' : 'text-gray-500'} rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100`}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
                     </div>
 
-                    <a href="#" className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+                    <button
+                        onClick={handleNextPage}
+                        disabled={currentPage === totalPage}
+                        className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
                         <span>
                             Next
                         </span>
@@ -264,7 +297,7 @@ const AllUser = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 rtl:-scale-x-100">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
                         </svg>
-                    </a>
+                    </button>
                 </div>
             </section>
         </div>

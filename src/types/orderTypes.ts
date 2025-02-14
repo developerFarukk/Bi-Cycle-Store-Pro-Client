@@ -1,4 +1,47 @@
 
+// export interface User {
+//     _id: string;
+//     name: string;
+//     email: string;
+//     role: string;
+//     status: string;
+//     isDeleted: boolean;
+//     createdAt: string;
+//     updatedAt: string;
+//     __v: number;
+// }
+
+// export interface Product {
+//     _id: string;
+//     name: string;
+//     brand: string;
+//     price: number;
+//     model: string;
+//     type: string;
+//     description: string;
+//     quantity: number;
+//     inStock: boolean;
+//     isDeleted: boolean;
+//     bicycleImage: string;
+//     createdAt: string;
+//     updatedAt: string;
+//     __v: number;
+//     status: string;
+// }
+
+// export interface TOrders {
+//     _id: string;
+//     user: User;
+//     products: Product;
+//     quantity: number;
+//     totalPrice: number;
+//     status: string;
+//     paymentStatus: string;
+//     createdAt: string;
+//     updatedAt: string;
+// }
+
+
 export interface User {
     _id: string;
     name: string;
@@ -6,6 +49,8 @@ export interface User {
     role: string;
     status: string;
     isDeleted: boolean;
+    address: string;
+    mobile: string;
     createdAt: string;
     updatedAt: string;
     __v: number;
@@ -20,23 +65,36 @@ export interface Product {
     type: string;
     description: string;
     quantity: number;
-    inStock: boolean;
+    status: string;
     isDeleted: boolean;
     bicycleImage: string;
     createdAt: string;
     updatedAt: string;
     __v: number;
-    status: string;
+}
+
+export interface Transaction {
+    id: string;
+    transactionStatus: null | string;
+    bank_status: string;
+    date_time: string;
+    method: string;
+    sp_code: string;
+    sp_message: string;
+}
+
+export interface OrderProduct {
+    product: Product;
+    quantity: number;
 }
 
 export interface TOrders {
     _id: string;
     user: User;
-    productId: Product;
-    quantity: number;
+    products: OrderProduct[];
     totalPrice: number;
     status: string;
-    paymentStatus: string;
+    transaction: Transaction;
     createdAt: string;
     updatedAt: string;
 }

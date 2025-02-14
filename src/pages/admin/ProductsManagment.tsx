@@ -11,8 +11,6 @@ import { useState } from "react";
 
 const ProductsManagment = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    console.log("current page", currentPage);
-
 
     const { data: bicycleData, isLoading, isError } = useGetAllProductsQuery([
         { name: "page", value: currentPage },
@@ -24,9 +22,6 @@ const ProductsManagment = () => {
     const totalPage = bicycleData?.data?.meta?.totalPage;
     const limit = bicycleData?.data?.meta?.limit;
 
-    console.log("page limit", limit);
-    console.log(totalPage, "total page");
-    console.log(bicycle, "bicycle");
 
     const [deleteProduct] = useDeleteProductMutation();
 
