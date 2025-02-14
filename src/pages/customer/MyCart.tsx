@@ -8,7 +8,6 @@ import { useCallback, useEffect } from "react";
 import { toast } from "sonner";
 
 const MyCart = () => {
-
     const cartItems = useAppSelector((state: RootState) => state.cart);
     const dispatch = useAppDispatch();
     const [createOrder, { isLoading, isSuccess, data, isError, error }] = useAddOrderMutation();
@@ -20,37 +19,51 @@ const MyCart = () => {
         });
     }, [cartItems.items, dispatch]);
 
-
     const handleCheckOut = async () => {
         const transformedCartItems = cartItems.items.map((item) => ({
             product: item._id,
             quantity: item.quantity,
         }));
 
+        console.log(transformedCartItems);
+        
 
-        await createOrder({ products: transformedCartItems });
+       const order = await createOrder({ products: transformedCartItems });
+       console.log(order);
+       
     };
 
-
     const toastId = "cart";
+
     useEffect(() => {
-        if (isLoading) toast.loading("Processing ...", { id: toastId });
+        if (isLoading) {
+            toast.loading("Processing ...", { id: toastId });
+        }
+
+        // if (!data?.data?.paymentUrl) {
+        //     toast.loading("No data find", { id: toastId });
+        // }
+
 
         if (isSuccess) {
             toast.success(data?.message, { id: toastId });
-            console.log(data?.data?.paymentUrl);
 
             resetCart();
 
-            if (data?.data?.paymentUrl) {
+            if (data.data.paymentUrl) {
+
                 setTimeout(() => {
                     window.location.href = data.data.paymentUrl;
-                }, 300);
+                }, 100);
             }
         }
 
-        if (isError) toast.error(JSON.stringify(error), { id: toastId });
-    }, [data?.data, data?.message, error, isError, isLoading, isSuccess, resetCart]);
+        if (isError) {
+            toast.error(JSON.stringify(error), { id: toastId });
+        }
+
+
+    }, [data, error, isError, isLoading, isSuccess, resetCart]);
 
     return (
         <div>

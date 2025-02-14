@@ -48,7 +48,7 @@ const orderManagementApi = baseApi.injectEndpoints({
         //     },
         // }),
 
-        // create Product API
+        // create order API
         addOrder: builder.mutation({
             query: (data) => ({
                 url: '/orders/create-order',
@@ -87,14 +87,41 @@ const orderManagementApi = baseApi.injectEndpoints({
             invalidatesTags: ['Order']
         }),
 
+        // Get Me Order
+        getMeOrders: builder.query({
+            query: (args) => {
+                // console.log(args);
+                const params = new URLSearchParams();
+
+                if (args) {
+                    args.forEach((item: TQueryParam) => {
+                        params.append(item.name, item.value as string);
+                    });
+                }
+
+                return {
+                    url: '/orders/me',
+                    method: 'GET',
+                    params: params,
+                };
+            },
+            providesTags: ['Order'],
+            transformResponse: (response: TResponseRedux<TOrders[]>) => {
+                return {
+                    data: response.data,
+                };
+            },
+        }),
+
     }),
 });
 
 export const {
     useAddOrderMutation,
     useGetAllOrdersQuery,
+    useGetMeOrdersQuery,
     useVerifyOrderQuery,
     useDeleteOrderMutation,
     useUpdateOrderMutation,
-    
+
 } = orderManagementApi;

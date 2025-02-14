@@ -16,7 +16,7 @@ const Navbar = () => {
 
     const isCustomer = user && user.role === 'customer';
 
-    console.log(user?.role);
+    // console.log(user?.role);
 
 
     // const user = useSelector((state: RootState) => state.auth.user);
