@@ -78,10 +78,15 @@ const OrderManageCustomer = () => {
                                                 Status
                                             </th>
 
-                                            {/* Product Details */}
-                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400">
-                                                Products
+                                            {/* Transection Id */}
+                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                Transection Id
                                             </th>
+
+                                            {/* Product Details */}
+                                            {/* <th scope="col" className="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400">
+                                                Products
+                                            </th> */}
 
                                             {/* Total-Price */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -117,19 +122,24 @@ const OrderManageCustomer = () => {
                                                         {or.status}
                                                     </td>
 
+                                                    {/* Order-Status */}
+                                                    <td className="px-4 py-4 text-sm  dark:text-gray-300 whitespace-nowrap">
+                                                        {or.transaction.id}
+                                                    </td>
+
 
                                                     {/* Product Details */}
-                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                                    {/* <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                         <table className="w-full">
                                                             <thead>
                                                                 <tr>
-                                                                    <th className="text-sm font-normal text-center text-gray-500 dark:text-gray-400">
-                                                                        Product ID
+                                                                    <th className=" px-4 py-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
+                                                                        Name
                                                                     </th>
-                                                                    <th className="text-sm font-normal text-center text-gray-500 dark:text-gray-400">
+                                                                    <th className="px-4 py-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
                                                                         Quantity
                                                                     </th>
-                                                                    <th className="text-sm font-normal text-center text-gray-500 dark:text-gray-400">
+                                                                    <th className="px-4 py-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
                                                                         Unit Price
                                                                     </th>
                                                                 </tr>
@@ -138,7 +148,7 @@ const OrderManageCustomer = () => {
                                                                 {or.products.map((product, productIndex) => (
                                                                     <tr key={productIndex}>
                                                                         <td className="px-4 py-2 text-sm text-center text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                                            {product.product._id}
+                                                                            {product.product}
                                                                         </td>
                                                                         <td className="px-4 py-2 text-sm text-center text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                                             {product.quantity}
@@ -150,7 +160,7 @@ const OrderManageCustomer = () => {
                                                                 ))}
                                                             </tbody>
                                                         </table>
-                                                    </td>
+                                                    </td> */}
 
                                                     {/* Total-Price */}
                                                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
