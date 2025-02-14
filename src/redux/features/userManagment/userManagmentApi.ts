@@ -22,7 +22,7 @@ const userManagementApi = baseApi.injectEndpoints({
                 }
 
                 return {
-                    url: '/users',
+                    url: '/users?limit=100',
                     method: 'GET',
                     params: params,
                 };

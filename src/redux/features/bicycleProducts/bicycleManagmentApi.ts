@@ -20,7 +20,7 @@ const productManagementApi = baseApi.injectEndpoints({
                 }
 
                 return {
-                    url: '/bicycle?limit=50',
+                    url: '/bicycle',
                     // url: '/bicycle',
                     method: 'GET',
                     params: params,
