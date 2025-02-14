@@ -45,7 +45,7 @@ const AllUser = () => {
 
     const totalUser = userData?.data?.meta?.total;
     const totalPage = userData?.data?.meta?.page;
-    const limit = userData?.data?.meta?.limit;
+    // const limit = userData?.data?.meta?.limit;
 
     console.log("total Page", userData?.data?.meta?.page);
 
