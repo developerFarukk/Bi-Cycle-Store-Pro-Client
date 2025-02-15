@@ -18,6 +18,10 @@ import { useNavigate } from "react-router-dom";
 const BicycleCard = () => {
     const { data: bicycleData, isLoading, isError } = useGetAllProductsQuery(undefined);
     const bicycle = bicycleData?.data?.result;
+
+    console.log(bicycle);
+    
+
     const user = useSelector((state: RootState) => state.auth.user);
     const dispatch = useAppDispatch();
     const [cartItems, setCartItemsState] = useState<TCartItem[]>([]);
