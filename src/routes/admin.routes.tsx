@@ -24,7 +24,6 @@ export const adminPaths = [
     },
     {
         name: 'User Managments',
-        index: true,
         icons: <MdManageAccounts />,
         path: 'usermanagements',
         element: <AdminPrivateRoute ><AdminDashboard /></AdminPrivateRoute>,

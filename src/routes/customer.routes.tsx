@@ -2,19 +2,26 @@
 import MyCart from "@/pages/customer/MyCart";
 import OrderManageCustomer from "@/pages/customer/OrderManageCustomer";
 import { FaShopify } from "react-icons/fa6";
-import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { MdOutlineAddShoppingCart, MdViewModule } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import ProfileManage from "@/pages/customer/ProfileManage";
 import ChangedPassword from "@/authentication/ChangedPassword";
 import { TbLockPassword } from "react-icons/tb";
 import PrivateRoute from "@/privateRoures/PrivetRout";
+import OverviewCustomer from "@/dashboard/OverviewCustomer";
 
 
 
 export const customerPaths = [
     {
-        name: 'My Cart',
+        name: 'Overview',
         index: true,
+        icons: <MdViewModule />,
+        path: 'overview',
+        element: <PrivateRoute ><OverviewCustomer /></PrivateRoute>,
+    },
+    {
+        name: 'My Cart',
         path: 'storermanagments',
         icons: <FaShopify />,
         element: <PrivateRoute><MyCart /></PrivateRoute>,
