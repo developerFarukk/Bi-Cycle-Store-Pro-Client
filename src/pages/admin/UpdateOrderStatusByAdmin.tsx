@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import UpOrderStateAdmin from "./UpOrderStateAdmin";
 import { useUpdateOrderMutation } from "@/redux/features/orderManagmentApi/OrderManagmentApi";
+import { TExtraError } from "@/types";
 
 interface TOrderStatus {
     orderStatus: string;
@@ -25,7 +26,7 @@ const UpdateOrderStatusByAdmin = ({ orderStatus, orderId }: TOrderStatus) => {
             setIsOpen(false);
         } catch (error) {
             console.error("Update Error:", error);
-            toast.error(error?.data?.message || 'Failed to update order status');
+            toast.error((error as TExtraError)?.data?.message || 'Failed to delete user');
         }
     };
 

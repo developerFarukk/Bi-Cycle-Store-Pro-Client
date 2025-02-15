@@ -1,6 +1,7 @@
 import UpdateUserStat from "@/components/modal/UpdateUserStat";
 import { useUpdateUserMutation } from "@/redux/features/userManagment/userManagmentApi";
 import { RootState } from "@/redux/store";
+import { TExtraError } from "@/types";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
@@ -45,7 +46,7 @@ const UpdateUserStatus = ({ userStatus, userId, email }: TStatus) => {
             setIsOpen(false);
         } catch (error) {
             console.error("Update Error:", error);
-            toast.error(error?.data?.message || 'Failed to update user status');
+            toast.error((error as TExtraError)?.data?.message || 'Failed to delete user');
         }
 
     };

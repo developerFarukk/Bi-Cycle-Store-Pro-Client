@@ -7,6 +7,7 @@ import { RootState } from "@/redux/store";
 import UpdateUserModal from "@/components/modal/UpdateUserModal";
 import { useUpdateUserMutation } from "@/redux/features/userManagment/userManagmentApi";
 import { useState } from "react";
+import { TExtraError } from "@/types";
 
 export interface TRole {
     userRole: string;
@@ -46,7 +47,7 @@ const UpdateRole = ({ userRole, userId, email }: TRole) => {
             setIsOpen(false);
         } catch (error) {
             // console.error("Update Error:", error);
-            toast.error(error?.data?.message || 'Failed to update user role');
+            toast.error((error as TExtraError)?.data?.message || 'Failed to delete user');
         }
 
     };

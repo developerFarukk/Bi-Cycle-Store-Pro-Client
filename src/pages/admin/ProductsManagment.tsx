@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import Swal from "sweetalert2";
 import ProductModalUpdate from "./ProductModalUpdate";
 import { useState } from "react";
+import { TExtraError } from "@/types";
 
 
 
@@ -16,7 +17,7 @@ const ProductsManagment = () => {
         { name: "page", value: currentPage },
         { name: "limit", value: 6 },
     ]);
-   
+
     const bicycle = bicycleData?.data?.result;
     const totalBicycle = bicycleData?.data?.meta?.total;
     const totalPage = bicycleData?.data?.meta?.totalPage;
@@ -64,10 +65,10 @@ const ProductsManagment = () => {
                     });
                 } catch (error) {
                     console.error("Delete Error:", error);
-                    toast.error(error?.data?.message || 'Failed to delete Product');
-                    Swal.fire({ // Show error message with SweetAlert2
+                    toast.error((error as TExtraError)?.data?.message || 'Failed to delete user');
+                    Swal.fire({ 
                         title: "Error!",
-                        text: error?.data?.message || 'Failed to delete product',
+                        text: (error as TExtraError)?.data?.message || 'Failed to delete user',
                         icon: "error"
                     });
                 }
@@ -141,7 +142,7 @@ const ProductsManagment = () => {
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                                         {
                                             bicycle.map((bi: TBicycle, index: number) => {
-                                               
+
                                                 const globalIndex = (currentPage - 1) * limit + index;
 
                                                 return (

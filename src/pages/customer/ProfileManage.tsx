@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
 import LoadingProgress from "@/shared/LoadingProgress";
+import { TExtraError } from "@/types";
 
 // Define the schema for validation
 const userSchema = z.object({
@@ -49,7 +50,7 @@ const ProfileManage = () => {
             // Refetch user data after a successful update
             refetch();
         } catch (error) {
-            toast.error(error?.data?.message || 'Failed to update user');
+            toast.error((error as TExtraError)?.data?.message || 'Failed to delete user');
         }
     };
 

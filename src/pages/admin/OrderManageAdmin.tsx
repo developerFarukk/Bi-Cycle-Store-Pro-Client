@@ -8,6 +8,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 import UpdateOrderStatusByAdmin from "./UpdateOrderStatusByAdmin";
+import { TExtraError } from "@/types";
 
 const OrderManageAdmin = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -83,10 +84,10 @@ const OrderManageAdmin = () => {
                     });
                 } catch (error) {
                     console.error("Delete Error:", error);
-                    toast.error(error?.data?.message || 'Failed to delete order');
+                    toast.error((error as TExtraError)?.data?.message || 'Failed to delete user');
                     Swal.fire({ // Show error message with SweetAlert2
                         title: "Error!",
-                        text: error?.data?.message || 'Failed to delete order',
+                        text: (error as TExtraError)?.data?.message || 'Failed to delete user',
                         icon: "error"
                     });
                 }

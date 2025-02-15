@@ -9,6 +9,8 @@ import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
 import Swal from 'sweetalert2'
+import { TExtraError } from "@/types";
+
 
 
 export interface Tuserss {
@@ -93,10 +95,11 @@ const AllUser = () => {
                     });
                 } catch (error) {
                     console.error("Delete Error:", error);
-                    toast.error(error?.data?.message || 'Failed to delete user');
+                    // toast.error(error?.data?.message || 'Failed to delete user');
+                    toast.error((error as TExtraError)?.data?.message || 'Failed to delete user');
                     Swal.fire({ // Show error message with SweetAlert2
                         title: "Error!",
-                        text: error?.data?.message || 'Failed to delete user',
+                        text: (error as TExtraError)?.data?.message || 'Failed to delete user',
                         icon: "error"
                     });
                 }

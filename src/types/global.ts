@@ -32,3 +32,10 @@ export type TQueryParam = {
     name: string;
     value: string | number | boolean | React.Key;
 };
+
+
+export interface  TExtraError {
+    data?: {
+        message?: string;
+    };
+}
