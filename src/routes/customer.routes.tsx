@@ -32,7 +32,7 @@ export const customerPaths = [
     },
     {
         name: 'Change Password',
-        path: 'changepassword',
+        path: 'changepasswordcustomer',
         icons: <TbLockPassword />,
         element: <ChangedPassword />,
     },

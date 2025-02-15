@@ -7,6 +7,8 @@ import { FaCreativeCommonsShare } from "react-icons/fa";
 import ProductsManagment from "@/pages/admin/ProductsManagment";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import OrderManageAdmin from "@/pages/admin/OrderManageAdmin";
+import { TbLockPassword } from "react-icons/tb";
+import ChangedPassword from "@/authentication/ChangedPassword";
 
 
 
@@ -35,5 +37,11 @@ export const adminPaths = [
         icons: <MdOutlineAddShoppingCart />,
         path: 'ordermanagments',
         element: <PrivateRoute ><OrderManageAdmin /></PrivateRoute>,
+    },
+    {
+        name: 'Change Password',
+        path: 'changepasswordadmin',
+        icons: <TbLockPassword />,
+        element: <ChangedPassword />,
     },
 ];
