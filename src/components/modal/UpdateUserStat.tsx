@@ -1,5 +1,4 @@
-// import PropTypes from 'prop-types'
-import { Fragment, useState } from 'react'
+// import PropTypes from 'prop-types'import { Fragment, useState } from 'react'
 import {
     Dialog,
     Listbox,
@@ -13,6 +12,7 @@ import {
 } from '@headlessui/react'
 import { BsCheckLg } from 'react-icons/bs'
 import { AiOutlineDown } from 'react-icons/ai'
+import { Fragment, useState } from 'react';
 const status = ['in-progress', 'blocked']
 
 interface THandModal {

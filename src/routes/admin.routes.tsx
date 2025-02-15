@@ -1,7 +1,7 @@
 import AdminDashboard from "@/pages/admin/AllUser";
 import CreatProduct from "@/pages/admin/CreatProduct";
 import PrivateRoute from "@/privateRoures/PrivetRout";
-import { MdManageAccounts } from "react-icons/md";
+import { MdManageAccounts, MdViewModule } from "react-icons/md";
 import { IoMdBicycle } from "react-icons/io";
 import { FaCreativeCommonsShare } from "react-icons/fa";
 import ProductsManagment from "@/pages/admin/ProductsManagment";
@@ -9,39 +9,48 @@ import { MdOutlineAddShoppingCart } from "react-icons/md";
 import OrderManageAdmin from "@/pages/admin/OrderManageAdmin";
 import { TbLockPassword } from "react-icons/tb";
 import ChangedPassword from "@/authentication/ChangedPassword";
+import AdminPrivateRoute from "@/privateRoures/AdminPrivateRoute";
+import OverviewAdmin from "@/dashboard/OverviewAdmin";
 
 
 
 export const adminPaths = [
     {
+        name: 'Overview',
+        index: true,
+        icons: <MdViewModule />,
+        path: 'overview',
+        element: <AdminPrivateRoute ><OverviewAdmin /></AdminPrivateRoute>,
+    },
+    {
         name: 'User Managments',
         index: true,
         icons: <MdManageAccounts />,
         path: 'usermanagements',
-        element: <PrivateRoute ><AdminDashboard /></PrivateRoute>,
+        element: <AdminPrivateRoute ><AdminDashboard /></AdminPrivateRoute>,
     },
     {
         name: 'Create Product',
         icons: <FaCreativeCommonsShare />,
         path: 'create-product',
-        element: <PrivateRoute ><CreatProduct /></PrivateRoute>,
+        element: <AdminPrivateRoute ><CreatProduct /></AdminPrivateRoute>,
     },
     {
         name: 'Product Managments',
         icons: <IoMdBicycle />,
         path: 'productmanagments',
-        element: <PrivateRoute ><ProductsManagment /></PrivateRoute>,
+        element: <AdminPrivateRoute ><ProductsManagment /></AdminPrivateRoute>,
     },
     {
         name: 'Order Managments',
         icons: <MdOutlineAddShoppingCart />,
         path: 'ordermanagments',
-        element: <PrivateRoute ><OrderManageAdmin /></PrivateRoute>,
+        element: <AdminPrivateRoute ><OrderManageAdmin /></AdminPrivateRoute>,
     },
     {
         name: 'Change Password',
         icons: <TbLockPassword />,
         path: 'changepasswordadmin',
-        element: <ChangedPassword />,
+        element: <PrivateRoute><ChangedPassword /></PrivateRoute>,
     },
 ];

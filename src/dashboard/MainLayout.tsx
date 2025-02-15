@@ -4,6 +4,7 @@ import {
     Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu,
     SidebarMenuButton, SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { IoHome } from "react-icons/io5";
 
 import { RootState } from "@/redux/store";
 import { adminPaths } from "@/routes/admin.routes";
@@ -31,13 +32,9 @@ const MainLayout = () => {
                     <SidebarGroup>
                         <SidebarGroupLabel className="mt-2 mb-6 text-2xl text-center flex justify-center items-center hover:bg-blue-100">
                             <div className="p-2 ">
-                                <Link to="/">DASHBOARD</Link>
+                                <Link to="/" className="flex justify-center items-center gap-1"><span><IoHome /></span>RideNest</Link>
                                 <div className="text-black text-sm underline">{email}</div>
-                                {/* <div className="">
-                                    <span className="inline-block w-40 h-1 bg-blue-500 rounded-full"></span>
-                                    <span className="inline-block w-3 h-1 ml-1 bg-blue-500 rounded-full"></span>
-                                    <span className="inline-block w-1 h-1 ml-1 bg-blue-500 rounded-full"></span>
-                                </div> */}
+                                
                             </div>
                         </SidebarGroupLabel>
                         <SidebarGroupContent>

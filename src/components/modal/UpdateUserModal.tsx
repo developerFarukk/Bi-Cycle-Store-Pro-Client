@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types'
+
 import { Fragment, useState } from 'react'
 import {
     Dialog,
@@ -18,7 +18,8 @@ const roles = ['customer', 'admin']
 interface THandModal {
     setIsOpen: (isOpen: boolean) => void;
     isOpen: boolean ;
-    modalHandler: (modal: Dialog ) => void;
+    // modalHandler: (modal: Dialog ) => void;
+    modalHandler: (selectedStatus: string) => void;
     userRole: string
 }
 
@@ -137,12 +138,5 @@ const UpdateUserModal = ({ setIsOpen, isOpen, modalHandler, userRole }: THandMod
         </Transition>
     )
 }
-
-// UpdateUserModal.propTypes = {
-//     user: PropTypes.object,
-//     modalHandler: PropTypes.func,
-//     setIsOpen: PropTypes.func,
-//     isOpen: PropTypes.bool,
-// }
 
 export default UpdateUserModal;

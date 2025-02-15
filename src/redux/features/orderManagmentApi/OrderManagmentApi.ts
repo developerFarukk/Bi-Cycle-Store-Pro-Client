@@ -33,20 +33,6 @@ const orderManagementApi = baseApi.injectEndpoints({
             },
         }),
 
-        // Get single Bicycle
-        // getSingleBicycle: builder.query({
-        //     query: (id) => {
-        //         return {
-        //             url: `/bicycle/${id}`,
-        //             method: 'GET',
-        //         };
-        //     },
-        //     transformResponse: (response: TResponseRedux<any>) => {
-        //         return {
-        //             data: response.data,
-        //         };
-        //     },
-        // }),
 
         // create order API
         addOrder: builder.mutation({

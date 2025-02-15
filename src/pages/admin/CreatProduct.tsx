@@ -136,7 +136,7 @@ const CreatProduct = () => {
                         className="w-[500px]"
                         placeholder="Input Product price"
                         {...register("price", {
-                            valueAsNumber: true, // Ensure the value is parsed as a number
+                            valueAsNumber: true,
                         })}
                     />
                     <div className="flex justify-end mt-1">
@@ -195,7 +195,7 @@ const CreatProduct = () => {
                         className="w-[500px]"
                         placeholder="Input Product Quantity"
                         {...register("quantity", {
-                            valueAsNumber: true, // Ensure the value is parsed as a number
+                            valueAsNumber: true,
                         })}
                     />
                     <div className="flex justify-end mt-1">

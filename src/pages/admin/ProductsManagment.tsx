@@ -16,7 +16,7 @@ const ProductsManagment = () => {
         { name: "page", value: currentPage },
         { name: "limit", value: 6 },
     ]);
-    // const { data: bicycleData, isLoading, isError } = useGetAllProductsQuery(undefined);
+   
     const bicycle = bicycleData?.data?.result;
     const totalBicycle = bicycleData?.data?.meta?.total;
     const totalPage = bicycleData?.data?.meta?.totalPage;

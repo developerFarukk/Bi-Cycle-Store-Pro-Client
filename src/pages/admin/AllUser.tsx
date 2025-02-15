@@ -61,31 +61,6 @@ const AllUser = () => {
         return <div>Error loading users.</div>;
     }
 
-    // const handleDeleteUser = async (user: any) => {
-    //     // console.log(user);
-
-    //     if (!currentUser) {
-    //         toast.error('You must be logged in to perform this action');
-    //         return;
-    //     }
-
-    //     if (currentUser.userEmail === user.email) {
-    //         toast.error('Action Not Allowed');
-    //         return;
-    //     }
-
-
-    //     try {
-    //      await deleteUser({ id: user._id, body: { isDeleted: true } }).unwrap();
-    //         // console.log("Update Result:", result);
-    //         toast.success('User deleted successfully');
-    //     } catch (error) {
-    //         // console.error("Update Error:", error);
-    //         toast.error(error?.data?.message || 'Failed to update user role');
-    //     }
-
-    // }
-
     const handleDeleteUser = async (user: any) => {
         if (!currentUser) {
             toast.error('You must be logged in to perform this action');

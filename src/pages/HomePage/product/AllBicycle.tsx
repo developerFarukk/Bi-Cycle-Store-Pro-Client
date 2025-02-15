@@ -12,9 +12,6 @@ import { getCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "@/uti
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-// Define your BicycleBrand and BicycleType enums
-// type BicycleBrand = 'Duranta' | 'Atlas' | 'Hero' | 'Phoenix' | 'Tata Stryder' | 'Avon Cycles' | 'BTwin' | 'Giant' | 'Cannondale' | 'Merida' | 'Suzuki' | 'Bajaz' | 'Royel';
-// type BicycleType = 'Road' | 'Mountain' | 'Hybrid' | 'Electric';
 
 const AllBicyclesPage = () => {
     const { data: bicycleData, isLoading, isError } = useGetAllProductsQuery(undefined);
