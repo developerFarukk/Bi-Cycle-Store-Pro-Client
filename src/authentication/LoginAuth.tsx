@@ -128,7 +128,7 @@ const LoginAuth = () => {
                             <button
                                 type="submit"
                                 className="bg-blue-500 text-white p-2 rounded w-full"
-                                disabled={isLoading} // Disable button while loading
+                                disabled={isLoading} 
                             >
                                 {isLoading ? "Processing..." : "Submit"}
                             </button>

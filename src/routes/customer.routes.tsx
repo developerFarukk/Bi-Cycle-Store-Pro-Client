@@ -5,6 +5,8 @@ import { FaShopify } from "react-icons/fa6";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import ProfileManage from "@/pages/customer/ProfileManage";
+import ChangedPassword from "@/authentication/ChangedPassword";
+import { TbLockPassword } from "react-icons/tb";
 
 
 
@@ -27,5 +29,11 @@ export const customerPaths = [
         path: 'profilemanagments',
         icons: <CgProfile />,
         element: <ProfileManage />,
+    },
+    {
+        name: 'Change Password',
+        path: 'changepassword',
+        icons: <TbLockPassword />,
+        element: <ChangedPassword />,
     },
 ];

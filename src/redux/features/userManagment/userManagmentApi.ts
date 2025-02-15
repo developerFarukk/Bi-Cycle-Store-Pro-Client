@@ -64,6 +64,16 @@ const userManagementApi = baseApi.injectEndpoints({
             }),
         }),
 
+        // Password Changed API
+        paswordChangedUser: builder.mutation({
+            query: ({ userEmail, body }) => ({
+                url: `/users/passwordchange/${userEmail}`,
+                method: 'PATCH',
+                body,
+            }),
+            invalidatesTags: ['User']
+        }),
+
     }),
 });
 
@@ -72,5 +82,6 @@ export const {
     useGetAllUsersQuery,
     useUpdateUserMutation,
     useDeleteUserMutation,
-    useGetMeUserQuery
+    useGetMeUserQuery,
+    usePaswordChangedUserMutation,
 } = userManagementApi;

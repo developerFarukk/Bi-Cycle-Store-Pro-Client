@@ -13,6 +13,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
+import LoadingProgress from "@/shared/LoadingProgress";
 
 // Define the schema for validation
 const userSchema = z.object({
@@ -53,7 +54,7 @@ const ProfileManage = () => {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div><LoadingProgress /></div>;
     }
 
     if (isError) {
