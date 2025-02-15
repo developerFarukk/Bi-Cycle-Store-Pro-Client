@@ -23,6 +23,9 @@ const Slider = () => {
                 className="mySwiper"
             >
                 <SwiperSlide className='items-center justify-center text-center flex h-40'>
+                    <img className='block mx-auto lg:max-h-96 rounded-md' src="../../../../public/offer-bicycle.jpg" alt="Bicycle5" />
+                </SwiperSlide>
+                <SwiperSlide className='items-center justify-center text-center flex h-40'>
                     <img className='block mx-auto lg:max-h-96' src="../../../../public/Bi-1.png" alt="Bicycle1" />
                 </SwiperSlide>
                 <SwiperSlide className='items-center justify-center text-center flex h-40'>
@@ -34,9 +37,7 @@ const Slider = () => {
                 <SwiperSlide className='items-center justify-center text-center flex h-40'>
                     <img className='block mx-auto lg:max-h-96' src="../../../../public/Bi-4.png" alt="Bicycle4" />
                 </SwiperSlide>
-                <SwiperSlide className='items-center justify-center text-center flex h-40'>
-                    <img className='block mx-auto lg:max-h-96' src="../../../../public/offer-bicycle.jpg" alt="Bicycle5" />
-                </SwiperSlide>
+
             </Swiper>
         </>
     );
