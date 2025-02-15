@@ -10,6 +10,15 @@ Welcome to the **Bicycle Marketplace**, a full-stack e-commerce platform designe
 - **Role-Based Authentication**: Supports user and admin roles.
 - **Smooth Registration & Login**: Easy-to-use forms for user registration and login.
 
+### Admin Credentials
+1. Login Admin:
+   ```bash
+   {
+        "email": "farukk7920@gmail.com",
+        "password": "1234",
+    }
+
+
 ### Public Routes
 - **Home Page**: Overview of the platform.
 - **All Products Page**: Showcase all available bicycles with filtering and sorting options.
