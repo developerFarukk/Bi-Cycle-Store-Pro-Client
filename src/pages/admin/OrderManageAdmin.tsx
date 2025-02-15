@@ -20,6 +20,8 @@ const OrderManageAdmin = () => {
     const [deleteOrder] = useDeleteOrderMutation();
 
     const orders = orderData?.data?.result;
+    // console.log(orders);
+
     const totalorder = orderData?.data?.meta?.total;
     const totalPage = orderData?.data?.meta?.totalPage;
     const limit = orderData?.data?.meta?.limit;
@@ -58,8 +60,7 @@ const OrderManageAdmin = () => {
     // Products Delate Function
     const handleDeleteProduct = async (or: any) => {
 
-        console.log(or);
-
+        // console.log(or);
 
         Swal.fire({
             title: "Are you sure?",
@@ -149,6 +150,7 @@ const OrderManageAdmin = () => {
 
                                     {/* Table Body */}
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+
                                         {orders?.map((or: TOrders, index: number) => {
                                             const globalIndex = (currentPage - 1) * limit + index;
                                             return (
@@ -257,10 +259,10 @@ const OrderManageAdmin = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
 
                 {/* Pagination */}
-                <div className="flex items-center justify-between mt-6 mb-10">
+                <div className="flex items-center justify-between mt-6 mb-10" >
                     <button
                         onClick={handlePreviousPage}
                         disabled={currentPage === 1}
@@ -295,8 +297,8 @@ const OrderManageAdmin = () => {
                         </svg>
                     </button>
                 </div>
-            </section>
-        </div>
+            </section >
+        </div >
     );
 };
 

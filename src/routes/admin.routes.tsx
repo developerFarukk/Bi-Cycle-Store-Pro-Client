@@ -40,8 +40,8 @@ export const adminPaths = [
     },
     {
         name: 'Change Password',
-        path: 'changepasswordadmin',
         icons: <TbLockPassword />,
+        path: 'changepasswordadmin',
         element: <ChangedPassword />,
     },
 ];
