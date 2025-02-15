@@ -27,6 +27,7 @@ const productManagementApi = baseApi.injectEndpoints({
                 };
             },
             providesTags: ['Bicycle'],
+            
             transformResponse: (response: TResponseRedux<TBicycle[]>) => {
                 return {
                     data: response.data,
