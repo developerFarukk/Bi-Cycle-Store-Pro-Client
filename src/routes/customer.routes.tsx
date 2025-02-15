@@ -7,6 +7,7 @@ import { CgProfile } from "react-icons/cg";
 import ProfileManage from "@/pages/customer/ProfileManage";
 import ChangedPassword from "@/authentication/ChangedPassword";
 import { TbLockPassword } from "react-icons/tb";
+import PrivateRoute from "@/privateRoures/PrivetRout";
 
 
 
@@ -16,24 +17,24 @@ export const customerPaths = [
         index: true,
         path: 'storermanagments',
         icons: <FaShopify />,
-        element: <MyCart />,
+        element: <PrivateRoute><MyCart /></PrivateRoute>,
     },
     {
         name: 'Order Managments',
         path: 'ordermanagments',
         icons: <MdOutlineAddShoppingCart />,
-        element: <OrderManageCustomer />,
+        element: <PrivateRoute><OrderManageCustomer /></PrivateRoute>,
     },
     {
         name: 'Profile Managments',
         path: 'profilemanagments',
         icons: <CgProfile />,
-        element: <ProfileManage />,
+        element: <PrivateRoute><ProfileManage /></PrivateRoute>,
     },
     {
         name: 'Change Password',
         path: 'changepasswordcustomer',
         icons: <TbLockPassword />,
-        element: <ChangedPassword />,
+        element: <PrivateRoute><ChangedPassword /></PrivateRoute>,
     },
 ];

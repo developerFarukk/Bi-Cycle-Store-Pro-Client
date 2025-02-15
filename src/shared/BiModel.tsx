@@ -203,7 +203,7 @@ const BiModel = ({ title, id }: TTitle) => {
                                             >
                                                 Add to Cart
                                             </Button>
-                                            <Link to="/customer/ordermanagments">
+                                            <Link to="/customer/storermanagments">
                                                 <Button
                                                     onClick={() => handleAddToCart(bicycle)}
                                                     className="block w-full rounded-sm bg-blue-800 text-sm font-medium transition hover:scale-105"

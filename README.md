@@ -1,50 +1,65 @@
-# React + TypeScript + Vite
+# 🚴‍♂️ Bicycle Marketplace - Full Stack Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the **Bicycle Marketplace**, a full-stack e-commerce platform designed for buying and selling bicycles. This application provides a seamless user experience with role-based authentication, product management, and an intuitive UI/UX design.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Features
 
-## Expanding the ESLint configuration
+### User Registration & Authentication
+- **Role-Based Authentication**: Supports user and admin roles.
+- **Smooth Registration & Login**: Easy-to-use forms for user registration and login.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Public Routes
+- **Home Page**: Overview of the platform.
+- **All Products Page**: Showcase all available bicycles with filtering and sorting options.
+- **Product Details Page**: Detailed information about a specific bicycle.
+- **About Us Page**: Information about the platform/company.
 
-- Configure the top-level `parserOptions` property like this:
+### Private Routes
+- **Checkout Page**: Accessible to authenticated users for placing orders.
+- **Dashboard**:
+  - **User Role**: View order history and account details.
+  - **Admin Role**: Manage products, view orders, and oversee platform activities.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### UI/UX Design
+- **Intuitive & Responsive**: Works seamlessly across all device sizes.
+- **Visually Appealing**: Modern and clean design for an enhanced user experience.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🛠️ Technologies Used
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Frontend
+- **React.js**: A JavaScript library for building user interfaces.
+- **Redux**: State management library.
+- **React Router**: For routing and navigation.
+- **Tailwind CSS**: For styling and responsive design.
+- **Axios**: For making HTTP requests.
+
+### Backend
+- **Node.js**: JavaScript runtime environment.
+- **Express.js**: Web framework for Node.js.
+- **MongoDB**: NoSQL database for storing data.
+- **Mongoose**: MongoDB object modeling for Node.js.
+- **JWT (JSON Web Tokens)**: For authentication and authorization.
+
+### Tools
+- **Git & GitHub**: Version control and collaboration.
+- **Postman**: API testing.
+- **Vercel/Netlify**: Frontend deployment.
+- **Render/Heroku**: Backend deployment.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- **Node.js**: Install Node.js from [here](https://nodejs.org/).
+- **MongoDB**: Set up a MongoDB database locally or use [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/developerFarukk/Bi-Cycle-Store-Pro-Client.git
+   cd bicycle-marketplace

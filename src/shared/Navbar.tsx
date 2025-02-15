@@ -175,7 +175,7 @@ const Navbar = () => {
 
                         {isCustomer && ( // Conditionally render the cart card
                             <div className="flex justify-center items-center md:block">
-                                <Link to="/customer/ordermanagments">
+                                <Link to="/customer/storermanagments">
                                     <div className="flex justify-center items-center text-center">
                                         <div className="relative">
                                             <div className="t-0 absolute left-3">
