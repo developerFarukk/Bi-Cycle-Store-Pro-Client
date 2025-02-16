@@ -20,8 +20,8 @@ const UpdateOrderStatusByAdmin = ({ orderStatus, orderId }: TOrderStatus) => {
     // Modal handler function
     const modalHandler = async (selectedStatus: string) => {
         try {
-            const result = await updateOrder({ orderId, body: { status: selectedStatus } }).unwrap();
-            console.log("Update Result:", result);
+            await updateOrder({ orderId, body: { status: selectedStatus } }).unwrap();
+            // console.log("Update Result:", result);
             toast.success('Order status updated successfully');
             setIsOpen(false);
         } catch (error) {

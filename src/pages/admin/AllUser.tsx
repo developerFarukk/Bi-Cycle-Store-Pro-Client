@@ -49,7 +49,7 @@ const AllUser = () => {
     const totalPage = userData?.data?.meta?.page;
     // const limit = userData?.data?.meta?.limit;
 
-    console.log("total Page", userData?.data?.meta?.page);
+    // console.log("total Page", userData?.data?.meta?.page);
 
 
 
@@ -85,8 +85,8 @@ const AllUser = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const deleteResult = await deleteUser({ id: user._id, body: { isDeleted: true } }).unwrap();
-                    console.log("Delete Result:", deleteResult);
+                    await deleteUser({ id: user._id, body: { isDeleted: true } }).unwrap();
+                    // console.log("Delete Result:", deleteResult);
                     // toast.success('User deleted successfully');
                     Swal.fire({
                         title: "Deleted!",

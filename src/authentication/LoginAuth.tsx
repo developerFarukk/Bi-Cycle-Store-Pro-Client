@@ -68,7 +68,7 @@ const LoginAuth = () => {
             try {
                 // Decode the token
                 const user = jwtDecode(token) as TUser;
-                console.log();
+                // console.log();
 
                 dispatch(setUser({ user, token }));
                 toast.success(data.message, { id: toastId });

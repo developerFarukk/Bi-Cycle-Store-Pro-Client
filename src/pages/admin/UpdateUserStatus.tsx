@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
 
- interface TStatus {
+interface TStatus {
     userStatus: string;
     userId: string;
     email: string;
@@ -40,8 +40,8 @@ const UpdateUserStatus = ({ userStatus, userId, email }: TStatus) => {
 
 
         try {
-            const result = await updateUser({ userId, body: { status: selectedStatus } }).unwrap();
-            console.log("Update Result:", result);
+            await updateUser({ userId, body: { status: selectedStatus } }).unwrap();
+            // console.log("Update Result:", result);
             toast.success('User status updated successfully');
             setIsOpen(false);
         } catch (error) {

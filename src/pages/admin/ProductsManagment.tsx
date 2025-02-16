@@ -55,8 +55,8 @@ const ProductsManagment = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const deleteResult = await deleteProduct({ id: bi._id, body: { isDeleted: true } }).unwrap();
-                    console.log("Delete Result:", deleteResult);
+                    await deleteProduct({ id: bi._id, body: { isDeleted: true } }).unwrap();
+                    // console.log("Delete Result:", deleteResult);
                     // toast.success('User deleted successfully');
                     Swal.fire({
                         title: "Deleted!",
@@ -66,7 +66,7 @@ const ProductsManagment = () => {
                 } catch (error) {
                     console.error("Delete Error:", error);
                     toast.error((error as TExtraError)?.data?.message || 'Failed to delete user');
-                    Swal.fire({ 
+                    Swal.fire({
                         title: "Error!",
                         text: (error as TExtraError)?.data?.message || 'Failed to delete user',
                         icon: "error"

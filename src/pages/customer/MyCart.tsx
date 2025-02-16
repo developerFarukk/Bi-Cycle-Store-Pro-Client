@@ -25,12 +25,12 @@ const MyCart = () => {
             quantity: item.quantity,
         }));
 
-        console.log(transformedCartItems);
-        
+        // console.log(transformedCartItems);
 
-       const order = await createOrder({ products: transformedCartItems });
-       console.log(order);
-       
+
+        await createOrder({ products: transformedCartItems });
+        //    console.log(order);
+
     };
 
     const toastId = "cart";

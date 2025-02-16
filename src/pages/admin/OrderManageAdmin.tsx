@@ -74,8 +74,8 @@ const OrderManageAdmin = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const deleteResult = await deleteOrder({ id: or._id, }).unwrap();
-                    console.log("Delete Result:", deleteResult);
+                    await deleteOrder({ id: or._id, }).unwrap();
+                    // console.log("Delete Result:", deleteResult);
                     // toast.success('User deleted successfully');
                     Swal.fire({
                         title: "Deleted!",
