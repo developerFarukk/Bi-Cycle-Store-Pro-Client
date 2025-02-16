@@ -1,4 +1,9 @@
 
+import offerpic from "/public/offer-bicycle.jpg";
+import pic1 from "/public/Bi-1.png";
+import pic2 from "/public/Bi-2.png";
+import pic3 from "/public/Bi-3.png";
+import pic4 from "/public/Bi-4.png";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
@@ -23,19 +28,19 @@ const Slider = () => {
                 className="mySwiper"
             >
                 <SwiperSlide className='items-center justify-center text-center flex h-40'>
-                    <img className='block mx-auto lg:max-h-96 rounded-md' src="../../../../public/offer-bicycle.jpg" alt="Bicycle5" />
+                    <img className='block mx-auto lg:max-h-96 rounded-md' src={offerpic} alt="Bicycle5" />
                 </SwiperSlide>
                 <SwiperSlide className='items-center justify-center text-center flex h-40'>
-                    <img className='block mx-auto lg:max-h-96' src="../../../../public/Bi-1.png" alt="Bicycle1" />
+                    <img className='block mx-auto lg:max-h-96' src={pic1} alt="Bicycle1" />
                 </SwiperSlide>
                 <SwiperSlide className='items-center justify-center text-center flex h-40'>
-                    <img className='block mx-auto lg:max-h-96' src="../../../../public/Bi-2.png" alt="Bicycle2" />
+                    <img className='block mx-auto lg:max-h-96' src={pic2} alt="Bicycle2" />
                 </SwiperSlide>
                 <SwiperSlide className='items-center justify-center text-center flex h-40'>
-                    <img className='block mx-auto lg:max-h-96' src="../../../../public/Bi-3.png" alt="Bicycle3" />
+                    <img className='block mx-auto lg:max-h-96' src={pic3} alt="Bicycle3" />
                 </SwiperSlide>
                 <SwiperSlide className='items-center justify-center text-center flex h-40'>
-                    <img className='block mx-auto lg:max-h-96' src="../../../../public/Bi-4.png" alt="Bicycle4" />
+                    <img className='block mx-auto lg:max-h-96' src={pic4} alt="Bicycle4" />
                 </SwiperSlide>
 
             </Swiper>
