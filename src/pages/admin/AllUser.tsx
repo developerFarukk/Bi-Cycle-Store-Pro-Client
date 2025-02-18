@@ -85,7 +85,7 @@ const AllUser = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await deleteUser({ id: user._id, body: { isDeleted: true } }).unwrap();
+                    await deleteUser({ id: user?._id, body: { isDeleted: true } }).unwrap();
                     // console.log("Delete Result:", deleteResult);
                     // toast.success('User deleted successfully');
                     Swal.fire({
@@ -186,8 +186,8 @@ const AllUser = () => {
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
 
                                         {
-                                            users.map((user: Tuserss) =>
-                                                <tr key={user._id} >
+                                            users?.map((user: Tuserss) =>
+                                                <tr key={user?._id} >
                                                     <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                                         <div className="inline-flex items-center gap-x-3">
                                                             <input type="checkbox" className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700" />
@@ -195,8 +195,8 @@ const AllUser = () => {
                                                             <div className="flex items-center gap-x-2">
                                                                 <img className="object-cover w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="" />
                                                                 <div>
-                                                                    <h2 className="font-medium text-gray-800 dark:text-white ">{user.name}</h2>
-                                                                    <p className="text-sm font-normal text-gray-600 dark:text-gray-400">{user.mobile}</p>
+                                                                    <h2 className="font-medium text-gray-800 dark:text-white ">{user?.name}</h2>
+                                                                    <p className="text-sm font-normal text-gray-600 dark:text-gray-400">{user?.mobile}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -206,13 +206,13 @@ const AllUser = () => {
                                                             <span className="h-1.5 w-1.5 rounded-full "></span>
 
                                                             <h2 className="text-sm font-normal ">
-                                                                <UpdateUserStatus userStatus={user.status} userId={user._id} email={user.email} /></h2>
+                                                                <UpdateUserStatus userStatus={user?.status} userId={user?._id} email={user?.email} /></h2>
                                                         </div>
                                                     </td>
                                                     <td className="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap flex justify-center">
                                                         <div className="text-center inline-flex items-center px-3 py-1 rounded-full gap-x-2">
                                                             {/* {user.role} */}
-                                                            <UpdateRole userRole={user.role} userId={user._id} email={user.email} />
+                                                            <UpdateRole userRole={user?.role} userId={user?._id} email={user?.email} />
                                                         </div>
                                                     </td>
                                                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{user.email}</td>

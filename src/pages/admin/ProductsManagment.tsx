@@ -154,34 +154,34 @@ const ProductsManagment = () => {
                                                                 <div className="flex items-center gap-x-2">
                                                                     <img
                                                                         className="object-cover w-10 h-10 rounded-lg border-2 border-blue-100"
-                                                                        src={bi.bicycleImage}
-                                                                        alt={bi.name}
+                                                                        src={bi?.bicycleImage}
+                                                                        alt={bi?.name}
                                                                     />
                                                                     <div>
-                                                                        <h2 className="font-medium text-gray-800 dark:text-white">{bi.name}</h2>
+                                                                        <h2 className="font-medium text-gray-800 dark:text-white">{bi?.name}</h2>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </td>
 
                                                         <td className="px-8 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-                                                            {bi.brand}
+                                                            {bi?.brand}
                                                         </td>
 
                                                         <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                            {bi.model}
+                                                            {bi?.model}
                                                         </td>
 
                                                         <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                            {bi.type}
+                                                            {bi?.type}
                                                         </td>
 
                                                         <td className="px-8 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                            {bi.price}
+                                                            {bi?.price}
                                                         </td>
 
                                                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                            {bi.quantity}
+                                                            {bi?.quantity}
                                                         </td>
 
                                                         <td className="px-10 py-4 text-sm whitespace-nowrap">

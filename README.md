@@ -10,11 +10,17 @@ Welcome to the **Bicycle Marketplace**, a full-stack e-commerce platform designe
 - **Role-Based Authentication**: Supports user and admin roles.
 - **Smooth Registration & Login**: Easy-to-use forms for user registration and login.
 
+## All Link
+- **Website Live Link**: <a href="https://ridenest.vercel.app" target="_blank" rel="noopener noreferrer">RideNest</a>
+- **GitHub Server Repo**: <a href="https://github.com/developerFarukk/By-Cycle-Store-Pro-Server" target="_blank" rel="noopener noreferrer">RideNest Server</a>
+  **VIDIO Review Link**: <a href="https://drive.google.com/file/d/1IsGVsPrFx5H8lbmnGJ4HgKfblrYOH4hI/view?usp=sharing" target="_blank" rel="noopener noreferrer">Video Presentation</a>
+
+
 ### Admin Credentials
 1. Login Admin:
    ```bash
    {
-        "email": "farukk7920@gmail.com",
+        "email": "ridenest@gmail.com",
         "password": "1234",
     }
 
@@ -44,7 +50,6 @@ Welcome to the **Bicycle Marketplace**, a full-stack e-commerce platform designe
 - **Redux**: State management library.
 - **React Router**: For routing and navigation.
 - **Tailwind CSS**: For styling and responsive design.
-- **Axios**: For making HTTP requests.
 
 ### Backend
 - **Node.js**: JavaScript runtime environment.
@@ -56,8 +61,8 @@ Welcome to the **Bicycle Marketplace**, a full-stack e-commerce platform designe
 ### Tools
 - **Git & GitHub**: Version control and collaboration.
 - **Postman**: API testing.
-- **Vercel/Netlify**: Frontend deployment.
-- **Render/Heroku**: Backend deployment.
+- **Vercel**: Frontend deployment.
+- **Render**: Backend deployment.
 
 ---
 

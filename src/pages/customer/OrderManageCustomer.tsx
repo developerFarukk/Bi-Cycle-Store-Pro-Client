@@ -102,34 +102,36 @@ const OrderManageCustomer = () => {
 
                                     {/* Table Body */}
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                                        {orders?.map((or: TOrders, index: number) => {
-                                            const globalIndex = (currentPage - 1) * limit + index;
-                                            return (
-                                                <tr key={or._id}>
-                                                    {/* SL */}
-                                                    <td className="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                                        {globalIndex + 1}
-                                                    </td>
+                                        {
+                                            orders?.length > 0 ?
+                                                (orders?.map((or: TOrders, index: number) => {
+                                                    const globalIndex = (currentPage - 1) * limit + index;
+                                                    return (
+                                                        <tr key={or?._id}>
+                                                            {/* SL */}
+                                                            <td className="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
+                                                                {globalIndex + 1}
+                                                            </td>
 
-                                                    {/* Order-Created */}
-                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                        {formatDate(or.createdAt)}
-                                                    </td>
-
-
-                                                    {/* Order-Status */}
-                                                    <td className="px-4 py-4 text-sm text-blue-500 dark:text-gray-300 whitespace-nowrap">
-                                                        {or.status}
-                                                    </td>
-
-                                                    {/* Order-Status */}
-                                                    <td className="px-4 py-4 text-sm  dark:text-gray-300 whitespace-nowrap">
-                                                        {or.transaction.id}
-                                                    </td>
+                                                            {/* Order-Created */}
+                                                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                                                {formatDate(or?.createdAt)}
+                                                            </td>
 
 
-                                                    {/* Product Details */}
-                                                    {/* <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                                            {/* Order-Status */}
+                                                            <td className="px-4 py-4 text-sm text-blue-500 dark:text-gray-300 whitespace-nowrap">
+                                                                {or?.status}
+                                                            </td>
+
+                                                            {/* Order-Status */}
+                                                            <td className="px-4 py-4 text-sm  dark:text-gray-300 whitespace-nowrap">
+                                                                {or?.transaction?.id}
+                                                            </td>
+
+
+                                                            {/* Product Details */}
+                                                            {/* <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                         <table className="w-full">
                                                             <thead>
                                                                 <tr>
@@ -162,13 +164,13 @@ const OrderManageCustomer = () => {
                                                         </table>
                                                     </td> */}
 
-                                                    {/* Total-Price */}
-                                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                        {or.totalPrice} TK
-                                                    </td>
+                                                            {/* Total-Price */}
+                                                            <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                                                {or?.totalPrice} TK
+                                                            </td>
 
-                                                    {/* Action */}
-                                                    {/* <td className="px-4 py-4 text-sm whitespace-nowrap">
+                                                            {/* Action */}
+                                                            {/* <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                         <div className="flex items-center justify-center gap-x-6">
                                                             <button
                                                                 onClick={() => handleDeleteProduct(or)}
@@ -179,9 +181,17 @@ const OrderManageCustomer = () => {
                                                             </button>
                                                         </div>
                                                     </td> */}
-                                                </tr>
-                                            );
-                                        })}
+                                                        </tr>
+                                                    );
+                                                })) :
+                                                (
+                                                    <tr>
+                                                        <td colSpan={7} className="text-center py-4 text-gray-600">
+                                                            No available data
+                                                        </td>
+                                                    </tr>
+                                                )
+                                        }
                                     </tbody>
                                 </table>
                             </div>

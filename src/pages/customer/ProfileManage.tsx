@@ -72,7 +72,7 @@ const ProfileManage = () => {
                 />
 
                 <div className="px-6 py-4">
-                    <h1 className="text-xl font-semibold text-gray-800 dark:text-white">{user.name}</h1>
+                    <h1 className="text-xl font-semibold text-gray-800 dark:text-white">{user?.name}</h1>
 
                     <p className="py-2 text-gray-700 dark:text-gray-400">
                         Full Stack maker & UI / UX Designer, love hip hop music Author of Building UI.
@@ -99,7 +99,7 @@ const ProfileManage = () => {
                             />
                         </svg>
 
-                        <h1 className="px-2 text-sm">{user.address}</h1>
+                        <h1 className="px-2 text-sm">{user?.address}</h1>
                     </div>
 
                     {/* Email */}
@@ -118,7 +118,7 @@ const ProfileManage = () => {
                             />
                         </svg>
 
-                        <h1 className="px-2 text-sm">{user.email}</h1>
+                        <h1 className="px-2 text-sm">{user?.email}</h1>
                     </div>
 
                     {/* Phone */}
@@ -158,7 +158,7 @@ const ProfileManage = () => {
                                             <Label htmlFor="name" className="text-right">
                                                 Name
                                             </Label>
-                                            <Input id="name" type="text" {...register("name")} defaultValue={user.name} className="col-span-3" />
+                                            <Input id="name" type="text" {...register("name")} defaultValue={user?.name} className="col-span-3" />
                                         </div>
 
                                         {/* Phone */}
@@ -166,7 +166,7 @@ const ProfileManage = () => {
                                             <Label htmlFor="mobile" className="text-right">
                                                 Phone
                                             </Label>
-                                            <Input type="number" id="mobile" defaultValue={user.mobile} {...register("mobile")} className="col-span-3" />
+                                            <Input type="number" id="mobile" defaultValue={user?.mobile} {...register("mobile")} className="col-span-3" />
                                         </div>
 
                                         {/* Address */}
@@ -174,7 +174,7 @@ const ProfileManage = () => {
                                             <Label htmlFor="address" className="text-right">
                                                 Address
                                             </Label>
-                                            <Textarea defaultValue={user.address} {...register("address")} className="col-span-3" placeholder="Type your address here." />
+                                            <Textarea defaultValue={user?.address} {...register("address")} className="col-span-3" placeholder="Type your address here." />
                                         </div>
                                     </div>
                                     <DialogFooter>

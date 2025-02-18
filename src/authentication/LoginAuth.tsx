@@ -35,10 +35,10 @@ const LoginAuth = () => {
         formState: { errors },
     } = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            email: "farukk7920@gmail.com",
-            password: "1234",
-        },
+        // defaultValues: {
+        //     email: "",
+        //     password: "",
+        // },
     });
 
     // Use the login mutation

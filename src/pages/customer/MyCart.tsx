@@ -79,38 +79,38 @@ const MyCart = () => {
                         <div className="mt-8">
                             {cartItems.items.length > 0 ? (
                                 <ul className="space-y-4">
-                                    {cartItems.items.map((item) => (
-                                        <div key={item._id}>
+                                    {cartItems?.items.map((item) => (
+                                        <div key={item?._id}>
                                             <li className="flex items-center gap-4 border-2 p-2 rounded-md bg-fuchsia-100">
                                                 <img
-                                                    src={item.bicycleImage}
-                                                    alt={item.name}
+                                                    src={item?.bicycleImage}
+                                                    alt={item?.name}
                                                     className="size-16 rounded-sm object-cover"
                                                 />
 
                                                 <div>
-                                                    <h3 className="text-lg text-blue-400">{item.name}</h3>
+                                                    <h3 className="text-lg text-blue-400">{item?.name}</h3>
 
                                                     <dl className="mt-0.5 space-y-px  text-gray-600">
                                                         <div className="flex gap-8">
                                                             <div>
                                                                 <div>
                                                                     <dt className="inline font-medium ">Brand:</dt>
-                                                                    <dd className="inline ml-2">{item.brand}</dd>
+                                                                    <dd className="inline ml-2">{item?.brand}</dd>
                                                                 </div>
                                                                 <div>
                                                                     <dt className="inline font-medium ">Model:</dt>
-                                                                    <dd className="inline ml-2">{item.model}</dd>
+                                                                    <dd className="inline ml-2">{item?.model}</dd>
                                                                 </div>
                                                             </div>
                                                             <div>
                                                                 <div>
                                                                     <dt className="inline font-medium ">Type:</dt>
-                                                                    <dd className="inline ml-2">{item.type}</dd>
+                                                                    <dd className="inline ml-2">{item?.type}</dd>
                                                                 </div>
                                                                 <div>
                                                                     <dt className="inline font-medium ">Price:</dt>
-                                                                    <dd className="inline ml-2">{item.price}</dd>
+                                                                    <dd className="inline ml-2">{item?.price}</dd>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -127,14 +127,14 @@ const MyCart = () => {
                                                         <input
                                                             type="number"
                                                             min="1"
-                                                            defaultValue={item.quantity}
+                                                            defaultValue={item?.quantity}
                                                             id="Line1Qty"
                                                             className="h-8 w-12 rounded-sm border-gray-200 bg-fuchsia-200 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-hidden [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                                                         />
                                                     </form>
 
                                                     <button
-                                                        onClick={() => dispatch(removeFromCart(item._id))}
+                                                        onClick={() => dispatch(removeFromCart(item?._id))}
                                                         className="text-gray-600 transition hover:text-red-600"
                                                     >
                                                         <span className="sr-only">Remove item</span>
@@ -161,7 +161,7 @@ const MyCart = () => {
                                 </ul>
                             ) : (
                                 <div className="text-center text-gray-600">
-                                    <p>Products not found</p>
+                                    <p> No available products</p>
                                 </div>
                             )}
 
