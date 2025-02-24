@@ -32,14 +32,14 @@ const productSchema = z.object({
 interface TTitle {
     title: string;
     product: any;
-   
+
 }
 
 const ProductModalUpdate = ({ title, product }: TTitle) => {
     const [updateProduct] = useUpdateProductMutation();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const { register, handleSubmit, setValue, watch, reset, formState: { errors }} = useForm({
+    const { register, handleSubmit, setValue, watch, reset, formState: { errors } } = useForm({
         resolver: zodResolver(productSchema),
         mode: "onBlur",
     });
@@ -77,9 +77,9 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
                 price: Number(data.price),
                 quantity: Number(data.quantity),
             };
-            
+
             // Correct way to call the mutation:
-            const res = await updateProduct({ bicycleId: product._id, body: productData }).unwrap(); 
+            const res = await updateProduct({ bicycleId: product._id, body: productData }).unwrap();
 
             if (res.error) {
                 toast.error(res.error.data.message, { id: toastId });
@@ -99,19 +99,19 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
                 <DialogTrigger asChild>
                     <Button variant="outline">{title}</Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[90%] md:max-w-3xl lg:max-w-4xl xl:max-w-6xl">
+                <DialogContent className="sm:max-w-[90%] md:max-w-3xl lg:max-w-4xl xl:max-w-3xl p-4 overflow-y-auto max-h-[90vh]">
                     <DialogHeader>
-                        <DialogTitle className="text-center">Update Bicycle Product</DialogTitle>
+                        <DialogTitle className="text-center text-2xl">Update Bicycle Product</DialogTitle>
                     </DialogHeader>
 
                     <div className="lg:ml-0 md:ml-0 justify-center flex">
-                        <form onSubmit={handleSubmit(onSubmit)}>
+                        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[500px]">
                             {/* Input Name */}
                             <div className="p-1">
                                 <Label>Product Name</Label>
                                 <Input
                                     type="text"
-                                    className="w-full md:w-[500px]"
+                                    className="w-full"
                                     placeholder="Input product name"
                                     {...register("name")}
                                 />
@@ -127,7 +127,7 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
                                 <Label>Description</Label>
                                 <Textarea
                                     placeholder="Input product description"
-                                    className="w-full md:w-[500px]"
+                                    className="w-full"
                                     {...register("description")}
                                 />
                                 {errors.description && (
@@ -145,7 +145,7 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
                                     value={selectedBrand}
                                     required
                                 >
-                                    <SelectTrigger className="w-full md:w-[500px]">
+                                    <SelectTrigger className="w-full">
                                         <SelectValue placeholder="Select Brand" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -166,7 +166,7 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
                                 <Label>Product Price</Label>
                                 <Input
                                     type="number"
-                                    className="w-full md:w-[500px]"
+                                    className="w-full"
                                     placeholder="Input product price"
                                     {...register("price", { valueAsNumber: true })}
                                 />
@@ -182,7 +182,7 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
                                 <Label>Product Model</Label>
                                 <Input
                                     type="text"
-                                    className="w-full md:w-[500px]"
+                                    className="w-full"
                                     placeholder="Input product model"
                                     {...register("model")}
                                 />
@@ -201,7 +201,7 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
                                     value={selectedType}
                                     required
                                 >
-                                    <SelectTrigger className="w-full md:w-[500px]">
+                                    <SelectTrigger className="w-full">
                                         <SelectValue placeholder="Select Type" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -222,7 +222,7 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
                                 <Label>Product Quantity</Label>
                                 <Input
                                     type="number"
-                                    className="w-full md:w-[500px]"
+                                    className="w-full"
                                     placeholder="Input product quantity"
                                     {...register("quantity", { valueAsNumber: true })}
                                 />
@@ -238,7 +238,7 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
                                 <Label>Product Image Link</Label>
                                 <Input
                                     type="text"
-                                    className="w-full md:w-[500px]"
+                                    className="w-full"
                                     placeholder="Input product image link"
                                     {...register("bicycleImage")}
                                 />
@@ -251,7 +251,7 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
 
                             {/* Submit Button */}
                             <div className="p-1 mt-2">
-                                <Button className="w-full md:w-[500px]" type="submit">
+                                <Button className="w-full" type="submit">
                                     Update Product
                                 </Button>
                             </div>
@@ -264,5 +264,3 @@ const ProductModalUpdate = ({ title, product }: TTitle) => {
 };
 
 export default ProductModalUpdate;
-
-
