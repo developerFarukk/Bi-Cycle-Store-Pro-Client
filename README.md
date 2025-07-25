@@ -77,3 +77,31 @@ Welcome to the **Bicycle Marketplace**, a full-stack e-commerce platform designe
    ```bash
    git clone https://github.com/developerFarukk/Bi-Cycle-Store-Pro-Client.git
    cd bicycle-marketplace
+   ```
+2. **Install Dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment**  
+    Create a `.env` file in the root directory. Refer to `.env.example` for guidance:
+
+   ```
+   VITE_BASE_URL=<"Backend api base url">
+   ```
+
+   Refer to `.env.example` for additional configuration options.
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+```
+The app will run at `http://localhost:5173`.
+
+
+📬 **Contact**  
+For issues or inquiries, reach out to [Developerfaruk](mailto:web.omarfaruk.dev@gmail.com). Thank you 💜
